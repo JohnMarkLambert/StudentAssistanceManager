@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Student Assistance Manager</string>
+
+    <string name="MM_Event_Title">Next Event:</string>
+    <string name="MM_Event_Name">Event Name: </string>
+    <string name="MM_Event_DueDate">Due Date: </string>
+    <string name="MM_Event_Duration">Duration: </string>
+    <string name="MM_Event_Desc">Description: </string>
+    <string name="MM_Transaction_Title">Last Transaction:</string>
+
+    <string name="Menu_Calendar">Calendar</string>
+    <string name="Menu_Budget">Budget</string>
+    <string name="Menu_Settings">Settings</string>
+    <string name="Menu_Home">Home</string>
+
+    <string name="Title_Calendar">Calendar</string>
+
+    <string name="Create_Event_Button">Create Event</string>
+    <string name="Show_All_Events">Show All Events</string>
+</resources>
