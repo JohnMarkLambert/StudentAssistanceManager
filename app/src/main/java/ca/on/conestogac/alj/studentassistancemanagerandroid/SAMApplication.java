@@ -43,8 +43,8 @@ public class SAMApplication extends Application {
                               int period, int complete, String desc)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL("INSERT INTO tbl_assignments(name, dueDate, duration, " +
-                "period, complete, description) VALUES ('" + name + "', '" + dueDate + "', '" +
+        db.execSQL("INSERT INTO tbl_assignments(AssignmentName, DueDate, Duration, " +
+                "Period, Complete, Description) VALUES ('" + name + "', '" + dueDate + "', '" +
                 duration + "', '" + period + "', '" + complete + "', '" + desc + "')");
 
     }

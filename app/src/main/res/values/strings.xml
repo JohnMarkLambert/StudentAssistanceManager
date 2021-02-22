@@ -18,4 +18,12 @@
 
     <string name="Create_Event_Button">Create Event</string>
     <string name="Show_All_Events">Show All Events</string>
+    <string name="Cancel_Event_Button">Cancel</string>
+
+    <string name="Event_Name">Event Name: </string>
+    <string name="Event_Due_Date">Due Date: </string>
+    <string name="Event_Duration">Duration: </string>
+    <string name="Event_Description">Description</string>
+
+
 </resources>
