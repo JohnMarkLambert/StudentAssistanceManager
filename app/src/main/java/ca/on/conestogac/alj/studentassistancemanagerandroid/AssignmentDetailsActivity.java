@@ -1,6 +1,9 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DateFormat;
@@ -30,6 +34,8 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
     private CheckBox ckbComplete;
     private TextView txtDesc;
     private Button btnEdit;
+    private Button btnCancel;
+    private Intent intent;
 
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
     private Date date;
@@ -55,6 +61,7 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
         ckbComplete = findViewById(R.id.ckbComplete);
         txtDesc = findViewById(R.id.txtDesc);
         btnEdit = findViewById(R.id.btnEditADetails);
+        btnCancel = findViewById(R.id.btnCancelEvent);
 
         txtAssignName.setText(assignment.getName());
         date = new Date((long)assignment.getDueDate()*1000);
@@ -70,6 +77,32 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
 //                //code to go to Edit Event/Assignment view.
 //            }
 //        });
+
+
+        DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int result) {
+                switch (result) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        ((SAMApplication) getApplication()).deleteAssignment(aId);
+                        intent = new Intent(getApplicationContext(), AllAssignmentActivity.class);
+                        startActivity(intent);
+                }
+            }
+        };
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_StudentAssistanceManagerAndroid));
+        dialogBuilder.setMessage("Cancel this event?").setPositiveButton("Yes", dialogListener)
+                .setNegativeButton("No", dialogListener);
+
+        btnCancel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                dialogBuilder.show();
+            }
+        });
+
+
 
     }
 
