@@ -10,8 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+
 import android.widget.CalendarView;
 import android.widget.DatePicker;
+
 
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity {
+
 
 
     private Button btnCreateEvent;
@@ -37,6 +40,7 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+
 
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -69,6 +73,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
+
         btnShowAll = findViewById(R.id.btnShowAll);
 
         btnShowAll.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +81,6 @@ public class CalendarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AllAssignmentActivity.class);
                 startActivity(intent);
-
             }
         });
     }
