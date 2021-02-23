@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Student Assistance Manager</string>
-
+    <!-- Main Menu Labels -->
     <string name="MM_Event_Title">Next Event:</string>
     <string name="MM_Event_Name">Event Name: </string>
     <string name="MM_Event_DueDate">Due Date: </string>
@@ -9,19 +9,26 @@
     <string name="MM_Event_Desc">Description: </string>
     <string name="MM_Transaction_Title">Last Transaction:</string>
 
+    <!-- Menu item labels -->
     <string name="Menu_Calendar">Calendar</string>
     <string name="Menu_Budget">Budget</string>
     <string name="Menu_Settings">Settings</string>
     <string name="Menu_Home">Home</string>
 
+    <!-- Calendar Labels -->
     <string name="Title_Calendar">Calendar</string>
-
     <string name="Create_Event_Button">Create Event</string>
     <string name="Show_All_Events">Show All Events</string>
+    <string name="Cancel_Event_Button">Cancel</string>
 
     <string name="Event_Name">Event Name: </string>
+    <string name="Event_Due_Date">Due Date: </string>
     <string name="Event_Duration">Duration: </string>
-    <string name="Time_Due">Time due: </string>
     <string name="Event_Description">Description</string>
+    <string name="Time_Due">Time Due: </string>
+
+
+    <string name="Assignment_Complete">Complete: </string>
+    <string name="Button_Edit">Edit Assignment</string>
 
 </resources>

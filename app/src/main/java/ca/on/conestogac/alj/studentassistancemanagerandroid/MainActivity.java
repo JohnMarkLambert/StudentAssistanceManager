@@ -14,6 +14,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //remove later
+        ((SAMApplication) getApplication()).deleteAllAssignments();
+        ((SAMApplication) getApplication()).addAssignment("test 1", 1614555000,
+                0, 1, 0, "This is a test");
+        ((SAMApplication) getApplication()).addAssignment("test 2", 1614295800,
+                1.5, 1, 0, "this is also a test");
     }
 
     @Override
