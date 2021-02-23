@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,12 +15,18 @@ import android.widget.DatePicker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class CalendarActivity extends AppCompatActivity {
 
     private Button btnCreateEvent;
     private CalendarView calendar;
     private SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
+    private String selectedDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,22 +37,32 @@ public class CalendarActivity extends AppCompatActivity {
         btnCreateEvent = findViewById(R.id.btnCreateEvent);
 
         calendar = findViewById(R.id.calendarView);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        selectedDate = dateFormat.format(date);
 
         btnCreateEvent.setOnClickListener(new View.OnClickListener() {
             Intent intent;
             @Override
             public void onClick(View v) {
-                calendar.getDate();
-                editor = sharedPref.edit();
-                editor.putLong("selectedDate", calendar.getDate());
-                editor.commit();
+
                 intent = new Intent(getApplicationContext(), CreateEventActivity.class);
+                intent.putExtra("selectedDate", selectedDate);
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
+
             }
         });
 
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                selectedDate = i + "/" + (i1 +1) + "/"+ i2;
+                Log.i("date", selectedDate +"");
+            }
+        });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
