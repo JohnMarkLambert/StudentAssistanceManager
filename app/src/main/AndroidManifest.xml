@@ -9,14 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentAssistanceManagerAndroid">
-        <activity android:name=".MainActivity" android:label="@string/app_name">
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CalendarActivity" android:label="@string/Title_Calendar"></activity>
+        <activity
+            android:name=".CalendarActivity"
+            android:label="@string/Title_Calendar" />
+        <activity
+            android:name=".AllAssignmentActivity"
+            android:label="@string/Show_All_Events" />
     </application>
 
 </manifest>
