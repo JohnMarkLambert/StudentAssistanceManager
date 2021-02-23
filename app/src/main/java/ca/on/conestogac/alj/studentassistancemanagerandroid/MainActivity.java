@@ -14,6 +14,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //sends notifications, probably not in the right spot
+        startService(new Intent(getApplicationContext(), NotificationService.class));
     }
 
     @Override
