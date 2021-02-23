@@ -36,15 +36,20 @@ public class SAMApplication extends Application {
                 // no-op
             }
         };
+
+
         super.onCreate();
+
+
+
     }
 
     public void addAssignment(String name, long dueDate, double duration,
                               int period, int complete, String desc)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL("INSERT INTO tbl_assignments(name, dueDate, duration, " +
-                "period, complete, description) VALUES ('" + name + "', '" + dueDate + "', '" +
+        db.execSQL("INSERT INTO tbl_assignments(AssignmentName, DueDate, Duration, " +
+                "Period, Complete, Description) VALUES ('" + name + "', '" + dueDate + "', '" +
                 duration + "', '" + period + "', '" + complete + "', '" + desc + "')");
 
     }
@@ -53,23 +58,23 @@ public class SAMApplication extends Application {
                                  int period, int complete, String desc)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL("UPDATE tbl_assignments SET (name = '" + name +
-                "', dueDate = '" + dueDate +
-                "', duration = '" + duration +
-                "', period = '" + period +
-                "', complete = '" + complete +
-                "', description = '" + desc + "')" +
-                " WHERE id = " + id);
+        db.execSQL("UPDATE tbl_assignments SET (AssignmentName = '" + name +
+                "', DueDate = '" + dueDate +
+                "', Duration = '" + duration +
+                "', Period = '" + period +
+                "', Complete = '" + complete +
+                "', Description = '" + desc + "')" +
+                " WHERE AssignmentId = " + id);
     }
 
     public void deleteAssignment(int id) {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL("DELETE FROM tbl_assignments WHERE id = " + id);
+        db.execSQL("DELETE FROM tbl_assignments WHERE AssignmentId = " + id);
     }
 
     public Assignment getAssignment (int Id) {
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM tbl_assignments WHERE id = " + Id,
+        Cursor c = db.rawQuery("SELECT * FROM tbl_assignments WHERE AssignmentId = " + Id,
                 null );
 
         if (c != null) {
@@ -90,7 +95,7 @@ public class SAMApplication extends Application {
             a.setComplete(false);
         }
         a.setDesc(c.getString(6));
-
+        c.close();
         return a;
     }
 
@@ -100,8 +105,8 @@ public class SAMApplication extends Application {
         Cursor c = db.rawQuery("SELECT * FROM tbl_assignments ORDER BY dueDate",
                 null);
         c.moveToFirst();
-        if (c.getCount() != 0) {
-            while (!c.isAfterLast())
+        if (c.getCount() > 0) {
+            while (c.getPosition() < c.getCount())
             {
                 Assignment a = new Assignment();
                 a.setId(c.getInt(0));
@@ -119,9 +124,15 @@ public class SAMApplication extends Application {
                 a.setDesc(c.getString(6));
 
                 assignments.add(a);
+                c.moveToNext();
             }
         }
         c.close();
         return assignments;
+    }
+
+    public void deleteAllAssignments() {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("DELETE FROM tbl_assignments");
     }
 }
