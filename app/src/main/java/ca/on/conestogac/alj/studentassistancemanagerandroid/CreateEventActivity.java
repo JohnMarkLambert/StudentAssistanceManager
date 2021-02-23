@@ -86,7 +86,7 @@ public class CreateEventActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.i("epoch", epochTime + "");
-        ((SAMApplication) getApplication()).addAssignment(name, 1, duration, 2, 0, description);
+        ((SAMApplication) getApplication()).addAssignment(name, epochTime, duration, 2, 0, description);
         Toast.makeText(this, "Event added", Toast.LENGTH_SHORT).show();
         super.finish();
     }
@@ -118,7 +118,7 @@ public class CreateEventActivity extends AppCompatActivity {
             goodData =false;
         }
         else {
-            Pattern timePattern = Pattern.compile("[1-2][1-4][:][1-9][1-9]$");
+            Pattern timePattern = Pattern.compile("([2][1-4]|[1][1-9]|[1-9])[:][1-5][1-9]$");
             timeDue = txtTimeDue.getText().toString();
             Matcher matcher = timePattern.matcher(timeDue);
             if (!matcher.find()){
