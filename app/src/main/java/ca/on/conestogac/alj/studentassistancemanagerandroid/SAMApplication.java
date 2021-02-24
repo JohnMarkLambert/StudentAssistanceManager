@@ -27,7 +27,8 @@ public class SAMApplication extends Application {
                         "Duration REAL," +
                         "Period INTEGER NOT NULL," +
                         "Complete INTEGER," +
-                        "Description TEXT)");
+                        "Description TEXT," +
+                        "Notified INTEGER)");
 
             }
 
@@ -39,9 +40,6 @@ public class SAMApplication extends Application {
 
 
         super.onCreate();
-
-
-
     }
 
     public void addAssignment(String name, long dueDate, double duration,
@@ -49,8 +47,8 @@ public class SAMApplication extends Application {
     {
         SQLiteDatabase db = helper.getWritableDatabase();
         db.execSQL("INSERT INTO tbl_assignments(AssignmentName, DueDate, Duration, " +
-                "Period, Complete, Description) VALUES ('" + name + "', '" + dueDate + "', '" +
-                duration + "', '" + period + "', '" + complete + "', '" + desc + "')");
+                "Period, Complete, Description, Notified) VALUES ('" + name + "', '" + dueDate + "', '" +
+                duration + "', '" + period + "', '" + complete + "', '" + desc + "', 0)");
 
     }
 
@@ -65,6 +63,17 @@ public class SAMApplication extends Application {
                 "', Complete = '" + complete +
                 "', Description = '" + desc + "')" +
                 " WHERE AssignmentId = " + id);
+    }
+
+    public void updateNotified(int id, boolean notified) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        int note;
+        if (notified = false) {
+            note = 0;
+        } else {
+            note = 1;
+        }
+        db.execSQL("UPDATE tble_assignments SET (Notified = '" + note + "') WHERE AssignmentId = " + id);
     }
 
     public void deleteAssignment(int id) {
@@ -95,6 +104,13 @@ public class SAMApplication extends Application {
             a.setComplete(false);
         }
         a.setDesc(c.getString(6));
+        int note = c.getInt(7);
+        if (note == 1) {
+            a.setNotified(true);
+        }
+        else {
+            a.setNotified(false);
+        }
         c.close();
         return a;
     }
@@ -122,7 +138,13 @@ public class SAMApplication extends Application {
                     a.setComplete(false);
                 }
                 a.setDesc(c.getString(6));
-
+                int note = c.getInt(7);
+                if (note == 1) {
+                    a.setNotified(true);
+                }
+                else {
+                    a.setNotified(false);
+                }
                 assignments.add(a);
                 c.moveToNext();
             }

@@ -1,5 +1,6 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -64,7 +65,7 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancelEvent);
 
         txtAssignName.setText(assignment.getName());
-        date = new Date((long)assignment.getDueDate()*1000);
+        date = new Date((long)assignment.getDueDate());
         txtDueDate.setText(df.format(date));
         txtDuration.setText(assignment.getDuration() + " Hours");
         ckbComplete.setChecked(assignment.isComplete());
@@ -74,7 +75,9 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
 //        btnEdit.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                //code to go to Edit Event/Assignment view.
+//                Intent intent = new Intent(getApplicationContext(), EditEventActivity.class);
+//                intent.putExtra("aId", assignment.getId());
+//                startActivity(intent);
 //            }
 //        });
 
