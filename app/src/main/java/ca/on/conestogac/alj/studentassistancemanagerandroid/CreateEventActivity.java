@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,7 +90,16 @@ public class CreateEventActivity extends AppCompatActivity {
         Log.i("epoch", epochTime + "");
         ((SAMApplication) getApplication()).addAssignment(name, epochTime, duration, 2, 0, description);
         Toast.makeText(this, "Event added", Toast.LENGTH_SHORT).show();
+
         super.finish();
+
+        List<Assignment> assignments = new ArrayList<>();
+        assignments = ((SAMApplication) getApplication()).getAllAssignments();
+
+        intent = new Intent(getApplicationContext(), AssignmentDetailsActivity.class);
+        intent.putExtra("aId", assignments.get(assignments.size() - 1).getId());
+        startActivity(intent);
+
     }
 
 
@@ -97,6 +108,10 @@ public class CreateEventActivity extends AppCompatActivity {
         boolean goodData = true;
         if (name.length() == 0) {
             txtEventName.setError("Event must have name");
+            goodData =false;
+        }
+        if (name.length() > 15) {
+            txtEventName.setError("Event name must be under 15 characters");
             goodData =false;
         }
         if (txtDuration.getText().length() == 0) {
@@ -118,7 +133,7 @@ public class CreateEventActivity extends AppCompatActivity {
             goodData =false;
         }
         else {
-            Pattern timePattern = Pattern.compile("([2][1-4]|[1][1-9]|[1-9])[:][1-5][1-9]$");
+            Pattern timePattern = Pattern.compile("^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$");
             timeDue = txtTimeDue.getText().toString();
             Matcher matcher = timePattern.matcher(timeDue);
             if (!matcher.find()){

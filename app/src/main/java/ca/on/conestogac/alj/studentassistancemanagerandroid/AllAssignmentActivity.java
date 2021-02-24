@@ -52,6 +52,7 @@ public class AllAssignmentActivity extends AppCompatActivity {
             }
         });
 
+
         List<Assignment> a = new ArrayList<>();
         LinearLayout ll = (LinearLayout)findViewById(R.id.AALayout);
 
