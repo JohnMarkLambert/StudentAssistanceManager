@@ -12,8 +12,7 @@ import android.widget.Button;
 
 
 import android.widget.CalendarView;
-import android.widget.DatePicker;
-
+import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
@@ -21,8 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -35,19 +35,50 @@ public class CalendarActivity extends AppCompatActivity {
     private String selectedDate;
 
     private Button btnShowAll;
+    private TextView txtCEventName;
+    private TextView txtCDueDate;
+    private TextView txtCDuration;
+    private TextView txtCDescription;
+
+    private List<Assignment> assignments;
+    private Assignment displayAssignment;
+
+    private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
+    private Date dueDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-
-
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        assignments = ((SAMApplication) getApplication()).getAllAssignments();
 
         btnCreateEvent = findViewById(R.id.btnCreateEvent);
 
         calendar = findViewById(R.id.calendarView);
+        txtCEventName = findViewById(R.id.txtMMEventName);
+        txtCDueDate = findViewById(R.id.txtMMDueDate);
+        txtCDuration = findViewById(R.id.txtMMDuration);
+        txtCDescription = findViewById(R.id.txtMMDescription);
+
+        if (!assignments.isEmpty()) {
+            for (Assignment a : assignments) {
+                if (a.isComplete() == false) {
+                    displayAssignment = a;
+                    break;
+                }
+            }
+
+            txtCEventName.setText(displayAssignment.getName());
+            dueDate = new Date((long) displayAssignment.getDueDate() );
+            txtCDueDate.setText(df.format(dueDate));
+            txtCDuration.setText(displayAssignment.getDuration() + " Hours");
+            txtCDescription.setText(displayAssignment.getDesc());
+        }
+
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         selectedDate = dateFormat.format(date);

@@ -8,6 +8,7 @@ public class Assignment {
     private long period;
     private boolean complete;
     private String desc;
+    private boolean notified;
 
 
     public int getId() {
@@ -66,7 +67,7 @@ public class Assignment {
         this.desc = desc;
     }
 
-    public Assignment (int id, String name, long dueDate, long period, boolean complete, String desc)
+    public Assignment (int id, String name, long dueDate, long period, boolean complete, String desc, boolean notified)
     {
         this.id = id;
         this.name = name;
@@ -74,9 +75,18 @@ public class Assignment {
         this.period = period;
         this.complete = complete;
         this.desc = desc;
+        this.notified = notified;
     }
 
     public Assignment() {
 
+    }
+
+    public boolean isNotified() {
+        return notified;
+    }
+
+    public void setNotified(boolean notified) {
+        this.notified = notified;
     }
 }

@@ -17,14 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //sends notifications, probably not in the right spot
-        startService(new Intent(getApplicationContext(), NotificationService.class));
-
-        //remove later
-        ((SAMApplication) getApplication()).deleteAllAssignments();
-        ((SAMApplication) getApplication()).addAssignment("test 1", 1614555000,
-                0, 1, 0, "This is a test");
-        ((SAMApplication) getApplication()).addAssignment("test 2", 1614295800,
-                1.5, 1, 0, "this is also a test");
+        //startService(new Intent(getApplicationContext(), NotificationService.class));
 
     }
 
