@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //sends notifications, probably not in the right spot
-        //startService(new Intent(getApplicationContext(), NotificationService.class));
+        startService(new Intent(getApplicationContext(), NotificationService.class));
 
     }
 

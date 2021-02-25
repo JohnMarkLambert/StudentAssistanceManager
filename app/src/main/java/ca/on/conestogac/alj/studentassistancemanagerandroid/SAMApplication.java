@@ -73,7 +73,7 @@ public class SAMApplication extends Application {
         } else {
             note = 1;
         }
-        db.execSQL("UPDATE tble_assignments SET (Notified = '" + note + "') WHERE AssignmentId = " + id);
+        db.execSQL("UPDATE tbl_assignments SET Notified = '" + note + "' WHERE AssignmentId = " + id);
     }
 
     public void deleteAssignment(int id) {
