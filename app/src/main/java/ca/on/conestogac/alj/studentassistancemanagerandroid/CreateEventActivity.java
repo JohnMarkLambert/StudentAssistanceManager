@@ -114,8 +114,9 @@ public class CreateEventActivity extends AppCompatActivity {
         txtTimeDue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int hr = Calendar.getInstance().HOUR_OF_DAY;
-                int min = Calendar.getInstance().MINUTE;
+                Calendar calendar= Calendar.getInstance();
+                int hr = calendar.get(Calendar.HOUR_OF_DAY);
+                int min = calendar.get(Calendar.MINUTE);
                 TimePickerDialog timeDialog = new TimePickerDialog(
                         CreateEventActivity.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
