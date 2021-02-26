@@ -45,8 +45,6 @@ public class NotificationService extends Service {
                         String dueDate = df.format(a.getDueDate());
                         String [] dateTime = dueDate.split(" ");
 
-                        Toast.makeText(getApplicationContext(), a.getName() + " is due on " + dateTime[0] + " at " + dateTime[1], Toast.LENGTH_LONG).show();
-
                         final Intent NotifyIntent = new Intent(getApplicationContext(), MainActivity.class);
                         NotifyIntent.addFlags(NotifyIntent.FLAG_ACTIVITY_CLEAR_TOP);
                         final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, NotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);

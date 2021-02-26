@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //sends notifications, probably not in the right spot
-        startService(new Intent(getApplicationContext(), NotificationService.class));
+
 
     }
 
@@ -58,5 +58,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return result;
+    }
+
+    @Override
+    protected void onStop() {
+        startService(new Intent(getApplicationContext(), NotificationService.class));
+        super.onStop();
     }
 }
