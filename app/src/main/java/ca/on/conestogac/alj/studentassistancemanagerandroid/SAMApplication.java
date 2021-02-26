@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.app.Application;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -56,13 +57,16 @@ public class SAMApplication extends Application {
                                  int period, int complete, String desc)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL("UPDATE tbl_assignments SET (AssignmentName = '" + name +
-                "', DueDate = '" + dueDate +
-                "', Duration = '" + duration +
-                "', Period = '" + period +
-                "', Complete = '" + complete +
-                "', Description = '" + desc + "')" +
-                " WHERE AssignmentId = " + id);
+
+        ContentValues cv = new ContentValues();
+        cv.put("AssignmentName", name);
+        cv.put("DueDate", dueDate);
+        cv.put("Duration", duration);
+        cv.put("Period", period);
+        cv.put("Complete", complete);
+        cv.put("Description", desc);
+
+        db.update("tbl_assignments", cv, "AssignmentId = ?", new String[]{String.valueOf(id)});
     }
 
     public void updateNotified(int id, boolean notified) {

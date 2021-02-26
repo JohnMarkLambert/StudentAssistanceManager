@@ -72,14 +72,14 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
         txtDesc.setText(assignment.getDesc());
         calDetails.setDate(assignment.getDueDate());
 
-//        btnEdit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), EditEventActivity.class);
-//                intent.putExtra("aId", assignment.getId());
-//                startActivity(intent);
-//            }
-//        });
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CreateEventActivity.class);
+                intent.putExtra("aId", assignment.getId());
+                startActivity(intent);
+            }
+        });
 
 
         DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
@@ -89,6 +89,7 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
                     case DialogInterface.BUTTON_POSITIVE:
                         ((SAMApplication) getApplication()).deleteAssignment(aId);
                         intent = new Intent(getApplicationContext(), AllAssignmentActivity.class);
+                        finish();
                         startActivity(intent);
                 }
             }

@@ -48,6 +48,7 @@ public class AllAssignmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CreateEventActivity.class);
+                intent.putExtra("aId", 0);
                 startActivity(intent);
             }
         });

@@ -78,29 +78,15 @@ public class CalendarActivity extends AppCompatActivity {
             txtCDescription.setText(displayAssignment.getDesc());
         }
 
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = new Date();
-        selectedDate = dateFormat.format(date);
-
         btnCreateEvent.setOnClickListener(new View.OnClickListener() {
             Intent intent;
             @Override
             public void onClick(View v) {
-
                 intent = new Intent(getApplicationContext(), CreateEventActivity.class);
-                intent.putExtra("selectedDate", selectedDate);
+                intent.putExtra("aId", 0);
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
 
-            }
-        });
-
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                selectedDate = i + "/" + (i1 +1) + "/"+ i2;
-                Log.i("date", selectedDate +"");
             }
         });
 

@@ -26,6 +26,7 @@
     <string name="Event_Duration">Duration: </string>
     <string name="Event_Description">Description</string>
     <string name="Time_Due">Time Due: </string>
+    <string name="Date_Due">Due Date:</string>
 
 
     <string name="Assignment_Complete">Complete: </string>
