@@ -100,6 +100,7 @@ public class CalendarActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     @Override
