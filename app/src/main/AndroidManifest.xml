@@ -31,7 +31,7 @@
         </activity>
 
         <activity android:name=".CalendarActivity" android:label="@string/Title_Calendar"></activity>
-        <activity android:name=".AllAssignmentActivity" android:label="@string/Show_All_Events"></activity>
+        <activity android:name=".AllAssignmentActivity" android:label="@string/Title_All_Events"></activity>
         <activity android:name=".AssignmentDetailsActivity" android:label="Assignment Details"></activity>
 
     </application>
