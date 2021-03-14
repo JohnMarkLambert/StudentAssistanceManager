@@ -14,6 +14,9 @@
     <string name="Menu_Budget">Budget</string>
     <string name="Menu_Settings">Settings</string>
     <string name="Menu_Home">Home</string>
+    <string name="Menu_Goals">Goals</string>
+    <string name="Menu_Transaction">Add Transaction</string>
+    <string name="Menu_Records">All Records</string>
 
     <!-- Calendar Labels -->
     <string name="Title_Calendar">Calendar</string>
