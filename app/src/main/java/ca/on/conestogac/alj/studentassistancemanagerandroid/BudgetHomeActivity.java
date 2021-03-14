@@ -1,29 +1,24 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class BudgetHomeActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        //sends notifications, probably not in the right spot
-
-
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.budgetmenu, menu);
+        setContentView(R.layout.activity_budgethome);
         return true;
     }
 
@@ -33,18 +28,28 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
 
         switch (item.getItemId()) {
-            case R.id.menuHome:
+            case R.id.BMenuHome:
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
-            case R.id.menuCalendar:
-                intent = new Intent(getApplicationContext(), CalendarActivity.class);
+            case R.id.BMenuBudget:
+                intent = new Intent(getApplicationContext(), BudgetHomeActivity.class);
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
-            case R.id.menuBudget:
-                intent = new Intent(getApplicationContext(), BudgetHomeActivity.class);
+            case R.id.BMenuGoals:
+                intent = new Intent(getApplicationContext(), GoalsActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
+            case R.id.BMenuTrans:
+                intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
+            case R.id.BMenuRecords:
+                intent = new Intent(getApplicationContext(), BudgetRecordsActivity.class);
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
@@ -58,11 +63,5 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return result;
-    }
-
-    @Override
-    protected void onStop() {
-        startService(new Intent(getApplicationContext(), NotificationService.class));
-        super.onStop();
     }
 }

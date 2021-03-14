@@ -33,6 +33,11 @@
         <activity android:name=".AssignmentDetailsActivity" android:label="Assignment Details"></activity>
         <activity android:name=".CreateEventActivity" android:label="@string/Create_Event_Button"></activity>
 
+        <activity android:name=".BudgetHomeActivity" android:label="Budget"></activity>
+        <activity android:name=".AddTransactionActivity" android:label="Transaction"></activity>
+        <activity android:name=".GoalsActivity" android:label="BUdget Goals"></activity>
+        <activity android:name=".BudgetRecordsActivity" android:label="Budget Records"></activity>
+
     </application>
 
 </manifest>
