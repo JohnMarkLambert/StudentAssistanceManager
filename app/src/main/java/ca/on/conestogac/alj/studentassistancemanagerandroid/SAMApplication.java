@@ -231,6 +231,7 @@ public class SAMApplication extends Application {
                 Transaction t = new Transaction(c.getInt(0), c.getLong(1),
                         c.getDouble(2), c.getInt(3), c.getInt(4),
                         c.getString(5));
+                transactions.add(t);
                 c.moveToNext();
             }
         }
@@ -261,5 +262,74 @@ public class SAMApplication extends Application {
     public void deleteCategory(int id) {
         SQLiteDatabase db = helper.getWritableDatabase();
         db.delete("tbl_category", "CategoryId = ?", new String[]{String.valueOf(id)});
+    }
+
+    public Category getCategory(int id) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM tbl_category WHERE CategoryId = " + id, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        Category cat = new Category(c.getInt(0), c.getString(1), c.getDouble(2));
+        c.close();
+        return cat;
+    }
+
+    public List<Category> getAllCategory() {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        List<Category> categories = new ArrayList<>();
+        Cursor c = db.rawQuery("SELECT * FROM tbl_category", null);
+        c.moveToFirst();
+        if (c.getCount() > 0) {
+            while (c.getPosition() < c.getCount()) {
+                Category cat = new Category(c.getInt(0), c.getString(1),
+                        c.getDouble(2));
+                categories.add(cat);
+                c.moveToNext();
+            }
+        }
+        c.close();
+        return categories;
+    }
+
+    public void deleteAllCategory() {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("DELETE FROM tbl_category");
+    }
+
+    //Payment type table functions
+    public void addPaymentType(String name){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("INSERT INTO tbl_payment_type(TypeName) Values('" + name + "')");
+    }
+
+    public void updatePaymentType(int id, String name){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("TypeName", name);
+        db.update("tbl_payment_type", cv, "PaymentTypeId = ?", new String[]{String.valueOf(id)});
+    }
+
+    public List<List<String>> getPaymentTypes() {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        List<List<String>> array = new ArrayList<>();
+        Cursor c = db.rawQuery("SELECT * FROM tbl_payment_types", null);
+        c.moveToFirst();
+        if (c.getCount() > 0) {
+            while (c.getPosition() < c.getCount()) {
+                List<String> PT = new ArrayList<>();
+                PT.add(c.getString(0));
+                PT.add(c.getString(1));
+                array.add(PT);
+                c.moveToNext();
+            }
+        }
+        c.close();
+        return array;
+    }
+
+    public void deleteAllPaymentType () {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("DELETE FROM tbl_payment_type");
     }
 }
