@@ -39,4 +39,7 @@
 
     <string name="Title_All_Events">All Events</string>
 
+    <!-- Budget Labels -->
+    <string name="BH_Last_Transaction">Last Transaction</string>
+
 </resources>
