@@ -48,6 +48,13 @@ public class SAMApplication extends Application {
                         "CategoryName TEXT NOT NULL," +
                         "CategoryGoal REAL NOT NULL)");
 
+                db.execSQL("CREATE TABLE IF NOT EXISTS tbl_records(" +
+                        "RecordId INTEGER PRIMARY KEY," +
+                        "RecordDate TEXT NOT NULL," +
+                        "GoalName TEXT NOT NULL," +
+                        "GoalAmount REAL NOT NULL," +
+                        "AmountSpent REAL NOT NULL)");
+
             }
 
             @Override
@@ -331,5 +338,43 @@ public class SAMApplication extends Application {
     public void deleteAllPaymentType () {
         SQLiteDatabase db = helper.getWritableDatabase();
         db.execSQL("DELETE FROM tbl_payment_type");
+    }
+
+    //Record Table functions
+    public void addRecord(String date, String goalName, Double goalAmount, Double amountSpent){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("INSERT INTO tbl_records (RecordDate, GoalName, GoalAmount, AmountSpent) " +
+                "VALUES('" + date + "', '" + goalName + "', '" + goalAmount + "', '" + amountSpent +
+                "')");
+    }
+
+    public List<Record> getMonthlyRecord(String date){
+        SQLiteDatabase db = helper.getReadableDatabase();
+        List<Record> r = new ArrayList<>();
+        Cursor c = db.rawQuery("SELECT * FROM tbl_records WHERE RecordDate = " + date, null);
+        c.moveToFirst();
+        if (c.getCount() > 0) {
+            while (c.getPosition() < c.getCount()) {
+                Record rec = new Record(c.getString(1), c.getString(2),
+                        c.getDouble(3), c.getDouble(4));
+                r.add(rec);
+            }
+        }
+        return r;
+    }
+
+    public List<Record> getAllRecords(){
+        SQLiteDatabase db = helper.getReadableDatabase();
+        List<Record> r = new ArrayList<>();
+        Cursor c = db.rawQuery("SELECT * FROM tbl_records", null);
+        c.moveToFirst();
+        if (c.getCount() > 0) {
+            while (c.getPosition() < c.getCount()) {
+                Record rec = new Record(c.getString(1), c.getString(2),
+                        c.getDouble(3), c.getDouble(4));
+                r.add(rec);
+            }
+        }
+        return r;
     }
 }
