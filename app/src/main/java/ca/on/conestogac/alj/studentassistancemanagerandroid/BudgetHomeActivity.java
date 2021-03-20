@@ -53,6 +53,11 @@ public class BudgetHomeActivity extends AppCompatActivity {
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
+            case R.id.BMenuTransactions:
+                intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
 //            case R.id.menuSettings:
 //                intent = new Intent(getApplicationContext(), SettingsActivity.class);
 //                //intent.putExtra("darkTheme", darkTheme);

@@ -11,6 +11,9 @@
         android:id="@+id/BMenuTrans"
         android:title="@string/Menu_Transaction" />
     <item
+        android:id="@+id/BMenuTransactions"
+        android:title="@string/Menu_SeeTransactions" />
+    <item
         android:id="@+id/BMenuGoals"
         android:title="@string/Menu_Goals" />
     <item

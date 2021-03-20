@@ -231,7 +231,7 @@ public class SAMApplication extends Application {
     public List<Transaction> getAllTransactions() {
         SQLiteDatabase db = helper.getReadableDatabase();
         List<Transaction> transactions = new ArrayList<>();
-        Cursor c = db.rawQuery("SELECT * FROM tbl_transactions", null);
+        Cursor c = db.rawQuery("SELECT * FROM tbl_transactions ORDER BY Date DESC", null);
         c.moveToFirst();
         if (c.getCount() > 0) {
             while (c.getPosition() < c.getCount()) {
@@ -315,6 +315,13 @@ public class SAMApplication extends Application {
         ContentValues cv = new ContentValues();
         cv.put("TypeName", name);
         db.update("tbl_payment_type", cv, "PaymentTypeId = ?", new String[]{String.valueOf(id)});
+    }
+
+    public String getPaymentType(int id) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM tbl_payment_types WHERE PaymentTypeId = " + id, null);
+        c.moveToFirst();
+        return c.getString(2);
     }
 
     public List<List<String>> getPaymentTypes() {
