@@ -16,7 +16,8 @@
     <string name="Menu_Home">Home</string>
     <string name="Menu_Goals">Goals</string>
     <string name="Menu_Transaction">Add Transaction</string>
-    <string name="Menu_Records">All Records</string>
+    <string name="Menu_Records">Records</string>
+    <string name="Menu_SeeTransactions">View Transactions</string>
 
     <!-- Calendar Labels -->
     <string name="Title_Calendar">Calendar</string>
@@ -41,5 +42,6 @@
 
     <!-- Budget Labels -->
     <string name="BH_Last_Transaction">Last Transaction</string>
+    <string name="AT_New_Trans">New Transaction</string>
 
 </resources>
