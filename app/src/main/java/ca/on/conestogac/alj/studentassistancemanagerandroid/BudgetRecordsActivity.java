@@ -19,7 +19,6 @@ public class BudgetRecordsActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.budgetmenu, menu);
-        setContentView(R.layout.activity_budgethome);
         return true;
     }
 
