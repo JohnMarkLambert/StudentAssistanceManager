@@ -40,6 +40,8 @@
         <activity android:name=".AllTransactionActivity" android:label="Transaction History"></activity>
         <activity android:name=".TransactionDetailActivity" android:label="Transaction Details"></activity>
 
+        <activity android:name=".SetGoalActivity" android:label="Add Budget Goal"></activity>
+
     </application>
 
 </manifest>
