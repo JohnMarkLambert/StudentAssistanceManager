@@ -14,11 +14,11 @@ public class BudgetHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_budgethome);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.budgetmenu, menu);
-        setContentView(R.layout.activity_budgethome);
         return true;
     }
 
@@ -48,16 +48,16 @@ public class BudgetHomeActivity extends AppCompatActivity {
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
+            case R.id.BMenuTransactions:
+                intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
+                startActivity(intent);
+                break;
             case R.id.BMenuRecords:
                 intent = new Intent(getApplicationContext(), BudgetRecordsActivity.class);
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
-            case R.id.BMenuTransactions:
-                intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
+
 //            case R.id.menuSettings:
 //                intent = new Intent(getApplicationContext(), SettingsActivity.class);
 //                //intent.putExtra("darkTheme", darkTheme);

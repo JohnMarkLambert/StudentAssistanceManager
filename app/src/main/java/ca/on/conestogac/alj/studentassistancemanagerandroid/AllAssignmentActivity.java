@@ -2,15 +2,12 @@ package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,10 +17,6 @@ import androidx.cardview.widget.CardView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -31,6 +24,7 @@ import java.util.Locale;
 public class AllAssignmentActivity extends AppCompatActivity {
 
     private Button btnAACreateEvent;
+    private List<Assignment> a;
 
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm",Locale.getDefault());
 
@@ -54,8 +48,6 @@ public class AllAssignmentActivity extends AppCompatActivity {
             }
         });
 
-
-        List<Assignment> a = new ArrayList<>();
         LinearLayout ll = (LinearLayout)findViewById(R.id.AALayout);
 
         try {
@@ -118,11 +110,11 @@ public class AllAssignmentActivity extends AppCompatActivity {
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
-//            case R.id.menuBudget:
-//                intent = new Intent(getApplicationContext(), BudgetActivity.class);
-//                //intent.putExtra("darkTheme", darkTheme);
-//                startActivity(intent);
-//                break;
+            case R.id.menuBudget:
+                intent = new Intent(getApplicationContext(), BudgetHomeActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
 //            case R.id.menuSettings:
 //                intent = new Intent(getApplicationContext(), SettingsActivity.class);
 //                //intent.putExtra("darkTheme", darkTheme);

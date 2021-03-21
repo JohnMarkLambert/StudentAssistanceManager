@@ -35,8 +35,10 @@
 
         <activity android:name=".BudgetHomeActivity" android:label="Budget"></activity>
         <activity android:name=".AddTransactionActivity" android:label="Transaction"></activity>
-        <activity android:name=".GoalsActivity" android:label="BUdget Goals"></activity>
+        <activity android:name=".GoalsActivity" android:label="Budget Goals"></activity>
         <activity android:name=".BudgetRecordsActivity" android:label="Budget Records"></activity>
+        <activity android:name=".AllTransactionActivity" android:label="Transaction History"></activity>
+        <activity android:name=".TransactionDetailActivity" android:label="Transaction Details"></activity>
 
     </application>
 
