@@ -78,10 +78,12 @@ public class NotificationService extends Service {
     //Spending Report Notification
     private void checkForStartOfMonth(){
         String currentDate = df.format(System.currentTimeMillis());
+        String transactionDate = "";
 
         if(currentDate.startsWith("01") && !firstDateChecked){
             //Toast.makeText(this, "First Day of month " + currentDate, Toast.LENGTH_LONG).show();
 
+            //Notification
             final Intent NotifyIntent = new Intent(getApplicationContext(), MainActivity.class);
             NotifyIntent.addFlags(NotifyIntent.FLAG_ACTIVITY_CLEAR_TOP);
             final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, NotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -94,9 +96,67 @@ public class NotificationService extends Service {
                     .setAutoCancel(true)
                     .build();
             manager.notify(ID, notification);
+
+            //Make spending report
+            List<Transaction> transactions = new ArrayList<>();
+            transactions = ((SAMApplication) getApplication()).getAllTransactions();
+
+            String [] splitCurrentDate = currentDate.split("/");
+
+            //get the current month
+            int currentMonth = Integer.parseInt(splitCurrentDate[1]);
+            int previousMonth = 0;
+
+            //sets the previous month to one less then the current month, unless it is jan (1) then it sets it to 12
+            if(currentMonth == 1){
+                previousMonth = 12;
+            }
+            else{
+                previousMonth = currentMonth--;
+            }
+
+            splitCurrentDate[1] = "";
+
+            //sets the current month to the previous month to check if the transactions are in the correct month. adds a 0 on the start of months 1-9 to match formatting
+            if(!(previousMonth > 9)){
+                splitCurrentDate[1] = "0";
+            }
+            splitCurrentDate[1] += String.valueOf(previousMonth);
+
+            String [] splitTransactionDate;
+
+            int numberOfCategories = ((SAMApplication) getApplication()).getAllCategory().size();
+            double [] categoryAmount = new double[numberOfCategories];
+
+            //make sure that there are transactions
+            if (transactions.size() > 0) {
+                for (Transaction t : transactions) {
+                    transactionDate = df.format(t.getDate());
+                    splitTransactionDate = transactionDate.split("/");
+
+                    //make sure that the transaction has the same month and year as the previous month
+                    if (splitCurrentDate[1] == splitTransactionDate[1] && splitCurrentDate[2].substring(0, 1) == splitTransactionDate[2].substring(0, 1)){
+                        for (int i = 0; i <= categoryAmount.length; i++){
+                            if(t.getCategory() == i){
+                                categoryAmount [i] += t.getAmount();
+                            }
+                        }
+                    }
+                }
+
+                List<Category> categories = new ArrayList<>();
+                categories = ((SAMApplication) getApplication()).getAllCategory();
+
+                for (Category c : categories){
+                    ((SAMApplication) getApplication()).addRecord(currentDate, c.getName(), c.getGoal(), categoryAmount[c.getId()]);
+                }
+            }
+
+            //check off that the past month has been done
             firstDateChecked = true;
         }
 
+        //then as soon as it's not the first day of the month, unchecks the first day so it can flag the next time it is the first day
         if (!currentDate.startsWith("01")){
             firstDateChecked = false;
         }
