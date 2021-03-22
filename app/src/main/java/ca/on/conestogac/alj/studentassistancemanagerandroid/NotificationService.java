@@ -24,6 +24,7 @@ public class NotificationService extends Service {
 
     public static final int ID = 1;
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
+    private boolean firstDateChecked = false;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -34,6 +35,14 @@ public class NotificationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         onTaskRemoved(intent);
 
+        checkForAssignmentNotification();
+        checkForStartOfMonth();
+
+        return START_STICKY;
+    }
+
+    //Assignment Notification
+    private void checkForAssignmentNotification(){
         List<Assignment> assignments = new ArrayList<>();
         assignments = ((SAMApplication) getApplication()).getAllAssignments();
 
@@ -64,7 +73,33 @@ public class NotificationService extends Service {
 
             }
         }
-        return START_STICKY;
+    }
+
+    //Spending Report Notification
+    private void checkForStartOfMonth(){
+        String currentDate = df.format(System.currentTimeMillis());
+
+        if(currentDate.startsWith("01") && !firstDateChecked){
+            //Toast.makeText(this, "First Day of month " + currentDate, Toast.LENGTH_LONG).show();
+
+            final Intent NotifyIntent = new Intent(getApplicationContext(), MainActivity.class);
+            NotifyIntent.addFlags(NotifyIntent.FLAG_ACTIVITY_CLEAR_TOP);
+            final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, NotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            final Notification notification = new Notification.Builder(getApplicationContext())
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle("New Spending Report")
+                    .setContentText("You have a spending report from the last month")
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .build();
+            manager.notify(ID, notification);
+            firstDateChecked = true;
+        }
+
+        if (!currentDate.startsWith("01")){
+            firstDateChecked = false;
+        }
     }
 
     @Override

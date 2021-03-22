@@ -62,9 +62,9 @@ public class SetGoalActivity extends AppCompatActivity {
     private void createGoal(){
         Log.i("Goal info:", "\nName: " + goalName + "\nAmount: " + goalAmount);
 
-        /*
+
         ((SAMApplication) getApplication()).createCategory(goalName, goalAmount);
-         */
+
         Toast.makeText(this, "Budget Goal Created", Toast.LENGTH_SHORT).show();
 
 
@@ -80,17 +80,17 @@ public class SetGoalActivity extends AppCompatActivity {
         //Name
         goalName = txtSetGoalName.getText().toString();
         if(goalName.length() == 0){
-            lblGoalName.setError("Budget Goal must have name");
+            txtSetGoalName.setError("Budget Goal must have name");
             validData = false;
         }
         if(goalName.length() > 15){
-            lblGoalName.setError("Budget Goal name must be 15 or less characters");
+            txtSetGoalName.setError("Budget Goal name must be 15 or less characters");
             validData = false;
         }
 
         //Amount
         if (txtSetGoalAmount.getText().length() == 0){
-            lblGoalAmount.setError("Must have a budget goal amount");
+            txtSetGoalAmount.setError("Must have a budget goal amount");
             validData = false;
         }
         else{
