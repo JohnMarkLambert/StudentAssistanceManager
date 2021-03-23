@@ -55,11 +55,11 @@ public class SAMApplication extends Application {
                         "GoalAmount REAL NOT NULL," +
                         "AmountSpent REAL NOT NULL)");
 
-                List<List<String>> paymentTypes = getPaymentTypes();
-                if (paymentTypes == null ){
-                    addPaymentType("Debit");
-                    addPaymentType("Credit");
-                }
+//                List<List<String>> paymentTypes = getPaymentTypes();
+//                if (paymentTypes == null ){
+//                    addPaymentType("Debit");
+//                    addPaymentType("Credit");
+//                }
 
             }
 

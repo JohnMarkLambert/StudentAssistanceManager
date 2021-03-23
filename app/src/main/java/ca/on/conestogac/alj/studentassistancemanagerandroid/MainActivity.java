@@ -17,10 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         //dummy Data
-        ((SAMApplication) getApplication()).addRecord("01/2021", "Food", 1250.50, 1255.99);
-        ((SAMApplication) getApplication()).addRecord("01/2021", "Rent", 1535.20, 1535.20);
-        ((SAMApplication) getApplication()).addRecord("01/2021", "Utilities", 80.85, 70.36);
-        ((SAMApplication) getApplication()).addRecord("01/2021", "Transportation", 125.65, 120.32);
+//        ((SAMApplication) getApplication()).addRecord("01/2021", "Food", 1250.50, 1255.99);
+//        ((SAMApplication) getApplication()).addRecord("01/2021", "Rent", 1535.20, 1535.20);
+//        ((SAMApplication) getApplication()).addRecord("01/2021", "Utilities", 80.85, 70.36);
+//        ((SAMApplication) getApplication()).addRecord("01/2021", "Transportation", 125.65, 120.32);
 //        ((SAMApplication) getApplication()).addRecord("02/2021", "Food", 1250.50, 1199.99);
 //        ((SAMApplication) getApplication()).addRecord("02/2021", "Rent", 1535.20, 1535.20);
 //        ((SAMApplication) getApplication()).addRecord("02/2021", "Utilities", 80.85, 90.00);
