@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Transaction_Amount_Hint"
-                android:inputType="number" />
+                android:inputType="number|numberDecimal" />
 
         </TableRow>
 
