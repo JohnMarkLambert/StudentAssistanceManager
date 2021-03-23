@@ -5,26 +5,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GoalsActivity extends AppCompatActivity {
 
+    private Button btnNewGoal;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals);
 
-
+        btnNewGoal = findViewById(R.id.btnNewGoal);
+        btnNewGoal.setOnClickListener(new View.OnClickListener() {
+            Intent intent;
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), SetGoalActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,5 +84,4 @@ public class GoalsActivity extends AppCompatActivity {
         }
         return result;
     }
-
 }

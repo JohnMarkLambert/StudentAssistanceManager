@@ -44,4 +44,11 @@
     <string name="BH_Last_Transaction">Last Transaction</string>
     <string name="AT_New_Trans">New Transaction</string>
 
+    <string name="Transaction_Date_Hint">Transaction Date</string>
+    <string name="Transaction_Amount_Hint">Payment</string>
+    <string name="Payment_Label">Payment</string>
+    <string name="Category_Label">Category</string>
+    <string name="Notes_Hint">Notes</string>
+    <string name="Save_Button">Save</string>
+
 </resources>
