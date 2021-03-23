@@ -22,6 +22,7 @@
                     android:id="@+id/lblGoalName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:hint="Goal Name" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,6 +49,7 @@
                     android:id="@+id/lblGoalAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:hint="Goal Amount" />
 
             </com.google.android.material.textfield.TextInputLayout>
