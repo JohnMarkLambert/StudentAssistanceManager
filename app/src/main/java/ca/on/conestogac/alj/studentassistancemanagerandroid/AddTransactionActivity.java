@@ -54,26 +54,29 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
         //TEMPORARY REPLACE LATER
-        String[] categoryArray = {"Category1", "Category2"};
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryArray);
-        spnGoals.setAdapter(categoryAdapter);
+
 
         String[] paymentArray = {"Payment1", "Payment2"};
         ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentArray);
-        spnPayment.setAdapter(paymentAdapter);
+       spnPayment.setAdapter(paymentAdapter);
 
+
+
+        List<Category> categoryList = ((SAMApplication) getApplication()).getAllCategory();
+        List<String> categoryListString = new ArrayList<String>();
+        for (int i=0; i < categoryList.size(); i++) {
+            categoryListString.add(categoryList.get(i).getName());
+        }
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryListString);
+        spnGoals.setAdapter(categoryAdapter);
 
 //Not tested, spinners filled with placeholders for now
-//        List<Category> categoryList = ((SAMApplication) getApplication()).getAllCategory();
-//        List<String> categoryListString = new ArrayList<String>();
-//        for (int i=0; i < categoryList.size(); i++) {
-//            categoryListString.add(categoryList.get(i).getName());
+//        List<List<String>> paymentList = ((SAMApplication) getApplication()).getPaymentTypes();
+//        List<String> paymentListString = new ArrayList<String>();
+//        for (int i=0; i < paymentList.size(); i++) {
+//            paymentListString.add(paymentList.get(0).get(i));
 //        }
-//        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryListString);
-//        spnGoals.setAdapter(categoryAdapter);
-//
-//        List<String> paymentList = ((SAMApplication) getApplication()).getPaymentTypes();
-//        ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentList);
+//        ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentListString);
 //        spnPayment.setAdapter(paymentAdapter);
 
         btnSaveTran.setOnClickListener(new View.OnClickListener() {
@@ -141,12 +144,12 @@ public class AddTransactionActivity extends AppCompatActivity {
         super.finish();
 
 //Not tested with transaction detail so commented out for now
-//        List<Transaction> transactions;
-//        transactions = ((SAMApplication) getApplication()).getAllTransactions();
-//
-//        intent = new Intent(getApplicationContext(), TransactionDetailActivity.class);
-//        intent.putExtra("tId", transactions.get(transactions.size() - 1).getId());
-//        startActivity(intent);
+        List<Transaction> transactions;
+        transactions = ((SAMApplication) getApplication()).getAllTransactions();
+
+        intent = new Intent(getApplicationContext(), TransactionDetailActivity.class);
+        intent.putExtra("tId", transactions.get(transactions.size() - 1).getId());
+        startActivity(intent);
     }
 
     private boolean validateData() {
