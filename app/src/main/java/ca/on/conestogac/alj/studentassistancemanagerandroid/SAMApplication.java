@@ -192,7 +192,7 @@ public class SAMApplication extends Application {
     public void addTransaction(Long date, double amount, int PT, int cat, String notes) {
         SQLiteDatabase db = helper.getWritableDatabase();
         db.execSQL("INSERT INTO tbl_transactions(" +
-                "TransactionId, Date, Amount, PaymentType, Category, Notes) " +
+                "Date, Amount, PaymentType, Category, Notes) " +
                 "VALUES ('" + date + "', '" + amount + "', '" + PT + "', '" + cat + "', '" +
                 notes + "')");
     }
