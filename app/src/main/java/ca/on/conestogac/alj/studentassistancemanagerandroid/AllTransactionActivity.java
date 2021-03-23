@@ -141,26 +141,28 @@ public class AllTransactionActivity extends AppCompatActivity {
     }
 
     private void showTransactions(String month){
-
+        ll.removeAllViews();
         if (transactions != null) {
             for (Transaction t : transactions) {
 
                 String checkDate = new SimpleDateFormat("MM/yyyy").format(new Date(t.getDate()));
-                if (month == "all" || checkDate == month) {
+                if (month == "all" | month.equals(checkDate)) {
                     CardView newCard = new CardView(this);
                     TextView tAmount = new TextView(this);
                     TextView tDate = new TextView(this);
-                    TextView tPayment = new TextView(this);
+                    //TextView tPayment = new TextView(this);
                     LinearLayout tLayout = new LinearLayout(this);
 
-                    String addDate = new SimpleDateFormat("dd/MM/yy HH:mm").format(new Date(t.getDate()));
+                    String addDate = new SimpleDateFormat("dd/MM/yy").format(new Date(t.getDate()));
                     String addAmount = Double.toString(t.getAmount());
                     tDate.setText(addDate);
-                    tAmount.setText(addAmount);
-                    tPayment.setText(((SAMApplication) getApplication()).getPaymentType(t.getPaymentType()));
+                    tAmount.setText("$" + addAmount);
+                    //tPayment.setText(((SAMApplication) getApplication()).getPaymentType(t.getPaymentType()));
+                    tLayout.setOrientation(LinearLayout.VERTICAL);
                     tLayout.addView(tDate);
                     tLayout.addView(tAmount);
-                    tLayout.addView(tPayment);
+                   //tLayout.addView(tPayment);
+
 
                     newCard.addView(tLayout);
                     newCard.setCardElevation(10);
