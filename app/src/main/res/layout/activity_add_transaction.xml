@@ -11,119 +11,78 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtTransactionDate"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="109dp"
-                    android:layout_height="match_parent"
-                    android:hint="Date" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <EditText
-                android:id="@+id/dateTransaction"
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="date" />
+                android:clickable="true"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:hint="@string/Transaction_Date_Hint" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="showTimePickerDialog"
-                android:text="Pick Time" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Transaction_Amount_Hint"
+                android:inputType="number" />
+
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Amount" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <EditText
-                android:id="@+id/editTextNumberDecimal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="numberDecimal" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Payment" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Payment_Label" />
 
             <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/paymentSpinner"
+                android:id="@+id/spnPayment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:spinnerMode="dropdown" />
+
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Goal" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Category_Label" />
 
             <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/goalSpinner"
+                android:id="@+id/spnGoals"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:spinnerMode="dropdown" />
+
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtNotes"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:hint="@string/Notes_Hint" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Notes" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
         </TableRow>
 
         <TableRow
@@ -135,13 +94,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:text="@string/Save_Button" />
 
             <Button
                 android:id="@+id/btnTranCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel" />
+                android:text="@string/Cancel_Event_Button" />
         </TableRow>
     </TableLayout>
 
