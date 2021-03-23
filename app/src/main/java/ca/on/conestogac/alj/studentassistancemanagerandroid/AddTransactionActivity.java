@@ -33,7 +33,8 @@ public class AddTransactionActivity extends AppCompatActivity {
     private Button btnSaveTran, btnTranCancel;
     private DatePickerDialog.OnDateSetListener datePickerListener;
     private String transactionDate, notes;
-    private int amount, payment, category;
+    private int payment, category;
+    private double amount;
     private long epochTime;
     private Intent intent;
 
@@ -180,7 +181,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             goodData = false;
         }
         else {
-            amount = Integer.parseInt(txtAmount.getText().toString());
+            amount = Double.parseDouble(txtAmount.getText().toString());
             txtAmount.setError(null);
         }
 
