@@ -45,6 +45,7 @@ public class BudgetHomeActivity extends AppCompatActivity {
                 break;
             case R.id.BMenuTrans:
                 intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                intent.putExtra("tId", "");
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;

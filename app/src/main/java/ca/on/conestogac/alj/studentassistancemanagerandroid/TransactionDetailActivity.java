@@ -51,6 +51,16 @@ public class TransactionDetailActivity extends AppCompatActivity {
                 dialogBuilder.show();
             }
         });
+
+        btnTranEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                intent.putExtra("tId", tId);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
