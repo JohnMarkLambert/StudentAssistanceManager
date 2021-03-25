@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -34,12 +35,18 @@ public class RecordDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorddetails);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         date = getIntent().getExtras().getString("rId");
         txtMonth = findViewById(R.id.txtReportDate);
         txtMonth.setText(date);
 
         pcvReport = (PieChartView)findViewById(R.id.MRChart);
         switchChart = (Switch)findViewById(R.id.switchReportPie);
+        ll = (LinearLayout)findViewById(R.id.LLReportGoals);
 
         colours = new ArrayList<>();
         colours.add(getColor(R.color.purple_200));
@@ -94,21 +101,22 @@ public class RecordDetailsActivity extends AppCompatActivity {
             LinearLayout newLL = new LinearLayout(this);
 
             txtGoalName.setText("Goal: " + record.getGoalName());
+            txtGoalName.setTextSize(20);
             txtGoalName.setBackgroundColor(colours.get(num));
             if (num == colours.size()-1) {
                 num = 0;
             } else {
                 num++;
             }
-            txtGoalAmount.setText("Goal Target: $" + record.getGoalAmount());
-            txtTotalAmount.setText("Total Spent: $" + record.getAmountSpent());
-            txtDiff.setText("Difference: $" + record.getDifference());
+            txtGoalAmount.setText("Goal Target: $" + String.format("%.2f", record.getGoalAmount()));
+            txtTotalAmount.setText("Total Spent: $" + String.format("%.2f", record.getAmountSpent()));
+            txtDiff.setText("Difference: $" + String.format("%.2f", record.getDifference()));
             if (record.getDifference() > 0) {
                 txtDiff.setTextColor(getResources().getColor(R.color.red, null));
             } else if (record.getDifference() <= 0) {
                 txtDiff.setTextColor(getResources().getColor(R.color.green, null));
             }
-
+            newLL.setOrientation(LinearLayout.VERTICAL);
             newLL.addView(txtGoalName);
             newLL.addView(txtGoalAmount);
             newLL.addView(txtTotalAmount);
@@ -139,7 +147,7 @@ public class RecordDetailsActivity extends AppCompatActivity {
             }
         }
         PieChartData pieChartData = new PieChartData(pieData);
-        pieChartData.setHasLabels(true).setValueLabelTextSize(20);
+        pieChartData.setHasLabelsOnlyForSelected(true).setValueLabelTextSize(16);
         if (mode) {
             pieChartData.setHasCenterCircle(true).setCenterText1("Totals");
         }

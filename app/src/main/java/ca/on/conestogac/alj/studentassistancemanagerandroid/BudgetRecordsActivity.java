@@ -120,26 +120,36 @@ public class BudgetRecordsActivity extends AppCompatActivity {
                 TextView diffTitle = new TextView(this);
                 TextView txtDiff = new TextView(this);
                 LinearLayout newLL = new LinearLayout(this);
+                LinearLayout ll1 = new LinearLayout(this);
+                LinearLayout ll2 = new LinearLayout(this);
+                LinearLayout ll3 = new LinearLayout(this);
+                newLL.setOrientation(LinearLayout.VERTICAL);
+                ll1.setOrientation(LinearLayout.HORIZONTAL);
+                ll2.setOrientation(LinearLayout.HORIZONTAL);
+                ll3.setOrientation(LinearLayout.HORIZONTAL);
 
                 txtDate.setText(date);
-                goalTitle.setText("Goal:");
-                txtGoal.setText(Double.toString(goal));
-                totalTitle.setText("Total:");
-                txtTotal.setText(Double.toString(total));
-                diffTitle.setText("Difference");
-                txtDiff.setText(Double.toString(diff));
+                goalTitle.setText("Goal: ");
+                txtGoal.setText("$" + String.format("%.2f", goal));
+                totalTitle.setText("Total: ");
+                txtTotal.setText("$" + String.format("%.2f", total));
+                diffTitle.setText("Difference ");
+                txtDiff.setText("$" + String.format("%.2f", diff));
                 if (diff > 0) {
                     txtDiff.setTextColor(getResources().getColor(R.color.red, null));
                 } else if (diff <= 0) {
                     txtDiff.setTextColor(getResources().getColor(R.color.green, null));
                 }
                 newLL.addView(txtDate);
-                newLL.addView(goalTitle);
-                newLL.addView(txtGoal);
-                newLL.addView(totalTitle);
-                newLL.addView(txtTotal);
-                newLL.addView(diffTitle);
-                newLL.addView(txtDiff);
+                ll1.addView(goalTitle);
+                ll1.addView(txtGoal);
+                ll2.addView(totalTitle);
+                ll2.addView(txtTotal);
+                ll3.addView(diffTitle);
+                ll3.addView(txtDiff);
+                newLL.addView(ll1);
+                newLL.addView(ll2);
+                newLL.addView(ll3);
                 newCard.addView(newLL);
 
                 ll.addView(newCard);
