@@ -14,25 +14,22 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inlGoalName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2">
+                android:layout_weight="2"
+                android:hint="Goal Name">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/lblGoalName"
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/txtGoalName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="Goal Name" />
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/txtSetGoalName"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
@@ -41,26 +38,21 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inlGoalAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2">
+                android:layout_weight="2"
+                android:hint="Goal Amount ($)">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/lblGoalAmount"
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/txtGoalAmount"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="Goal Amount" />
-
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/txtSetGoalAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberDecimal" />
         </LinearLayout>
 
         <LinearLayout
