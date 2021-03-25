@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,11 +36,13 @@ public class AddTransactionActivity extends AppCompatActivity {
     private Button btnSaveTran, btnTranCancel;
     private DatePickerDialog.OnDateSetListener datePickerListener;
     private String transactionDate, notes;
-    private int payment, category;
+    private int payment, tId;
+    private Category category;
     private double amount;
     private long epochTime;
     private Intent intent;
-
+    private boolean isEditing;
+    private SimpleDateFormat dfDate;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,28 +57,34 @@ public class AddTransactionActivity extends AppCompatActivity {
         btnSaveTran = findViewById(R.id.btnSaveTran);
         btnTranCancel = findViewById(R.id.btnTranCancel);
 
+        isEditing = false;
+        dfDate = new SimpleDateFormat("yyyy/MM/dd");
 
-        //TEMPORARY REPLACE LATER
-        String[] categoryArray = {"Category1", "Category2"};
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryArray);
-        spnGoals.setAdapter(categoryAdapter);
-
+//Temporary
         String[] paymentArray = {"Payment1", "Payment2"};
         ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentArray);
-        spnPayment.setAdapter(paymentAdapter);
+       spnPayment.setAdapter(paymentAdapter);
 
+
+
+        List<Category> categoryList = ((SAMApplication) getApplication()).getAllCategory();
+        ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, categoryList);
+        spnGoals.setAdapter(categoryAdapter);
+
+        tId = getIntent().getExtras().getInt("tId");
+        if (tId != 0) {
+            populateFields();
+            isEditing = true;
+            btnSaveTran.setText("Update");
+        }
 
 //Not tested, spinners filled with placeholders for now
-//        List<Category> categoryList = ((SAMApplication) getApplication()).getAllCategory();
-//        List<String> categoryListString = new ArrayList<String>();
-//        for (int i=0; i < categoryList.size(); i++) {
-//            categoryListString.add(categoryList.get(i).getName());
+//        List<List<String>> paymentList = ((SAMApplication) getApplication()).getPaymentTypes();
+//        List<String> paymentListString = new ArrayList<String>();
+//        for (int i=0; i < paymentList.size(); i++) {
+//            paymentListString.add(paymentList.get(0).get(i));
 //        }
-//        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryListString);
-//        spnGoals.setAdapter(categoryAdapter);
-//
-//        List<String> paymentList = ((SAMApplication) getApplication()).getPaymentTypes();
-//        ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentList);
+//        ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentListString);
 //        spnPayment.setAdapter(paymentAdapter);
 
         btnSaveTran.setOnClickListener(new View.OnClickListener() {
@@ -136,17 +147,25 @@ public class AddTransactionActivity extends AppCompatActivity {
                 "\nGoal: " + category +
                 "\nNotes: " + notes);
 
-        ((SAMApplication) getApplication()).addTransaction(epochTime, amount, payment,category, notes);
+        if(isEditing) {
+            ((SAMApplication) getApplication()).updateTransaction(tId, epochTime, amount, payment,category.getId(), notes);
+            Toast.makeText(this, "Transaction updated", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            ((SAMApplication) getApplication()).addTransaction(epochTime, amount, payment,category.getId(), notes);
+            Toast.makeText(this, "Transaction created", Toast.LENGTH_SHORT).show();
+        }
+
+
 
         super.finish();
 
-//Not tested with transaction detail so commented out for now
-//        List<Transaction> transactions;
-//        transactions = ((SAMApplication) getApplication()).getAllTransactions();
-//
-//        intent = new Intent(getApplicationContext(), TransactionDetailActivity.class);
-//        intent.putExtra("tId", transactions.get(transactions.size() - 1).getId());
-//        startActivity(intent);
+        List<Transaction> transactions;
+        transactions = ((SAMApplication) getApplication()).getAllTransactions();
+
+        intent = new Intent(getApplicationContext(), TransactionDetailActivity.class);
+        intent.putExtra("tId", transactions.get(transactions.size() - 1).getId());
+        startActivity(intent);
     }
 
     private boolean validateData() {
@@ -154,7 +173,6 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         //Transaction Date Validation
         Date today = new Date();
-        SimpleDateFormat dfDate = new SimpleDateFormat("yyyy/MM/dd");
 
         if (txtTransactionDate.getText().length() == 0) {
             txtTransactionDate.setError("Select a transaction date");
@@ -185,13 +203,37 @@ public class AddTransactionActivity extends AppCompatActivity {
             txtAmount.setError(null);
         }
 
-        category = spnGoals.getSelectedItemPosition();
+        category = (Category) spnGoals.getSelectedItem();
         payment = spnPayment.getSelectedItemPosition();
         notes = txtNotes.getText().toString();
 
         Log.i("Data Validation","Data is valid: " + goodData);
 
         return goodData;
+    }
+
+    private void populateFields() {
+        Transaction transaction = ((SAMApplication) getApplication()).getTransaction(tId);
+        Calendar cal = Calendar.getInstance();
+        setTitle("Edit Transaction");
+
+        txtAmount.setText(String.valueOf(transaction.getAmount()));
+
+        Adapter adapter = spnGoals.getAdapter();
+
+        List<Category> categories = new ArrayList<Category>(adapter.getCount());
+        for (int i = 0; i < adapter.getCount(); i++) {
+            Category c = (Category) adapter.getItem(i);
+            if (transaction.getCategory() == c.getId()) {
+                spnGoals.setSelection(i);
+            }
+        }
+
+
+        txtTransactionDate.setText(dfDate.format(transaction.getDate()));
+
+        txtNotes.setText(transaction.getNotes());
+
     }
 
 

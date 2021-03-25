@@ -1,12 +1,18 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
+
+import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DateFormat;
@@ -15,43 +21,54 @@ import java.util.Locale;
 
 public class TransactionDetailActivity extends AppCompatActivity {
 
-    private TextView txtTranDDate, txtTranDAmount, txtTranDPayment, txtTranDGoal, txtTranDNotes;
-    private Transaction transaction;
-    private Category category;
+    private Button btnTranDelete, btnTranEdit;
     private int tId;
-    private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
+    private Intent intent;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_detail);
 
-        txtTranDDate = findViewById(R.id.txtTranDDate);
-        txtTranDAmount = findViewById(R.id.txtTranDAmount);
-        txtTranDPayment = findViewById(R.id.txtTranDPayment);
-        txtTranDGoal = findViewById(R.id.txtTranDGoal);
-        txtTranDNotes = findViewById(R.id.txtTranDNotes);
+        btnTranDelete = findViewById(R.id.btnTranDelete);
+        btnTranEdit = findViewById(R.id.btnTranEdit);
 
         tId = getIntent().getExtras().getInt("tId");
-        transaction = ((SAMApplication) getApplication()).getTransaction(tId);
 
+        DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int result) {
+                switch (result) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        ((SAMApplication) getApplication()).deleteTransaction(tId);
+                        intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
+                        finish();
+                        startActivity(intent);
+                }
+            }
+        };
 
-        //category = ((SAMApplication) getApplication()).getCategory(transaction.getCategory());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_StudentAssistanceManagerAndroid));
+        dialogBuilder.setMessage("Delete this transaction?").setPositiveButton("Yes", dialogListener)
+                .setNegativeButton("No", dialogListener);
 
+        btnTranDelete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                dialogBuilder.show();
+            }
+        });
 
-        String date = df.format(transaction.getDate());
-        txtTranDDate.setText(date);
-        txtTranDAmount.setText(String.valueOf(transaction.getAmount()));
+        btnTranEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        //txtTranDPayment.setText(transaction.getPaymentType());
-        //txtTranDGoal.setText(category.getName());
-        //Just have these until payment table issues are resolved, and category is implemented into transaction creation
-        txtTranDPayment.setText("FILLER");
-        txtTranDGoal.setText("FILLER");
-
-        if (transaction.getNotes().length() != 0){
-            txtTranDNotes.setText(transaction.getNotes());
-        }
+                intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                intent.putExtra("tId", tId);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

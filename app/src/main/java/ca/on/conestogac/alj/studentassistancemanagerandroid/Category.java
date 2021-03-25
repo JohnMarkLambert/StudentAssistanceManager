@@ -34,4 +34,8 @@ public class Category {
         this.name = name;
         this.goal = goal;
     }
+
+    public String toString() {
+        return name;
+    }
 }
