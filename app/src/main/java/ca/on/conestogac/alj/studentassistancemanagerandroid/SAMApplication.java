@@ -364,13 +364,18 @@ public class SAMApplication extends Application {
     public List<Record> getMonthlyRecord(String date){
         SQLiteDatabase db = helper.getReadableDatabase();
         List<Record> r = new ArrayList<>();
-        Cursor c = db.rawQuery("SELECT * FROM tbl_records WHERE RecordDate = " + date, null);
+        Cursor c = db.rawQuery("SELECT * FROM tbl_records", null);
         c.moveToFirst();
         if (c.getCount() > 0) {
             while (c.getPosition() < c.getCount()) {
-                Record rec = new Record(c.getString(1), c.getString(2),
-                        c.getDouble(3), c.getDouble(4));
-                r.add(rec);
+                String check = c.getString(1);
+                if (check.equals(date)) {
+                    Record rec = new Record(c.getString(1), c.getString(2),
+                            c.getDouble(3), c.getDouble(4));
+                    r.add(rec);
+
+                }
+                c.moveToNext();
             }
         }
         return r;
@@ -386,6 +391,7 @@ public class SAMApplication extends Application {
                 Record rec = new Record(c.getString(1), c.getString(2),
                         c.getDouble(3), c.getDouble(4));
                 r.add(rec);
+                c.moveToNext();
             }
         }
         return r;
