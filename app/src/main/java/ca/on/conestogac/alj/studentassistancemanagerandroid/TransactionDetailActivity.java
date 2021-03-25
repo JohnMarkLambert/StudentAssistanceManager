@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,11 @@ public class TransactionDetailActivity extends AppCompatActivity {
     private int tId;
     private Intent intent;
 
+    private TextView txtTranDDate, txtTranDAmount, txtTranDPayment, txtTranDGoal, txtTranDNotes;
+    private Transaction transaction;
+    private Category category;
+
+    private DateFormat df = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +40,35 @@ public class TransactionDetailActivity extends AppCompatActivity {
         btnTranDelete = findViewById(R.id.btnTranDelete);
         btnTranEdit = findViewById(R.id.btnTranEdit);
 
+        txtTranDDate = findViewById(R.id.txtTranDDate);
+        txtTranDAmount = findViewById(R.id.txtTranDAmount);
+        txtTranDPayment = findViewById(R.id.txtTranDPayment);
+        txtTranDGoal = findViewById(R.id.txtTranDGoal);
+        txtTranDNotes = findViewById(R.id.txtTranDNotes);
+
+
         tId = getIntent().getExtras().getInt("tId");
+
+        transaction = ((SAMApplication) getApplication()).getTransaction(tId);
+
+        //category = ((SAMApplication) getApplication()).getCategory(transaction.getCategory());
+
+        String date = df.format(transaction.getDate());
+        txtTranDDate.setText(date);
+        txtTranDAmount.setText(String.valueOf(transaction.getAmount()));
+
+        //txtTranDPayment.setText(transaction.getPaymentType());
+        //txtTranDGoal.setText(category.getName());
+        //Just have these until payment table issues are resolved, and category is implemented into transaction creation
+        txtTranDPayment.setText("FILLER");
+        txtTranDGoal.setText("FILLER");
+
+        if (transaction.getNotes().length() != 0){
+            txtTranDNotes.setText(transaction.getNotes());
+        }
+
+
+
 
         DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
             @Override
