@@ -3,6 +3,7 @@ package ca.on.conestogac.alj.studentassistancemanagerandroid;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 
@@ -51,17 +52,15 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
         transaction = ((SAMApplication) getApplication()).getTransaction(tId);
 
-        //category = ((SAMApplication) getApplication()).getCategory(transaction.getCategory());
-
         String date = df.format(transaction.getDate());
         txtTranDDate.setText(date);
         txtTranDAmount.setText(String.valueOf(transaction.getAmount()));
 
-        //txtTranDPayment.setText(transaction.getPaymentType());
-        //txtTranDGoal.setText(category.getName());
+        category = ((SAMApplication) getApplication()).getCategory(transaction.getCategory());
+        txtTranDGoal.setText(category.getName());
+
         //Just have these until payment table issues are resolved, and category is implemented into transaction creation
         txtTranDPayment.setText("FILLER");
-        txtTranDGoal.setText("FILLER");
 
         if (transaction.getNotes().length() != 0){
             txtTranDNotes.setText(transaction.getNotes());
