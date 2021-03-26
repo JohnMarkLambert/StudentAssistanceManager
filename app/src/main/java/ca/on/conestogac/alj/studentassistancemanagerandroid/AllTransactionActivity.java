@@ -49,7 +49,7 @@ public class AllTransactionActivity extends AppCompatActivity {
         btnNewTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                Intent intent = new Intent(getApplicationContext(), TransactionDetailActivity.class);
                 intent.putExtra("tId", 0);
                 startActivity(intent);
             }
