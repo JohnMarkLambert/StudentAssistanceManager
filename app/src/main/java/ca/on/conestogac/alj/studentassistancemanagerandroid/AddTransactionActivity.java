@@ -62,7 +62,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         isEditing = false;
         dfDate = new SimpleDateFormat("yyyy/MM/dd");
 
-        //Temporary
+        //Temp
         String[] paymentArray = {"Debit", "Credit"};
         ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentArray);
         spnPayment.setAdapter(paymentAdapter);
