@@ -333,7 +333,7 @@ public class SAMApplication extends Application {
     public List<List<String>> getPaymentTypes() {
         SQLiteDatabase db = helper.getReadableDatabase();
         List<List<String>> array = new ArrayList<>();
-        Cursor c = db.rawQuery("SELECT * FROM tbl_payment_types", null);
+        Cursor c = db.rawQuery("SELECT * FROM tbl_payment_type", null);
         c.moveToFirst();
         if (c.getCount() > 0) {
             while (c.getPosition() < c.getCount()) {
