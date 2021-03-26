@@ -43,6 +43,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     private Intent intent;
     private boolean isEditing;
     private SimpleDateFormat dfDate;
+    private TextView txtGoalError;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         spnPayment = findViewById(R.id.spnPayment);
         spnGoals = findViewById(R.id.spnGoals);
         txtNotes = findViewById(R.id.txtNotes);
+        txtGoalError = findViewById(R.id.txtGoalError);
 
         btnSaveTran = findViewById(R.id.btnSaveTran);
         btnTranCancel = findViewById(R.id.btnTranCancel);
@@ -60,18 +62,21 @@ public class AddTransactionActivity extends AppCompatActivity {
         isEditing = false;
         dfDate = new SimpleDateFormat("yyyy/MM/dd");
 
-//Temporary
-        String[] paymentArray = {"Payment1", "Payment2"};
+        //Temp
+        String[] paymentArray = {"Debit", "Credit"};
         ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentArray);
-       spnPayment.setAdapter(paymentAdapter);
+        spnPayment.setAdapter(paymentAdapter);
 
 
 
         List<Category> categoryList = ((SAMApplication) getApplication()).getAllCategory();
         ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, categoryList);
         spnGoals.setAdapter(categoryAdapter);
-
-        tId = getIntent().getExtras().getInt("tId");
+        try {
+            tId = getIntent().getExtras().getInt("tId");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (tId != 0) {
             populateFields();
             isEditing = true;
@@ -157,14 +162,21 @@ public class AddTransactionActivity extends AppCompatActivity {
         }
 
 
-
         super.finish();
 
         List<Transaction> transactions;
         transactions = ((SAMApplication) getApplication()).getAllTransactions();
 
         intent = new Intent(getApplicationContext(), TransactionDetailActivity.class);
-        intent.putExtra("tId", transactions.get(transactions.size() - 1).getId());
+
+
+        int i;
+        for (i = 0; i < transactions.size(); i++) {
+            if (transactions.get(i).getId() == transactions.size()) {
+                break;
+            }
+        }
+        intent.putExtra("tId", transactions.get(i).getId());
         startActivity(intent);
     }
 
@@ -203,7 +215,18 @@ public class AddTransactionActivity extends AppCompatActivity {
             txtAmount.setError(null);
         }
 
-        category = (Category) spnGoals.getSelectedItem();
+        //Category Validation
+
+        if(spnGoals.getSelectedItem() == null) {
+            goodData = false;
+            txtGoalError.setError("Select a category");
+        }
+        else {
+            txtGoalError.setError(null);
+            category = (Category) spnGoals.getSelectedItem();
+        }
+
+
         payment = spnPayment.getSelectedItemPosition();
         notes = txtNotes.getText().toString();
 
@@ -229,6 +252,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
         }
 
+        spnPayment.setSelection(transaction.getPaymentType());
 
         txtTransactionDate.setText(dfDate.format(transaction.getDate()));
 
