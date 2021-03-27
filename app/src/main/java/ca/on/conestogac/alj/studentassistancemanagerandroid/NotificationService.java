@@ -25,6 +25,7 @@ public class NotificationService extends Service {
 
     public static final int ID = 1;
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
+    private DateFormat recordDate = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
     private boolean firstDateChecked = false;
 
     @Override
@@ -151,7 +152,7 @@ public class NotificationService extends Service {
 //                            Toast.LENGTH_LONG).show();
 
                     //make sure that the transaction has the same month and year as the previous month
-                    if (splitCurrentDate[1].equals(splitTransactionDate[1]) && splitCurrentDate[2].substring(0, 1).equals(splitTransactionDate[2].substring(0, 1))){
+                    if (splitCurrentDate[1].equals(splitTransactionDate[1]) && splitCurrentDate[2].substring(0, 2).equals(splitTransactionDate[2].substring(0, 2))){
                         //Toast.makeText(this, "Test", Toast.LENGTH_LONG).show();
                         //add up transactions for each category/goal
                         for (int i = 0; i <= categoryAmount.length; i++){
@@ -165,8 +166,11 @@ public class NotificationService extends Service {
                 List<Category> categories = new ArrayList<>();
                 categories = ((SAMApplication) getApplication()).getAllCategory();
 
+                String recordString;
+                recordString = splitCurrentDate[1] + "/" + splitCurrentDate[2].substring(0, 2);
+
                 for (Category c : categories){
-                    ((SAMApplication) getApplication()).addRecord(currentDate, c.getName(), c.getGoal(), categoryAmount[c.getId() - 1]);
+                    ((SAMApplication) getApplication()).addRecord(recordString, c.getName(), c.getGoal(), categoryAmount[c.getId() - 1]);
                     //Toast.makeText(this, "Spending Report Created", Toast.LENGTH_LONG).show();
                 }
             }
