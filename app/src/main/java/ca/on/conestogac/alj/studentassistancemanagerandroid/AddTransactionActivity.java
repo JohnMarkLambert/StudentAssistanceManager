@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +41,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     private boolean isEditing;
     private SimpleDateFormat dfDate;
     private TextView txtGoalError;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +70,6 @@ public class AddTransactionActivity extends AppCompatActivity {
         String[] paymentArray = {"Debit", "Credit"};
         ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentArray);
         spnPayment.setAdapter(paymentAdapter);
-
 
 
         List<Category> categoryList = ((SAMApplication) getApplication()).getAllCategory();
@@ -117,7 +119,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 if (txtTransactionDate.getText().length() != 0) {
                     String[] dateArray = String.valueOf(txtTransactionDate.getText()).split("/");
                     year = Integer.parseInt(dateArray[0]);
-                    month = Integer.parseInt(dateArray[1]) -1;
+                    month = Integer.parseInt(dateArray[1]) - 1;
                     day = Integer.parseInt(dateArray[2]);
                 } else {
                     year = calendar.get(Calendar.YEAR);
@@ -153,12 +155,11 @@ public class AddTransactionActivity extends AppCompatActivity {
                 "\nGoal: " + category +
                 "\nNotes: " + notes);
 
-        if(isEditing) {
-            ((SAMApplication) getApplication()).updateTransaction(tId, epochTime, amount, payment,category.getId(), notes);
+        if (isEditing) {
+            ((SAMApplication) getApplication()).updateTransaction(tId, epochTime, amount, payment, category.getId(), notes);
             Toast.makeText(this, "Transaction updated", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            ((SAMApplication) getApplication()).addTransaction(epochTime, amount, payment,category.getId(), notes);
+        } else {
+            ((SAMApplication) getApplication()).addTransaction(epochTime, amount, payment, category.getId(), notes);
             Toast.makeText(this, "Transaction created", Toast.LENGTH_SHORT).show();
         }
 
@@ -210,19 +211,17 @@ public class AddTransactionActivity extends AppCompatActivity {
         if (txtAmount.getText().length() == 0) {
             txtAmount.setError("Enter an amount");
             goodData = false;
-        }
-        else {
+        } else {
             amount = Double.parseDouble(txtAmount.getText().toString());
             txtAmount.setError(null);
         }
 
         //Category Validation
 
-        if(spnGoals.getSelectedItem() == null) {
+        if (spnGoals.getSelectedItem() == null) {
             goodData = false;
             txtGoalError.setError("Select a category");
-        }
-        else {
+        } else {
             txtGoalError.setError(null);
             category = (Category) spnGoals.getSelectedItem();
         }
@@ -231,7 +230,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         payment = spnPayment.getSelectedItemPosition();
         notes = txtNotes.getText().toString();
 
-        Log.i("Data Validation","Data is valid: " + goodData);
+        Log.i("Data Validation", "Data is valid: " + goodData);
 
         return goodData;
     }
@@ -275,4 +274,5 @@ public class AddTransactionActivity extends AppCompatActivity {
         }
         return result;
     }
+}
 
