@@ -111,6 +111,7 @@ public class SetGoalActivity extends AppCompatActivity {
         for (Category c : categories){
             if(c.getName().equals(goalName) && !isEditing){
                 duplicateGoal = true;
+                inlGoalName.setError(goalName + " is already a budget goal");
                 validData = false;
             }
         }
@@ -122,9 +123,6 @@ public class SetGoalActivity extends AppCompatActivity {
         else if(goalName.length() > 15){
             inlGoalName.setError("Budget Goal name must be 15 or less characters");
             validData = false;
-        }
-        else if (duplicateGoal){
-            inlGoalName.setError(goalName + " is already a budget goal");
         }
         else{
             inlGoalName.setError(null);

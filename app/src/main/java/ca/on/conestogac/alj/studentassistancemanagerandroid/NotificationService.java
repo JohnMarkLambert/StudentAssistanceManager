@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -24,6 +25,7 @@ public class NotificationService extends Service {
 
     public static final int ID = 1;
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
+    private DateFormat recordDate = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
     private boolean firstDateChecked = false;
 
     @Override
@@ -79,9 +81,15 @@ public class NotificationService extends Service {
     private void checkForStartOfMonth(){
         String currentDate = df.format(System.currentTimeMillis());
         String transactionDate = "";
+        //Toast.makeText(this, "First Day of month", Toast.LENGTH_LONG).show();
 
         if(currentDate.startsWith("01") && !firstDateChecked){
-            //Toast.makeText(this, "First Day of month " + currentDate, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "First Day of month", Toast.LENGTH_LONG).show();
+            //check off that the past month has been done
+            firstDateChecked = true;
+
+
+
 
             //Notification
             final Intent NotifyIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -112,8 +120,10 @@ public class NotificationService extends Service {
                 previousMonth = 12;
             }
             else{
-                previousMonth = currentMonth--;
+                previousMonth = currentMonth - 1;
             }
+
+            //Toast.makeText(this, String.valueOf(previousMonth), Toast.LENGTH_LONG).show();
 
             splitCurrentDate[1] = "";
 
@@ -134,10 +144,19 @@ public class NotificationService extends Service {
                     transactionDate = df.format(t.getDate());
                     splitTransactionDate = transactionDate.split("/");
 
+//                    Toast.makeText(this,
+//                            splitCurrentDate[1] + " " +
+//                            splitTransactionDate[1] + " " +
+//                            splitCurrentDate[2].substring(0, 1) + " " +
+//                            splitTransactionDate[2].substring(0, 1),
+//                            Toast.LENGTH_LONG).show();
+
                     //make sure that the transaction has the same month and year as the previous month
-                    if (splitCurrentDate[1] == splitTransactionDate[1] && splitCurrentDate[2].substring(0, 1) == splitTransactionDate[2].substring(0, 1)){
+                    if (splitCurrentDate[1].equals(splitTransactionDate[1]) && splitCurrentDate[2].substring(0, 2).equals(splitTransactionDate[2].substring(0, 2))){
+                        //Toast.makeText(this, "Test", Toast.LENGTH_LONG).show();
+                        //add up transactions for each category/goal
                         for (int i = 0; i <= categoryAmount.length; i++){
-                            if(t.getCategory() == i){
+                            if(t.getCategory() - 1 == i){
                                 categoryAmount [i] += t.getAmount();
                             }
                         }
@@ -147,19 +166,22 @@ public class NotificationService extends Service {
                 List<Category> categories = new ArrayList<>();
                 categories = ((SAMApplication) getApplication()).getAllCategory();
 
+                String recordString;
+                recordString = splitCurrentDate[1] + "/" + splitCurrentDate[2].substring(0, 2);
+
                 for (Category c : categories){
-                    ((SAMApplication) getApplication()).addRecord(currentDate, c.getName(), c.getGoal(), categoryAmount[c.getId()]);
+                    ((SAMApplication) getApplication()).addRecord(recordString, c.getName(), c.getGoal(), categoryAmount[c.getId() - 1]);
+                    //Toast.makeText(this, "Spending Report Created", Toast.LENGTH_LONG).show();
                 }
             }
 
-            //check off that the past month has been done
-            firstDateChecked = true;
         }
 
         //then as soon as it's not the first day of the month, unchecks the first day so it can flag the next time it is the first day
         if (!currentDate.startsWith("01")){
             firstDateChecked = false;
         }
+
     }
 
     @Override
