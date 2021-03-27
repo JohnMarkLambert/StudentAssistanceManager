@@ -4,23 +4,17 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -258,61 +252,5 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         txtNotes.setText(transaction.getNotes());
 
-    }
-
-
-
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.budgetmenu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        boolean result = true;
-        Intent intent;
-
-        switch (item.getItemId()) {
-            case R.id.BMenuHome:
-                intent = new Intent(getApplicationContext(), MainActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.BMenuBudget:
-                intent = new Intent(getApplicationContext(), BudgetHomeActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.BMenuGoals:
-                intent = new Intent(getApplicationContext(), GoalsActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.BMenuTrans:
-                intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.BMenuRecords:
-                intent = new Intent(getApplicationContext(), BudgetRecordsActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.BMenuTransactions:
-                intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-//            case R.id.menuSettings:
-//                intent = new Intent(getApplicationContext(), SettingsActivity.class);
-//                //intent.putExtra("darkTheme", darkTheme);
-//                startActivity(intent);
-//                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
     }
 }

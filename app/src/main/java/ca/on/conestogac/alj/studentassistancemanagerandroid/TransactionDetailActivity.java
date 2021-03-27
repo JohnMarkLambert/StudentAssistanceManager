@@ -3,17 +3,15 @@ package ca.on.conestogac.alj.studentassistancemanagerandroid;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,6 +45,10 @@ public class TransactionDetailActivity extends AppCompatActivity {
         txtTranDGoal = findViewById(R.id.txtTranDGoal);
         txtTranDNotes = findViewById(R.id.txtTranDNotes);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         tId = getIntent().getExtras().getInt("tId");
 
@@ -65,9 +67,6 @@ public class TransactionDetailActivity extends AppCompatActivity {
         if (transaction.getNotes().length() != 0){
             txtTranDNotes.setText(transaction.getNotes());
         }
-
-
-
 
         DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
             @Override
@@ -109,7 +108,8 @@ public class TransactionDetailActivity extends AppCompatActivity {
         boolean result = true;
         switch (item.getItemId()) {
             case android.R.id.home:
-                super.onBackPressed();
+                Intent intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
+                startActivity(intent);
                 break;
             default:
                 result = super.onOptionsItemSelected(item);
