@@ -34,7 +34,7 @@
         <activity android:name=".CreateEventActivity" android:label="@string/Create_Event_Button"></activity>
 
         <activity android:name=".BudgetHomeActivity" android:label="Budget"></activity>
-        <activity android:name=".AddTransactionActivity" android:label="Transaction"></activity>
+        <activity android:name=".AddTransactionActivity" android:label="Add Transaction"></activity>
         <activity android:name=".GoalsActivity" android:label="Budget Goals"></activity>
         <activity android:name=".BudgetRecordsActivity" android:label="Budget Records"></activity>
         <activity android:name=".RecordDetailsActivity" android:label="Monthly Report"></activity>
