@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -8,6 +9,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.core.app.NotificationCompat;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -56,18 +59,30 @@ public class NotificationService extends Service {
                         String dueDate = df.format(a.getDueDate());
                         String [] dateTime = dueDate.split(" ");
 
+                        final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                        //API 26 and greater fix
+                        String channelId = "channel-id";
+                        String channelName = "Channel Name";
+                        int importance = NotificationManager.IMPORTANCE_HIGH;
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                            NotificationChannel mChannel = new NotificationChannel(
+                                    channelId, channelName, importance);
+                            manager.createNotificationChannel(mChannel);
+                        }
+
+
                         final Intent NotifyIntent = new Intent(getApplicationContext(), MainActivity.class);
                         NotifyIntent.addFlags(NotifyIntent.FLAG_ACTIVITY_CLEAR_TOP);
                         final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, NotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                        final Notification notification = new Notification.Builder(getApplicationContext())
+                        final NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
                                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                                 .setContentTitle("Assignment Due Soon!")
                                 .setContentText(a.getName() + " is due on " + dateTime[0] + " at " + dateTime[1])
                                 .setContentIntent(pendingIntent)
-                                .setAutoCancel(true)
-                                .build();
-                        manager.notify(ID, notification);
+                                .setAutoCancel(true);
+
+                        manager.notify(ID, notification.build());
 
                         ((SAMApplication) getApplication()).updateNotified(a.getId(), true);
                     }
