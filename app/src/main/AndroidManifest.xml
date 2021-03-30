@@ -10,12 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentAssistanceManagerAndroid">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
 
         <service
             android:name=".NotificationService"
             android:enabled="true"
-            android:exported="false"></service>
-
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
@@ -25,26 +27,43 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name=".CalendarActivity" android:label="@string/Title_Calendar"></activity>
-        <activity android:name=".AllAssignmentActivity" android:label="@string/Title_All_Events"></activity>
-        <activity android:name=".AssignmentDetailsActivity" android:label="Assignment Details"></activity>
-        <activity android:name=".CreateEventActivity" android:label="@string/Create_Event_Button"></activity>
-
-        <activity android:name=".BudgetHomeActivity" android:label="Budget"></activity>
-
-        <activity android:name=".AddTransactionActivity" android:label="Add/Edit Transaction"></activity>
-
-        <activity android:name=".GoalsActivity" android:label="Budget Goals"></activity>
-        <activity android:name=".BudgetRecordsActivity" android:label="Budget Records"></activity>
-        <activity android:name=".RecordDetailsActivity" android:label="Monthly Report"></activity>
-        <activity android:name=".AllTransactionActivity" android:label="Transaction History"></activity>
-        <activity android:name=".TransactionDetailActivity" android:label="Transaction Details"></activity>
-
-        <activity android:name=".SetGoalActivity" android:label="Add Budget Goal"></activity>
-
+        <activity
+            android:name=".CalendarActivity"
+            android:label="@string/Title_Calendar" />
+        <activity
+            android:name=".AllAssignmentActivity"
+            android:label="@string/Title_All_Events" />
+        <activity
+            android:name=".AssignmentDetailsActivity"
+            android:label="Assignment Details" />
+        <activity
+            android:name=".CreateEventActivity"
+            android:label="@string/Create_Event_Button" />
+        <activity
+            android:name=".BudgetHomeActivity"
+            android:label="Budget" />
+        <activity
+            android:name=".AddTransactionActivity"
+            android:label="Add/Edit Transaction" />
+        <activity
+            android:name=".GoalsActivity"
+            android:label="Budget Goals" />
+        <activity
+            android:name=".BudgetRecordsActivity"
+            android:label="Budget Records" />
+        <activity
+            android:name=".RecordDetailsActivity"
+            android:label="Monthly Report" />
+        <activity
+            android:name=".AllTransactionActivity"
+            android:label="Transaction History" />
+        <activity
+            android:name=".TransactionDetailActivity"
+            android:label="Transaction Details" />
+        <activity
+            android:name=".SetGoalActivity"
+            android:label="Add Budget Goal" />
     </application>
 
 </manifest>

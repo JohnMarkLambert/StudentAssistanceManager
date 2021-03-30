@@ -42,7 +42,7 @@
 
     <!-- Budget Labels -->
     <string name="BH_Last_Transaction">Last Transaction</string>
-    <string name="AT_New_Trans">New Transaction</string> 
+    <string name="AT_New_Trans">New Transaction</string>
 
     <string name="Transaction_Date_Hint">Transaction Date*</string>
     <string name="Transaction_Amount_Hint">Amount ($)*</string>
@@ -50,5 +50,21 @@
     <string name="Category_Label">Goal</string>
     <string name="Notes_Hint">Notes</string>
     <string name="Save_Button">Save</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 </resources>

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SAMApplication extends Application {
     private static final String DB_NAME = "db_SAM";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private SQLiteOpenHelper helper;
 
@@ -27,7 +27,6 @@ public class SAMApplication extends Application {
                         "DueDate INTEGER NOT NULL," +
                         "Duration REAL," +
                         "Period INTEGER NOT NULL," +
-                        "Complete INTEGER," +
                         "Description TEXT," +
                         "Notified INTEGER)");
 
@@ -46,7 +45,8 @@ public class SAMApplication extends Application {
                 db.execSQL("CREATE TABLE IF NOT EXISTS tbl_category(" +
                         "CategoryId INTEGER PRIMARY KEY," +
                         "CategoryName TEXT NOT NULL," +
-                        "CategoryGoal REAL NOT NULL)");
+                        "CategoryGoal REAL NOT NULL," +
+                        "Deleted INTEGER)");
 
                 db.execSQL("CREATE TABLE IF NOT EXISTS tbl_records(" +
                         "RecordId INTEGER PRIMARY KEY," +
@@ -274,7 +274,9 @@ public class SAMApplication extends Application {
 
     public void deleteCategory(int id) {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.delete("tbl_category", "CategoryId = ?", new String[]{String.valueOf(id)});
+        ContentValues cv = new ContentValues();
+        cv.put("Deleted", 1);
+        db.update("tbl_category", cv, "CategoryId = ?", new String[]{String.valueOf(id)});
     }
 
     public Category getCategory(int id) {
