@@ -14,9 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class GoalsActivity extends AppCompatActivity {
@@ -128,11 +126,11 @@ public class GoalsActivity extends AppCompatActivity {
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
-//            case R.id.menuSettings:
-//                intent = new Intent(getApplicationContext(), SettingsActivity.class);
-//                //intent.putExtra("darkTheme", darkTheme);
-//                startActivity(intent);
-//                break;
+            case R.id.menuSettings:
+                intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
             default:
                 result = super.onOptionsItemSelected(item);
                 break;
