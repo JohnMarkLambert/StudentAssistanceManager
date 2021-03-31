@@ -13,4 +13,13 @@
     <color name="red">#FF0000</color>
     <color name="blue">#0000FF</color>
     <color name="grey">#888888</color>
+
+    <color name="prussian_blue">#05386B</color> //Light Theme (1)
+    <color name="illuminating_emerald">#379683</color> //Light Theme (2), Dark Theme (4)
+    <color name="medium_aquamarine">#5CDB95</color> //Light Theme (3), Dark Theme (5)
+    <color name="celadon">#8EE4AF</color> //Light Theme (4)
+    <color name="beige">#EDF5E1</color> //Light Theme (5)
+    <color name="rich_black">#0B0C10</color> //Dark Theme (1)
+    <color name="gunmental">#1F2833</color> //Dark Theme (2)
+    <color name="silver">#C5C6C7</color> //Dark Theme (3)
 </resources>
