@@ -30,6 +30,7 @@ public class NotificationService extends Service {
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
     private DateFormat recordDate = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
     private boolean firstDateChecked = false;
+    private String recordString;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -72,7 +73,8 @@ public class NotificationService extends Service {
                         }
 
 
-                        final Intent NotifyIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        final Intent NotifyIntent = new Intent(getApplicationContext(), AssignmentDetailsActivity.class);
+                        NotifyIntent.putExtra("aId", a.getId());
                         NotifyIntent.addFlags(NotifyIntent.FLAG_ACTIVITY_CLEAR_TOP);
                         final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, NotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                         final NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
@@ -96,29 +98,10 @@ public class NotificationService extends Service {
     private void checkForStartOfMonth(){
         String currentDate = df.format(System.currentTimeMillis());
         String transactionDate = "";
-        //Toast.makeText(this, "First Day of month", Toast.LENGTH_LONG).show();
 
         if(currentDate.startsWith("01") && !firstDateChecked){
-            //Toast.makeText(this, "First Day of month", Toast.LENGTH_LONG).show();
             //check off that the past month has been done
             firstDateChecked = true;
-
-
-
-
-            //Notification
-            final Intent NotifyIntent = new Intent(getApplicationContext(), MainActivity.class);
-            NotifyIntent.addFlags(NotifyIntent.FLAG_ACTIVITY_CLEAR_TOP);
-            final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, NotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            final Notification notification = new Notification.Builder(getApplicationContext())
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle("New Spending Report")
-                    .setContentText("You have a spending report from the last month")
-                    .setContentIntent(pendingIntent)
-                    .setAutoCancel(true)
-                    .build();
-            manager.notify(ID, notification);
 
             //Make spending report
             List<Transaction> transactions = new ArrayList<>();
@@ -137,8 +120,6 @@ public class NotificationService extends Service {
             else{
                 previousMonth = currentMonth - 1;
             }
-
-            //Toast.makeText(this, String.valueOf(previousMonth), Toast.LENGTH_LONG).show();
 
             splitCurrentDate[1] = "";
 
@@ -168,7 +149,6 @@ public class NotificationService extends Service {
 
                     //make sure that the transaction has the same month and year as the previous month
                     if (splitCurrentDate[1].equals(splitTransactionDate[1]) && splitCurrentDate[2].substring(0, 2).equals(splitTransactionDate[2].substring(0, 2))){
-                        //Toast.makeText(this, "Test", Toast.LENGTH_LONG).show();
                         //add up transactions for each category/goal
                         for (int i = 0; i <= categoryAmount.length; i++){
                             if(t.getCategory() - 1 == i){
@@ -181,14 +161,49 @@ public class NotificationService extends Service {
                 List<Category> categories = new ArrayList<>();
                 categories = ((SAMApplication) getApplication()).getAllCategory();
 
-                String recordString;
+                //String recordString;
                 recordString = splitCurrentDate[1] + "/" + splitCurrentDate[2].substring(0, 2);
 
                 for (Category c : categories){
                     ((SAMApplication) getApplication()).addRecord(recordString, c.getName(), c.getGoal(), categoryAmount[c.getId() - 1]);
-                    //Toast.makeText(this, "Spending Report Created", Toast.LENGTH_LONG).show();
                 }
             }
+
+            List<Record> records = new ArrayList<>();
+            records = ((SAMApplication) getApplication()).getAllRecords();
+
+            String rId = "";
+
+            for (Record r : records){
+                if (r.getDate().equals(recordString)){
+                    rId = r.getDate();
+                }
+            }
+
+            //Notification
+            final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+            //API 26 and greater fix
+            String channelId = "channel-id";
+            String channelName = "Channel Name";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                NotificationChannel mChannel = new NotificationChannel(
+                        channelId, channelName, importance);
+                manager.createNotificationChannel(mChannel);
+            }
+
+            final Intent NotifyIntent = new Intent(getApplicationContext(), RecordDetailsActivity.class);
+            NotifyIntent.putExtra("rId", rId);
+            NotifyIntent.addFlags(NotifyIntent.FLAG_ACTIVITY_CLEAR_TOP);
+            final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, NotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            final NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle("New Spending Report")
+                    .setContentText("You have a spending report from the last month")
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+            manager.notify(ID, notification.build());
 
         }
 
