@@ -1,36 +1,46 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SharedPreferences sp;
+    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-//        if (sp.getBoolean("themeType", false)) {
-//            //Dark Theme
-//            setTheme();
-//        } else {
-//            //Light Theme
-//            setTheme();
-//        }
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_calendar, R.id.nav_budget, R.id.nav_reports)
+                .setDrawerLayout(drawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
 
 
         //dummy Data
@@ -56,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
             ((SAMApplication) getApplication()).addPaymentType("Debit");
             ((SAMApplication) getApplication()).addPaymentType("Credit");
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 
     @Override
@@ -85,11 +102,11 @@ public class MainActivity extends AppCompatActivity {
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
-            case R.id.menuSettings:
-                intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
+//            case R.id.menuSettings:
+//                intent = new Intent(getApplicationContext(), SettingsActivity.class);
+//                //intent.putExtra("darkTheme", darkTheme);
+//                startActivity(intent);
+//                break;
             default:
                 result = super.onOptionsItemSelected(item);
                 break;

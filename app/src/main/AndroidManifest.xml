@@ -39,7 +39,8 @@
             android:label="Assignment Details" />
         <activity
             android:name=".CreateEventActivity"
-            android:label="@string/Create_Event_Button" />
+            android:label="@string/Create_Event_Button"
+            android:theme="@style/Theme.StudentAssistanceManagerAndroid"/>
         <activity
             android:name=".BudgetHomeActivity"
             android:label="Budget" />

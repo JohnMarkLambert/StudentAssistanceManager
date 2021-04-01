@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import java.text.DateFormat;
@@ -41,6 +42,8 @@ public class AllAssignmentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         LinearLayout ll = (LinearLayout)findViewById(R.id.AALayout);
 
