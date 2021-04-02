@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.preference.PreferenceManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,10 +32,16 @@ public class AllTransactionActivity extends AppCompatActivity {
     private String sortBy;
     private LinearLayout ll;
 
+    private SharedPreferences sp;
+    private String currency;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_transactions);
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        currency = sp.getString("currencyType", "$");
 
         try {
             transactions = ((SAMApplication) getApplication()).getAllTransactions();
@@ -156,7 +164,7 @@ public class AllTransactionActivity extends AppCompatActivity {
                     String addDate = new SimpleDateFormat("dd/MM/yy").format(new Date(t.getDate()));
                     String addAmount = Double.toString(t.getAmount());
                     tDate.setText(addDate);
-                    tAmount.setText("$" + addAmount);
+                    tAmount.setText(currency + addAmount);
                     //tPayment.setText(((SAMApplication) getApplication()).getPaymentType(t.getPaymentType()));
                     tLayout.setOrientation(LinearLayout.VERTICAL);
                     tLayout.addView(tDate);

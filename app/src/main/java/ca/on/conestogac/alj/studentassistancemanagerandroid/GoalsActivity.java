@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +24,16 @@ public class GoalsActivity extends AppCompatActivity {
     private Button btnNewGoal;
     private LinearLayout ll;
 
+    private SharedPreferences sp;
+    private String currency;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals);
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        currency = sp.getString("currencyType", "$");
 
         //Add new goal button
         btnNewGoal = findViewById(R.id.btnNewGoal);
@@ -56,7 +64,7 @@ public class GoalsActivity extends AppCompatActivity {
             String addName = c.getName();
             String addAmount = Double.toString(c.getGoal());
             cName.setText(addName);
-            cAmount.setText("$" + addAmount);
+            cAmount.setText(currency + addAmount);
             gLayout.setOrientation(LinearLayout.VERTICAL);
             gLayout.addView(cName);
             gLayout.addView(cAmount);

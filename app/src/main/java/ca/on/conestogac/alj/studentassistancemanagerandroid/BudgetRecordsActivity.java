@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,16 @@ public class BudgetRecordsActivity extends AppCompatActivity {
     private List<Record> records;
     private LinearLayout ll;
 
+    private SharedPreferences sp;
+    private String currency;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budgetrecords);
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        currency = sp.getString("currencyType", "$");
 
         try {
             records = ((SAMApplication) getApplication()).getAllRecords();
@@ -130,11 +137,11 @@ public class BudgetRecordsActivity extends AppCompatActivity {
 
                 txtDate.setText(date);
                 goalTitle.setText("Goal: ");
-                txtGoal.setText("$" + String.format("%.2f", goal));
+                txtGoal.setText(currency + String.format("%.2f", goal));
                 totalTitle.setText("Total: ");
-                txtTotal.setText("$" + String.format("%.2f", total));
+                txtTotal.setText(currency + String.format("%.2f", total));
                 diffTitle.setText("Difference ");
-                txtDiff.setText("$" + String.format("%.2f", diff));
+                txtDiff.setText(currency + String.format("%.2f", diff));
                 if (diff > 0) {
                     txtDiff.setTextColor(getResources().getColor(R.color.red, null));
                 } else if (diff <= 0) {
@@ -165,6 +172,4 @@ public class BudgetRecordsActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }

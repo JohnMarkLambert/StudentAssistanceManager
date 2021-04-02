@@ -1,5 +1,6 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +32,16 @@ public class RecordDetailsActivity extends AppCompatActivity {
     private List<Integer> colours;
     private PieChartView pcvReport;
 
+    private SharedPreferences sp;
+    private String currency;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorddetails);
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        currency = sp.getString("currencyType", "$");
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -108,9 +116,9 @@ public class RecordDetailsActivity extends AppCompatActivity {
             } else {
                 num++;
             }
-            txtGoalAmount.setText("Goal Target: $" + String.format("%.2f", record.getGoalAmount()));
-            txtTotalAmount.setText("Total Spent: $" + String.format("%.2f", record.getAmountSpent()));
-            txtDiff.setText("Difference: $" + String.format("%.2f", record.getDifference()));
+            txtGoalAmount.setText("Goal Target: " + currency + String.format("%.2f", record.getGoalAmount()));
+            txtTotalAmount.setText("Total Spent: " + currency + String.format("%.2f", record.getAmountSpent()));
+            txtDiff.setText("Difference: " + currency + String.format("%.2f", record.getDifference()));
             if (record.getDifference() > 0) {
                 txtDiff.setTextColor(getResources().getColor(R.color.red, null));
             } else if (record.getDifference() <= 0) {
@@ -131,7 +139,6 @@ public class RecordDetailsActivity extends AppCompatActivity {
     public void generateChart(boolean mode){
         int num = 0;
         double value;
-        String title;
         List<SliceValue> pieData = new ArrayList<>();
         for (Record record: records) {
             if (mode) {
@@ -140,7 +147,7 @@ public class RecordDetailsActivity extends AppCompatActivity {
                 value = record.getGoalAmount();
             }
             pieData.add(new SliceValue((float)value, colours.get(num)).setLabel(record.getGoalName()
-            + ": $" + value));
+            + ": " + currency + value));
             num++;
             if (num >= colours.size()){
                 num = 0;
