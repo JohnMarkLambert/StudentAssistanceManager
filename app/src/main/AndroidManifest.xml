@@ -3,20 +3,57 @@
     package="ca.on.conestogac.alj.studentassistancemanagerandroid">
 
     <application
+        android:name=".SAMApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentAssistanceManagerAndroid">
-        <activity android:name=".MainActivity" android:label="@string/app_name">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
+
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.StudentAssistanceManagerAndroid.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CalendarActivity" android:label="@string/Title_Calendar"></activity>
+        <activity
+            android:name=".AllAssignmentActivity"
+            android:label="@string/Title_All_Events" />
+        <activity
+            android:name=".AssignmentDetailsActivity"
+            android:label="Assignment Details" />
+        <activity
+            android:name=".CreateEventActivity"
+            android:label="@string/Create_Event_Button"
+            android:theme="@style/Theme.StudentAssistanceManagerAndroid"/>
+        <activity
+            android:name=".AddTransactionActivity"
+            android:label="Add/Edit Transaction" />
+        <activity
+            android:name=".RecordDetailsActivity"
+            android:label="Monthly Report" />
+        <activity
+            android:name=".AllTransactionActivity"
+            android:label="Transaction History" />
+        <activity
+            android:name=".TransactionDetailActivity"
+            android:label="Transaction Details" />
+        <activity
+            android:name=".SetGoalActivity"
+            android:label="Add Budget Goal" />
     </application>
 
 </manifest>

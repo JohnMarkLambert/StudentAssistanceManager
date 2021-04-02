@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtTransactionDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="auto"
+                android:focusableInTouchMode="false"
+                android:hint="@string/Transaction_Date_Hint" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Transaction_Amount_Hint"
+                android:inputType="number|numberDecimal" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Payment_Label" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spnPayment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="78dp">
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Category_Label" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spnGoals"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
+                android:paddingBottom="0dp"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/txtGoalError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:paddingTop="0dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Notes_Hint" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/btnSaveTran"
+                android:layout_width="214dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Save_Button" />
+
+            <Button
+                android:id="@+id/btnTranCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Cancel_Event_Button" />
+        </TableRow>
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

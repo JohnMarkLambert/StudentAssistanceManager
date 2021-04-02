@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Student Assistance Manager</string>
-
+    <!-- Main Menu Labels -->
     <string name="MM_Event_Title">Next Event:</string>
     <string name="MM_Event_Name">Event Name: </string>
     <string name="MM_Event_DueDate">Due Date: </string>
@@ -9,13 +9,64 @@
     <string name="MM_Event_Desc">Description: </string>
     <string name="MM_Transaction_Title">Last Transaction:</string>
 
+    <!-- Menu item labels -->
     <string name="Menu_Calendar">Calendar</string>
     <string name="Menu_Budget">Budget</string>
     <string name="Menu_Settings">Settings</string>
     <string name="Menu_Home">Home</string>
+    <string name="Menu_Goals">Goals</string>
+    <string name="Menu_Transaction">Add Transaction</string>
+    <string name="Menu_Records">Records</string>
+    <string name="Menu_SeeTransactions">View Transactions</string>
 
+    <!-- Calendar Labels -->
     <string name="Title_Calendar">Calendar</string>
-
     <string name="Create_Event_Button">Create Event</string>
     <string name="Show_All_Events">Show All Events</string>
+    <string name="Cancel_Event_Button">Cancel</string>
+    <string name="Edit_Event">Edit Event</string>
+
+    <string name="Event_Name">Event Name: </string>
+    <string name="Event_Due_Date">Due Date: </string>
+    <string name="Event_Duration">Duration: </string>
+    <string name="Event_Description">Description</string>
+    <string name="Time_Due">Time Due: </string>
+    <string name="Date_Due">Due Date:</string>
+
+
+    <string name="Assignment_Complete">Complete: </string>
+    <string name="Button_Edit">Edit Assignment</string>
+    <string name="Button_Cancel">Cancel Assignment</string>
+
+    <string name="Title_All_Events">All Events</string>
+
+    <!-- Budget Labels -->
+    <string name="BH_Last_Transaction">Last Transaction</string>
+    <string name="AT_New_Trans">New Transaction</string>
+
+    <string name="Transaction_Date_Hint">Transaction Date*</string>
+    <string name="Transaction_Amount_Hint">Amount ($)*</string>
+    <string name="Payment_Label">Payment</string>
+    <string name="Category_Label">Goal</string>
+    <string name="Notes_Hint">Notes</string>
+    <string name="Save_Button">Save</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
