@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.preference.PreferenceManager;
@@ -47,6 +48,12 @@ public class AllTransactionActivity extends AppCompatActivity {
             transactions = ((SAMApplication) getApplication()).getAllTransactions();
         } catch(Exception ex){
 
+        }
+
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         btnNewTransaction = findViewById(R.id.btnATNewTrans);
@@ -89,6 +96,9 @@ public class AllTransactionActivity extends AppCompatActivity {
         Intent intent;
 
         switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
             case R.id.BMenuHome:
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 //intent.putExtra("darkTheme", darkTheme);
@@ -191,5 +201,7 @@ public class AllTransactionActivity extends AppCompatActivity {
                 }
             }
         }
+
     }
+
 }

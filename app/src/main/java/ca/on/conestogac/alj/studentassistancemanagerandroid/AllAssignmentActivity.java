@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -42,8 +43,11 @@ public class AllAssignmentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         LinearLayout ll = (LinearLayout)findViewById(R.id.AALayout);
 
@@ -97,6 +101,9 @@ public class AllAssignmentActivity extends AppCompatActivity {
         Intent intent;
 
         switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
             case R.id.menuHome:
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 //intent.putExtra("darkTheme", darkTheme);
@@ -123,4 +130,6 @@ public class AllAssignmentActivity extends AppCompatActivity {
         }
         return result;
     }
+
+
 }
