@@ -30,9 +30,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CalendarActivity"
-            android:label="@string/Title_Calendar" />
-        <activity
             android:name=".AllAssignmentActivity"
             android:label="@string/Title_All_Events" />
         <activity
@@ -43,17 +40,8 @@
             android:label="@string/Create_Event_Button"
             android:theme="@style/Theme.StudentAssistanceManagerAndroid"/>
         <activity
-            android:name=".BudgetHomeActivity"
-            android:label="Budget" />
-        <activity
             android:name=".AddTransactionActivity"
             android:label="Add/Edit Transaction" />
-        <activity
-            android:name=".GoalsActivity"
-            android:label="Budget Goals" />
-        <activity
-            android:name=".BudgetRecordsActivity"
-            android:label="Budget Records" />
         <activity
             android:name=".RecordDetailsActivity"
             android:label="Monthly Report" />

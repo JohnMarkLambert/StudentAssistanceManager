@@ -96,26 +96,12 @@ public class AllTransactionActivity extends AppCompatActivity {
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
-            case R.id.BMenuBudget:
-                intent = new Intent(getApplicationContext(), BudgetHomeActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.BMenuGoals:
-                intent = new Intent(getApplicationContext(), GoalsActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
             case R.id.BMenuTrans:
                 intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
-            case R.id.BMenuRecords:
-                intent = new Intent(getApplicationContext(), BudgetRecordsActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
+
             case R.id.BMenuTransactions:
                 intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
                 //intent.putExtra("darkTheme", darkTheme);
