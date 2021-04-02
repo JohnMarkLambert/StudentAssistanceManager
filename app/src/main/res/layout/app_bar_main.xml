@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/Theme.StudentAssistanceManagerAndroid.PopupOverlay"/>
-<!--            android:background="@drawable/side_nav_bar"-->
+
 
 
     </com.google.android.material.appbar.AppBarLayout>

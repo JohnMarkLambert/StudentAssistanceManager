@@ -108,8 +108,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
         boolean result = true;
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
-                startActivity(intent);
+                super.onBackPressed();
                 break;
             default:
                 result = super.onOptionsItemSelected(item);

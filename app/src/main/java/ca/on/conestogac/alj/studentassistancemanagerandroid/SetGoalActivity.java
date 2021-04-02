@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -39,6 +40,11 @@ public class SetGoalActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setgoal);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         btnSetGoal = findViewById(R.id.btnSetGoal);
         btnCancelSet = findViewById(R.id.btnCancelSet);
@@ -89,10 +95,10 @@ public class SetGoalActivity extends AppCompatActivity {
         Toast.makeText(this, "Budget Goal Created", Toast.LENGTH_SHORT).show();
 
 
-        Intent intent;
-        intent = new Intent(getApplicationContext(), GoalsActivity.class);
+
         //intent.putExtra("darkTheme", darkTheme);
-        startActivity(intent);
+
+        this.finish();
     }
 
     private boolean validateData(){
