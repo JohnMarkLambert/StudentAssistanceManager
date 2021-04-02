@@ -74,10 +74,7 @@ public class SetGoalActivity extends AppCompatActivity {
         btnCancelSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent;
-                intent = new Intent(getApplicationContext(), GoalsActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
+                finish();
             }
         });
     }
