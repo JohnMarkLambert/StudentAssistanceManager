@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,12 +16,15 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import androidx.preference.PreferenceManager;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+//        if (sp.getBoolean("themeType", false)) {
+//            //Dark Theme
+//            setTheme();
+//        } else {
+//            //Light Theme
+//            setTheme();
+//        }
 
 
         //dummy Data
@@ -89,6 +103,16 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menuHome:
                 intent = new Intent(getApplicationContext(), MainActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
+            case R.id.menuCalendar:
+                intent = new Intent(getApplicationContext(), CalendarActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
+            case R.id.menuBudget:
+                intent = new Intent(getApplicationContext(), BudgetHomeActivity.class);
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;

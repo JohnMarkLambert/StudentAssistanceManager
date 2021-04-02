@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Preference category">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="themeType"
+            android:title="Theme" />
+        <ListPreference
+            android:defaultValue="$"
+            android:entries="@array/currency_values"
+            android:entryValues="@array/currency_values"
+            android:key="currencyType"
+            android:title="Currency"
+            app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            android:defaultValue="2 Days"
+            android:entries="@array/notification_periods"
+            android:entryValues="@array/notification_periods"
+            android:key="notificationType"
+            android:title="Notification Period"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+</PreferenceScreen>
