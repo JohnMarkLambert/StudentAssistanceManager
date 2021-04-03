@@ -56,7 +56,6 @@ public class NotificationService extends Service {
             for (Assignment a : assignments) {
                 if ((a.getDueDate() - System.currentTimeMillis()) <= TimeUnit.DAYS.toMillis(a.getPeriod())) {
                     if(!a.isNotified()) {
-                        //****for some reason it will send a toast from here but not a notification****
                         String dueDate = df.format(a.getDueDate());
                         String [] dateTime = dueDate.split(" ");
 
@@ -148,11 +147,11 @@ public class NotificationService extends Service {
 //                            Toast.LENGTH_LONG).show();
 
                     //make sure that the transaction has the same month and year as the previous month
-                    if (splitCurrentDate[1].equals(splitTransactionDate[1]) && splitCurrentDate[2].substring(0, 2).equals(splitTransactionDate[2].substring(0, 2))){
+                    if (splitCurrentDate[1].equals(splitTransactionDate[1]) && splitCurrentDate[2].substring(0, 2).equals(splitTransactionDate[2].substring(0, 2))) {
                         //add up transactions for each category/goal
-                        for (int i = 0; i <= categoryAmount.length; i++){
-                            if(t.getCategory() - 1 == i){
-                                categoryAmount [i] += t.getAmount();
+                        for (int i = 0; i <= categoryAmount.length; i++) {
+                            if (t.getCategory() - 1 == i) {
+                                categoryAmount[i] += t.getAmount();
                             }
                         }
                     }
@@ -164,47 +163,61 @@ public class NotificationService extends Service {
                 //String recordString;
                 recordString = splitCurrentDate[1] + "/" + splitCurrentDate[2].substring(0, 2);
 
-                for (Category c : categories){
-                    ((SAMApplication) getApplication()).addRecord(recordString, c.getName(), c.getGoal(), categoryAmount[c.getId() - 1]);
+                List<Record> records = new ArrayList<>();
+                records = ((SAMApplication) getApplication()).getAllRecords();
+
+                Record record = null;
+                for (Record r : records) {
+                    if (r.getDate().equals(recordString)) {
+                        record = r;
+                    }
+                }
+
+                //checks if there is already a record with for the past month, if not it makes one
+                if (record == null) {
+                    //Make the spending report
+                    for (Category c : categories) {
+                        ((SAMApplication) getApplication()).addRecord(recordString, c.getName(), c.getGoal(), categoryAmount[c.getId() - 1]);
+                    }
+
+
+                    //List<Record> records = new ArrayList<>();
+                    records = ((SAMApplication) getApplication()).getAllRecords();
+
+                    String rId = "";
+
+                    for (Record r : records) {
+                        if (r.getDate().equals(recordString)) {
+                            rId = r.getDate();
+                        }
+                    }
+
+                    //Send notification
+                    final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+                    //API 26 and greater fix
+                    String channelId = "channel-id";
+                    String channelName = "Channel Name";
+                    int importance = NotificationManager.IMPORTANCE_HIGH;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        NotificationChannel mChannel = new NotificationChannel(
+                                channelId, channelName, importance);
+                        manager.createNotificationChannel(mChannel);
+                    }
+
+                    final Intent NotifyIntent = new Intent(getApplicationContext(), RecordDetailsActivity.class);
+                    NotifyIntent.putExtra("rId", rId);
+                    NotifyIntent.addFlags(NotifyIntent.FLAG_ACTIVITY_CLEAR_TOP);
+                    final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, NotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    final NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
+                            .setSmallIcon(R.drawable.ic_launcher_foreground)
+                            .setContentTitle("New Spending Report")
+                            .setContentText("You have a spending report from the last month")
+                            .setContentIntent(pendingIntent)
+                            .setAutoCancel(true);
+                    manager.notify(ID, notification.build());
                 }
             }
-
-            List<Record> records = new ArrayList<>();
-            records = ((SAMApplication) getApplication()).getAllRecords();
-
-            String rId = "";
-
-            for (Record r : records){
-                if (r.getDate().equals(recordString)){
-                    rId = r.getDate();
-                }
-            }
-
-            //Notification
-            final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-            //API 26 and greater fix
-            String channelId = "channel-id";
-            String channelName = "Channel Name";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                NotificationChannel mChannel = new NotificationChannel(
-                        channelId, channelName, importance);
-                manager.createNotificationChannel(mChannel);
-            }
-
-            final Intent NotifyIntent = new Intent(getApplicationContext(), RecordDetailsActivity.class);
-            NotifyIntent.putExtra("rId", rId);
-            NotifyIntent.addFlags(NotifyIntent.FLAG_ACTIVITY_CLEAR_TOP);
-            final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, NotifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            final NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle("New Spending Report")
-                    .setContentText("You have a spending report from the last month")
-                    .setContentIntent(pendingIntent)
-                    .setAutoCancel(true);
-            manager.notify(ID, notification.build());
-
         }
 
         //then as soon as it's not the first day of the month, unchecks the first day so it can flag the next time it is the first day
