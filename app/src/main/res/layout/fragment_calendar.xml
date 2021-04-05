@@ -103,12 +103,6 @@
                 android:layout_weight="1"
                 android:text="@string/Create_Event_Button" />
 
-            <Button
-                android:id="@+id/btnShowAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/Show_All_Events" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

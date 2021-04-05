@@ -30,9 +30,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AllAssignmentActivity"
-            android:label="@string/Title_All_Events" />
-        <activity
             android:name=".AssignmentDetailsActivity"
             android:label="Assignment Details" />
         <activity
@@ -45,9 +42,6 @@
         <activity
             android:name=".RecordDetailsActivity"
             android:label="Monthly Report" />
-        <activity
-            android:name=".AllTransactionActivity"
-            android:label="Transaction History" />
         <activity
             android:name=".TransactionDetailActivity"
             android:label="Transaction Details" />

@@ -158,12 +158,6 @@
                 android:layout_weight="1"
                 android:text="@string/Menu_Transaction" />
 
-            <Button
-                android:id="@+id/btnShowAllTransaction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/Menu_SeeTransactions" />
         </LinearLayout>
 
     </LinearLayout>

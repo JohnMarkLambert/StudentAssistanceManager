@@ -74,9 +74,9 @@ public class TransactionDetailActivity extends AppCompatActivity {
                 switch (result) {
                     case DialogInterface.BUTTON_POSITIVE:
                         ((SAMApplication) getApplication()).deleteTransaction(tId);
-                        intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
+//                        intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
                         finish();
-                        startActivity(intent);
+//                        startActivity(intent);
                 }
             }
         };

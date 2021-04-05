@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import ca.on.conestogac.alj.studentassistancemanagerandroid.AllAssignmentActivity;
 import ca.on.conestogac.alj.studentassistancemanagerandroid.Assignment;
 import ca.on.conestogac.alj.studentassistancemanagerandroid.CreateEventActivity;
 import ca.on.conestogac.alj.studentassistancemanagerandroid.R;
@@ -39,8 +38,7 @@ public class CalendarFragment extends Fragment {
     private SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     private String selectedDate;
-
-    private Button btnShowAll;
+    
     private TextView txtCEventName;
     private TextView txtCDueDate;
     private TextView txtCDuration;
@@ -104,16 +102,6 @@ public class CalendarFragment extends Fragment {
             }
         });
 
-
-        btnShowAll = view.findViewById(R.id.btnShowAll);
-
-        btnShowAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), AllAssignmentActivity.class);
-                startActivity(intent);
-            }
-        });
         return view;
     }
 
