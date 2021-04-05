@@ -40,8 +40,18 @@ public class RecordDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorddetails);
 
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         currency = sp.getString("currencyType", "$");
+
+//        if (sp.getBoolean("themeType", false)) {
+//            //Dark Theme
+//            setTheme();
+//        } else {
+//            //Light Theme
+//            setTheme();
+//        }
+
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -139,6 +149,7 @@ public class RecordDetailsActivity extends AppCompatActivity {
     public void generateChart(boolean mode){
         int num = 0;
         double value;
+        String title;
         List<SliceValue> pieData = new ArrayList<>();
         for (Record record: records) {
             if (mode) {

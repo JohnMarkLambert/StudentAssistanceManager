@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="ca.on.conestogac.alj.studentassistancemanagerandroid.ui.Settings.SettingsFragment"
+        android:name="ca.on.conestogac.alj.studentassistancemanagerandroid.PreferenceFragment"
         android:label="Settings"
         tools:layout="@layout/settings_fragment" />
 

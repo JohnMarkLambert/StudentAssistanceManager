@@ -41,8 +41,17 @@ public class AllTransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_transactions);
 
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         currency = sp.getString("currencyType", "$");
+//        if (sp.getBoolean("themeType", false)) {
+//            //Dark Theme
+//            setTheme();
+//        } else {
+//            //Light Theme
+//            setTheme();
+//        }
+
 
         try {
             transactions = ((SAMApplication) getApplication()).getAllTransactions();

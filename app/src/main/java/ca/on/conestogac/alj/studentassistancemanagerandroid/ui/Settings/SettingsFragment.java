@@ -1,23 +1,16 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.Settings;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import ca.on.conestogac.alj.studentassistancemanagerandroid.R;
-import ca.on.conestogac.alj.studentassistancemanagerandroid.SettingsActivity;
 
 public class SettingsFragment extends Fragment {
 
@@ -31,7 +24,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.settings_fragment, container, false);
+        View view =  inflater.inflate(R.xml.root_preferences, container, false);
 
         return view;
     }

@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -22,10 +24,25 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    private SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Preferences need to go first
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+//        if (sp.getBoolean("themeType", false)) {
+//            //Dark Theme
+//            setTheme();
+//        } else {
+//            //Light Theme
+//            setTheme();
+//        }
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,34 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        boolean result = true;
-        Intent intent;
-
-        switch (item.getItemId()) {
-            case R.id.menuHome:
-                intent = new Intent(getApplicationContext(), MainActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-//            case R.id.menuSettings:
-//                intent = new Intent(getApplicationContext(), SettingsActivity.class);
-//                //intent.putExtra("darkTheme", darkTheme);
-//                startActivity(intent);
-//                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
-    }
 
     @Override
     protected void onStop() {
