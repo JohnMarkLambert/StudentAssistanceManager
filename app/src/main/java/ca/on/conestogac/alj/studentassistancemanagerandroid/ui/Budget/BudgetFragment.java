@@ -15,15 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import ca.on.conestogac.alj.studentassistancemanagerandroid.AddTransactionActivity;
-import ca.on.conestogac.alj.studentassistancemanagerandroid.AllTransactionActivity;
-import ca.on.conestogac.alj.studentassistancemanagerandroid.Category;
-import ca.on.conestogac.alj.studentassistancemanagerandroid.CreateEventActivity;
 import ca.on.conestogac.alj.studentassistancemanagerandroid.R;
 import ca.on.conestogac.alj.studentassistancemanagerandroid.SAMApplication;
 import ca.on.conestogac.alj.studentassistancemanagerandroid.Transaction;
@@ -31,7 +26,7 @@ import ca.on.conestogac.alj.studentassistancemanagerandroid.Transaction;
 public class BudgetFragment extends Fragment {
 
     private BudgetViewModel mViewModel;
-    private Button btnAddTransaction, btnShowAllTransaction;
+    private Button btnAddTransaction;
     private TextView txtBHDate, txtBHAmount, txtBHPayment, txtBHNotes;
     public static BudgetFragment newInstance() {
         return new BudgetFragment();
@@ -43,7 +38,6 @@ public class BudgetFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_budget, container, false);
 
         btnAddTransaction = view.findViewById(R.id.btnAddTransaction);
-        btnShowAllTransaction = view.findViewById(R.id.btnShowAllTransaction);
 
         txtBHDate = view.findViewById(R.id.txtBHDate);
         txtBHAmount = view.findViewById(R.id.txtBHAmount);
@@ -61,15 +55,6 @@ public class BudgetFragment extends Fragment {
             }
         });
 
-        btnShowAllTransaction.setOnClickListener(new View.OnClickListener() {
-            Intent intent;
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity().getApplicationContext(), AllTransactionActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-            }
-        });
 
         return view;
     }
