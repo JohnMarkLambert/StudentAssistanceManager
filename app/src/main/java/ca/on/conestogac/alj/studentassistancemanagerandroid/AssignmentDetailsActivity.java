@@ -88,9 +88,9 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
                 switch (result) {
                     case DialogInterface.BUTTON_POSITIVE:
                         ((SAMApplication) getApplication()).deleteAssignment(aId);
-                        intent = new Intent(getApplicationContext(), AllAssignmentActivity.class);
+//                        intent = new Intent(getApplicationContext(), AllAssignmentActivity.class);
                         finish();
-                        startActivity(intent);
+//                        startActivity(intent);
                 }
             }
         };

@@ -54,8 +54,23 @@ public class GoalsFragment extends Fragment {
             }
         });
 
-        //All budget goal cards
         ll = (LinearLayout) view.findViewById(R.id.llShowGoals);
+
+        return view;
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(GoalsViewModel.class);
+        // TODO: Use the ViewModel
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         ll.removeAllViews();
 
         List<Category> categories = new ArrayList<>();
@@ -94,15 +109,5 @@ public class GoalsFragment extends Fragment {
                 }
             });
         }
-            return view;
-        }
-
-
-        @Override
-        public void onActivityCreated (@Nullable Bundle savedInstanceState){
-            super.onActivityCreated(savedInstanceState);
-            mViewModel = new ViewModelProvider(this).get(GoalsViewModel.class);
-            // TODO: Use the ViewModel
-        }
-
     }
+}

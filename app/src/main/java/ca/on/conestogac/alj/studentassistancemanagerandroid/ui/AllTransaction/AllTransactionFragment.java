@@ -1,10 +1,19 @@
-package ca.on.conestogac.alj.studentassistancemanagerandroid;
+package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.AllTransaction;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,51 +21,51 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AllTransactionActivity extends AppCompatActivity {
+import ca.on.conestogac.alj.studentassistancemanagerandroid.AddTransactionActivity;
+import ca.on.conestogac.alj.studentassistancemanagerandroid.R;
+import ca.on.conestogac.alj.studentassistancemanagerandroid.SAMApplication;
+import ca.on.conestogac.alj.studentassistancemanagerandroid.Transaction;
+import ca.on.conestogac.alj.studentassistancemanagerandroid.TransactionDetailActivity;
 
+public class AllTransactionFragment extends Fragment {
+
+    private AllTransactionViewModel mViewModel;
     private Button btnNewTransaction;
     private List<Transaction> transactions;
     private Spinner dateSpinner;
     private String sortBy;
     private LinearLayout ll;
 
+
+    public static AllTransactionFragment newInstance() {
+        return new AllTransactionFragment();
+    }
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_transactions);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.all_transaction_fragment, container, false);
 
         try {
-            transactions = ((SAMApplication) getApplication()).getAllTransactions();
+            transactions = ((SAMApplication) getActivity().getApplication()).getAllTransactions();
         } catch(Exception ex){
 
         }
 
-
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        btnNewTransaction = findViewById(R.id.btnATNewTrans);
-        dateSpinner = (Spinner) findViewById(R.id.tranDateSpinner);
-        ll = (LinearLayout) findViewById(R.id.llShowTransactions);
+        btnNewTransaction = view.findViewById(R.id.btnATNewTrans);
+        dateSpinner = (Spinner) view.findViewById(R.id.tranDateSpinner);
+        ll = (LinearLayout) view.findViewById(R.id.llShowTransactions);
         populateSpinner();
 
         btnNewTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
+                Intent intent = new Intent(getActivity().getApplicationContext(), AddTransactionActivity.class);
                 intent.putExtra("tId", 0);
                 startActivity(intent);
             }
@@ -75,48 +84,14 @@ public class AllTransactionActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.budgetmenu, menu);
-        return true;
+        return view;
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        boolean result = true;
-        Intent intent;
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                super.onBackPressed();
-                break;
-            case R.id.BMenuHome:
-                intent = new Intent(getApplicationContext(), MainActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.BMenuTrans:
-                intent = new Intent(getApplicationContext(), AddTransactionActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-
-            case R.id.BMenuTransactions:
-                intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.menuSettings:
-                intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(AllTransactionViewModel.class);
+        // TODO: Use the ViewModel
     }
 
     private void populateSpinner() {
@@ -130,24 +105,24 @@ public class AllTransactionActivity extends AppCompatActivity {
                 }
             }
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, checking);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, checking);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dateSpinner.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
-    private void showTransactions(String month){
+    private void showTransactions(String month) {
         ll.removeAllViews();
         if (transactions != null) {
             for (Transaction t : transactions) {
 
                 String checkDate = new SimpleDateFormat("MM/yyyy").format(new Date(t.getDate()));
                 if (month == "all" | month.equals(checkDate)) {
-                    CardView newCard = new CardView(this);
-                    TextView tAmount = new TextView(this);
-                    TextView tDate = new TextView(this);
+                    CardView newCard = new CardView(getActivity().getApplicationContext());
+                    TextView tAmount = new TextView(getActivity().getApplicationContext());
+                    TextView tDate = new TextView(getActivity().getApplicationContext());
                     //TextView tPayment = new TextView(this);
-                    LinearLayout tLayout = new LinearLayout(this);
+                    LinearLayout tLayout = new LinearLayout(getActivity().getApplicationContext());
 
                     String addDate = new SimpleDateFormat("dd/MM/yy").format(new Date(t.getDate()));
                     String addAmount = Double.toString(t.getAmount());
@@ -157,7 +132,7 @@ public class AllTransactionActivity extends AppCompatActivity {
                     tLayout.setOrientation(LinearLayout.VERTICAL);
                     tLayout.addView(tDate);
                     tLayout.addView(tAmount);
-                   //tLayout.addView(tPayment);
+                    //tLayout.addView(tPayment);
 
 
                     newCard.addView(tLayout);
@@ -171,7 +146,7 @@ public class AllTransactionActivity extends AppCompatActivity {
                     newCard.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(getApplicationContext(), TransactionDetailActivity.class);
+                            Intent intent = new Intent(getActivity().getApplicationContext(), TransactionDetailActivity.class);
                             intent.putExtra("tId", t.getId());
                             startActivity(intent);
                         }
@@ -181,5 +156,4 @@ public class AllTransactionActivity extends AppCompatActivity {
         }
 
     }
-
-}
+    }

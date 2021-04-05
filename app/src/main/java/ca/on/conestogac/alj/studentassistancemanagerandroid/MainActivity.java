@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_calendar, R.id.nav_budget, R.id.nav_reports, R.id.nav_goals, R.id.nav_settings)
+                R.id.nav_home, R.id.nav_calendar,R.id.nav_assignments, R.id.nav_budget,R.id.nav_transactions, R.id.nav_reports, R.id.nav_goals, R.id.nav_settings)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -96,14 +96,20 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        boolean result = true;
-//        Intent intent;
-//
-//        switch (item.getItemId()) {
-//            case R.id.menuHome:
-//                intent = new Intent(getApplicationContext(), MainActivity.class);
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        boolean result = true;
+        Intent intent;
+
+        switch (item.getItemId()) {
+            case R.id.menuHome:
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
+//            case R.id.menuSettings:
+//                intent = new Intent(getApplicationContext(), SettingsActivity.class);
 //                //intent.putExtra("darkTheme", darkTheme);
 //                startActivity(intent);
 //                break;

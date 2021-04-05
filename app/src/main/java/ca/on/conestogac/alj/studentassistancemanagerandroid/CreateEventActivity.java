@@ -205,10 +205,10 @@ public class CreateEventActivity extends AppCompatActivity {
                         "\nDescription: " + description);
 
         if (isEditing) {
-            ((SAMApplication) getApplication()).updateAssignment(aId, name, epochTime, duration, 2, 0, description);
+//            ((SAMApplication) getApplication()).updateAssignment(aId, name, epochTime, duration, 2,  description);
             Toast.makeText(this, "Event updated", Toast.LENGTH_SHORT).show();
         } else {
-            ((SAMApplication) getApplication()).addAssignment(name, epochTime, duration, 2, 0, description);
+            ((SAMApplication) getApplication()).addAssignment(name, epochTime, duration, 2,  description);
             Toast.makeText(this, "Event added", Toast.LENGTH_SHORT).show();
         }
 
