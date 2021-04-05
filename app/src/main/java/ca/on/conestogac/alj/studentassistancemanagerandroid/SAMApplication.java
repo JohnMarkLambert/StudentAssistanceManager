@@ -76,12 +76,12 @@ public class SAMApplication extends Application {
     //Assignment Table Functions
 
     public void addAssignment(String name, long dueDate, double duration,
-                              int period, int complete, String desc)
+                              int period, String desc)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
         db.execSQL("INSERT INTO tbl_assignments(AssignmentName, DueDate, Duration, " +
-                "Period, Complete, Description, Notified) VALUES ('" + name + "', '" + dueDate + "', '" +
-                duration + "', '" + period + "', '" + complete + "', '" + desc + "', 0)");
+                "Period, Description, Notified) VALUES ('" + name + "', '" + dueDate + "', '" +
+                duration + "', '" + period +  "', '" + desc + "', 0)");
 
     }
 
@@ -132,15 +132,9 @@ public class SAMApplication extends Application {
         a.setDueDate(c.getLong(2));
         a.setDuration(c.getLong(3));
         a.setPeriod(c.getLong(4));
-        int comp = c.getInt(5);
-        if (comp == 1) {
-            a.setComplete(true);
-        }
-        else {
-            a.setComplete(false);
-        }
-        a.setDesc(c.getString(6));
-        int note = c.getInt(7);
+
+        a.setDesc(c.getString(5));
+        int note = c.getInt(6);
         if (note == 1) {
             a.setNotified(true);
         }
@@ -167,14 +161,8 @@ public class SAMApplication extends Application {
                 a.setDuration(c.getLong(3));
                 a.setPeriod(c.getLong(4));
                 int comp = c.getInt(5);
-                if (comp == 1) {
-                    a.setComplete(true);
-                }
-                else {
-                    a.setComplete(false);
-                }
-                a.setDesc(c.getString(6));
-                int note = c.getInt(7);
+                a.setDesc(c.getString(5));
+                int note = c.getInt(6);
                 if (note == 1) {
                     a.setNotified(true);
                 }

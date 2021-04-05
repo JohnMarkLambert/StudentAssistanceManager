@@ -46,6 +46,7 @@ public class CalendarFragment extends Fragment {
     private TextView txtCDuration;
     private TextView txtCDescription;
 
+
     private List<Assignment> assignments;
     private Assignment displayAssignment;
 
@@ -59,12 +60,11 @@ public class CalendarFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_calendar, container, false);
+        View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
-        assignments = ((SAMApplication) getActivity().getApplication()).getAllAssignments();
 
         btnCreateEvent = view.findViewById(R.id.btnCreateEvent);
 
@@ -73,6 +73,8 @@ public class CalendarFragment extends Fragment {
         txtCDueDate = view.findViewById(R.id.txtMMDueDate);
         txtCDuration = view.findViewById(R.id.txtMMDuration);
         txtCDescription = view.findViewById(R.id.txtMMDescription);
+
+        assignments = ((SAMApplication) getActivity().getApplication()).getAllAssignments();
 
         if (!assignments.isEmpty()) {
             for (Assignment a : assignments) {
@@ -83,7 +85,7 @@ public class CalendarFragment extends Fragment {
             }
 
             txtCEventName.setText(displayAssignment.getName());
-            dueDate = new Date((long) displayAssignment.getDueDate() );
+            dueDate = new Date((long) displayAssignment.getDueDate());
             txtCDueDate.setText(df.format(dueDate));
             txtCDuration.setText(displayAssignment.getDuration() + " Hours");
             txtCDescription.setText(displayAssignment.getDesc());
@@ -91,6 +93,7 @@ public class CalendarFragment extends Fragment {
 
         btnCreateEvent.setOnClickListener(new View.OnClickListener() {
             Intent intent;
+
             @Override
             public void onClick(View v) {
                 intent = new Intent(getActivity().getApplicationContext(), CreateEventActivity.class);
@@ -120,6 +123,4 @@ public class CalendarFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         // TODO: Use the ViewModel
     }
-
-
 }

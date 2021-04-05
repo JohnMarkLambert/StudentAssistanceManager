@@ -13,9 +13,17 @@
             android:icon="@drawable/ic_baseline_calendar"
             android:title="Calendar" />
         <item
+            android:id="@+id/nav_assignments"
+            android:icon="@drawable/ic_baseline_edit_note"
+            android:title="Assignments" />
+        <item
             android:id="@+id/nav_budget"
             android:icon="@drawable/ic_baseline_money"
             android:title="Budget" />
+        <item
+            android:id="@+id/nav_transactions"
+            android:icon="@drawable/ic_baseline_sync_alt"
+            android:title="Transactions" />
         <item
             android:id="@+id/nav_reports"
             android:icon="@drawable/ic_baseline_assessment"
