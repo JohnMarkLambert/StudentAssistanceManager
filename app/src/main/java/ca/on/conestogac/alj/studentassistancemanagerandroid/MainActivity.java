@@ -3,6 +3,7 @@ package ca.on.conestogac.alj.studentassistancemanagerandroid;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,7 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
-import androidx.preference.PreferenceManager;
+
 
 import java.util.List;
 
@@ -95,38 +96,38 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        boolean result = true;
-        Intent intent;
-
-        switch (item.getItemId()) {
-            case R.id.menuHome:
-                intent = new Intent(getApplicationContext(), MainActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.menuCalendar:
-                intent = new Intent(getApplicationContext(), CalendarActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.menuBudget:
-                intent = new Intent(getApplicationContext(), BudgetHomeActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-//            case R.id.menuSettings:
-//                intent = new Intent(getApplicationContext(), SettingsActivity.class);
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        boolean result = true;
+//        Intent intent;
+//
+//        switch (item.getItemId()) {
+//            case R.id.menuHome:
+//                intent = new Intent(getApplicationContext(), MainActivity.class);
 //                //intent.putExtra("darkTheme", darkTheme);
 //                startActivity(intent);
 //                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
-    }
+//            case R.id.menuCalendar:
+//                intent = new Intent(getApplicationContext(), CalendarActivity.class);
+//                //intent.putExtra("darkTheme", darkTheme);
+//                startActivity(intent);
+//                break;
+//            case R.id.menuBudget:
+//                intent = new Intent(getApplicationContext(), BudgetHomeActivity.class);
+//                //intent.putExtra("darkTheme", darkTheme);
+//                startActivity(intent);
+//                break;
+////            case R.id.menuSettings:
+////                intent = new Intent(getApplicationContext(), SettingsActivity.class);
+////                //intent.putExtra("darkTheme", darkTheme);
+////                startActivity(intent);
+////                break;
+//            default:
+//                result = super.onOptionsItemSelected(item);
+//                break;
+//        }
+//        return result;
+//    }
 
     @Override
     protected void onStop() {
