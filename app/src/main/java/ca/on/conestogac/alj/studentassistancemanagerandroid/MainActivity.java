@@ -131,12 +131,12 @@ public class MainActivity extends AppCompatActivity {
 ////                //intent.putExtra("darkTheme", darkTheme);
 ////                startActivity(intent);
 ////                break;
-//            default:
-//                result = super.onOptionsItemSelected(item);
-//                break;
-//        }
-//        return result;
-//    }
+            default:
+                result = super.onOptionsItemSelected(item);
+                break;
+        }
+        return result;
+    }
 
     @Override
     protected void onStop() {
