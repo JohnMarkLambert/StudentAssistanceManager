@@ -69,4 +69,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- settings Labels -->
+    <string name="btnClearCal">btnClearCal</string>
+    <string name="btnClearBud">btnClearBud</string>
+    <string name="TdiaClearCal">Delete Calendar Data</string>
+    <string name="MdiaClealCal">Are you sure you want to delete all Calendar Data?</string>
+    <string name="TdiaClearBud">Delete Budget Data</string>
+    <string name="MdiaClealBud">Are you sure you want to delete all Budget Data?</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
