@@ -99,14 +99,20 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        boolean result = true;
-//        Intent intent;
-//
-//        switch (item.getItemId()) {
-//            case R.id.menuHome:
-//                intent = new Intent(getApplicationContext(), MainActivity.class);
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        boolean result = true;
+        Intent intent;
+
+        switch (item.getItemId()) {
+            case R.id.menuHome:
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
+//            case R.id.menuSettings:
+//                intent = new Intent(getApplicationContext(), SettingsActivity.class);
 //                //intent.putExtra("darkTheme", darkTheme);
 //                startActivity(intent);
 //                break;
@@ -125,16 +131,17 @@ public class MainActivity extends AppCompatActivity {
 ////                //intent.putExtra("darkTheme", darkTheme);
 ////                startActivity(intent);
 ////                break;
-             default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
-    }
+//            default:
+//                result = super.onOptionsItemSelected(item);
+//                break;
+//        }
+//        return result;
+//    }
 
     @Override
     protected void onStop() {
         startService(new Intent(getApplicationContext(), NotificationService.class));
         super.onStop();
     }
+
 }
