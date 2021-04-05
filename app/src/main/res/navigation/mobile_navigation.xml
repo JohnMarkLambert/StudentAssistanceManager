@@ -18,10 +18,22 @@
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
+        android:id="@+id/nav_assignments"
+        android:name="ca.on.conestogac.alj.studentassistancemanagerandroid.ui.AllAssignment.AllAssignmentFragment"
+        android:label="Assignments"
+        tools:layout="@layout/all_assignment_fragment" />
+
+    <fragment
         android:id="@+id/nav_budget"
         android:name="ca.on.conestogac.alj.studentassistancemanagerandroid.ui.Budget.BudgetFragment"
         android:label="Budget"
         tools:layout="@layout/fragment_budget" />
+
+    <fragment
+        android:id="@+id/nav_transactions"
+        android:name="ca.on.conestogac.alj.studentassistancemanagerandroid.ui.AllTransaction.AllTransactionFragment"
+        android:label="Transactions"
+        tools:layout="@layout/all_transaction_fragment" />
 
     <fragment
         android:id="@+id/nav_reports"
