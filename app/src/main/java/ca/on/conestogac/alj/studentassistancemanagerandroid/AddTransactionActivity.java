@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -229,7 +228,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         }
 
 
-        payment = spnPayment.getSelectedItemPosition();
+        payment = spnPayment.getSelectedItemPosition() + 1 ;
         notes = txtNotes.getText().toString();
 
         Log.i("Data Validation", "Data is valid: " + goodData);

@@ -38,12 +38,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <Switch
-            android:id="@+id/swtBudgetHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Goals/Spending" />
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -75,7 +69,7 @@
                         android:text="Date" />
 
                     <TextView
-                        android:id="@+id/txtBHDate"
+                        android:id="@+id/txtMMTDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -95,7 +89,7 @@
                         android:text="Amount" />
 
                     <TextView
-                        android:id="@+id/txtBHAmount"
+                        android:id="@+id/txtMMAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -115,7 +109,7 @@
                         android:text="Payment" />
 
                     <TextView
-                        android:id="@+id/txtBHPayment"
+                        android:id="@+id/txtMMPayment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -135,7 +129,7 @@
                         android:text="Notes" />
 
                     <TextView
-                        android:id="@+id/txtBHNotes"
+                        android:id="@+id/txtMMNotes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"

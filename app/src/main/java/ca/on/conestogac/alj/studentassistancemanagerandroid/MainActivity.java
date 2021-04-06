@@ -29,18 +29,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         //Preferences need to go first
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
         sp = PreferenceManager.getDefaultSharedPreferences(this);
 
+
+
 //        if (sp.getBoolean("themeType", false)) {
 //            //Dark Theme
-//            setTheme();
+//            //setTheme();
 //        } else {
 //            //Light Theme
-//            setTheme();
+//            setTheme(R.style.SAMThemeLight);
 //        }
 
 

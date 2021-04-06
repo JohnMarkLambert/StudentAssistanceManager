@@ -80,7 +80,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/txtMMDescription"
+                    android:id="@+id/txtMMEDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView"

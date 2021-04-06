@@ -1,15 +1,8 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.Calendar;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -48,7 +46,7 @@ public class CalendarFragment extends Fragment {
     private List<Assignment> assignments;
     private Assignment displayAssignment;
 
-    private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
+    private DateFormat df = new SimpleDateFormat("dd/MM/yy hh:mm aa", Locale.getDefault());
     private Date dueDate;
 
     public static CalendarFragment newInstance() {
@@ -70,7 +68,7 @@ public class CalendarFragment extends Fragment {
         txtCEventName = view.findViewById(R.id.txtMMEventName);
         txtCDueDate = view.findViewById(R.id.txtMMDueDate);
         txtCDuration = view.findViewById(R.id.txtMMDuration);
-        txtCDescription = view.findViewById(R.id.txtMMDescription);
+        txtCDescription = view.findViewById(R.id.txtMMEDescription);
 
         assignments = ((SAMApplication) getActivity().getApplication()).getAllAssignments();
 
@@ -87,6 +85,7 @@ public class CalendarFragment extends Fragment {
             txtCDueDate.setText(df.format(dueDate));
             txtCDuration.setText(displayAssignment.getDuration() + " Hours");
             txtCDescription.setText(displayAssignment.getDesc());
+            calendar.setDate(displayAssignment.getDueDate());
         }
 
         btnCreateEvent.setOnClickListener(new View.OnClickListener() {
