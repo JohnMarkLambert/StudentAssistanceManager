@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
@@ -17,6 +18,7 @@ import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
@@ -29,8 +31,8 @@ public class RecordDetailsActivity extends AppCompatActivity {
     private LinearLayout ll;
     private TextView txtMonth;
     private List<Record> records;
-    private List<Integer> colours;
     private PieChartView pcvReport;
+    private List<Integer> colors;
 
     private SharedPreferences sp;
     private String currency;
@@ -66,19 +68,18 @@ public class RecordDetailsActivity extends AppCompatActivity {
         switchChart = (Switch)findViewById(R.id.switchReportPie);
         ll = (LinearLayout)findViewById(R.id.LLReportGoals);
 
-        colours = new ArrayList<>();
-        colours.add(getColor(R.color.purple_200));
-        colours.add(getColor(R.color.teal_200));
-        colours.add(getColor(R.color.orange));
-        colours.add(getColor(R.color.green));
-        colours.add(getColor(R.color.blue));
-        colours.add(getColor(R.color.grey));
-        colours.add(getColor(R.color.red));
+        colors = new ArrayList<>();
 
         try{
             records = ((SAMApplication) getApplication()).getMonthlyRecord(date);
         } catch (Exception ex) {
 
+        }
+
+        for (Record r: records) {
+            Random random = new Random();
+            int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+            colors.add(color);
         }
 
         switchChart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -120,8 +121,9 @@ public class RecordDetailsActivity extends AppCompatActivity {
 
             txtGoalName.setText("Goal: " + record.getGoalName());
             txtGoalName.setTextSize(20);
-            txtGoalName.setBackgroundColor(colours.get(num));
-            if (num == colours.size()-1) {
+            txtGoalName.setBackgroundColor(colors.get(num));
+            txtGoalName.setTextColor(getResources().getColor(R.color.white));
+            if (num == colors.size()-1) {
                 num = 0;
             } else {
                 num++;
@@ -149,7 +151,6 @@ public class RecordDetailsActivity extends AppCompatActivity {
     public void generateChart(boolean mode){
         int num = 0;
         double value;
-        String title;
         List<SliceValue> pieData = new ArrayList<>();
         for (Record record: records) {
             if (mode) {
@@ -157,10 +158,11 @@ public class RecordDetailsActivity extends AppCompatActivity {
             } else {
                 value = record.getGoalAmount();
             }
-            pieData.add(new SliceValue((float)value, colours.get(num)).setLabel(record.getGoalName()
+
+            pieData.add(new SliceValue((float)value, colors.get(num)).setLabel(record.getGoalName()
             + ": " + currency + value));
             num++;
-            if (num >= colours.size()){
+            if (num >= colors.size()){
                 num = 0;
             }
         }

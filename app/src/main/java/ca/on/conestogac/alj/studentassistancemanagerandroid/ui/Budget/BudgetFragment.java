@@ -43,7 +43,6 @@ public class BudgetFragment extends Fragment {
     }
 
     private Transaction transaction;
-    private List<Integer> colours;
     private PieChartView pcvReport;
     private List<Category> goals;
 
