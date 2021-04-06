@@ -7,133 +7,105 @@
     tools:context=".CreateEventActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TableLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlEventName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="@string/Event_Name">
 
-            <TableRow
+            <EditText
+                android:id="@+id/txtEventName"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inlEventName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/Event_Name">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Event_Duration">
 
-                    <EditText
-                        android:id="@+id/txtEventName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </TableRow>
-
-            <TableRow
+            <EditText
+                android:id="@+id/txtDuration"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number|numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inlDueDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/Date_Due">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlTimeDue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Time_Due">
 
-                    <EditText
-                        android:id="@+id/txtDateDue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:ems="10"
-                        android:focusable="auto"
-                        android:focusableInTouchMode="false" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </TableRow>
-
-            <TableRow
+            <EditText
+                android:id="@+id/txtTimeDue"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="true" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inlTimeDue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/Time_Due">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Date_Due">
 
-                    <EditText
-                        android:id="@+id/txtTimeDue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:ems="10"
-                        android:focusable="false"
-                        android:focusableInTouchMode="true" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </TableRow>
-
-            <TableRow
+            <EditText
+                android:id="@+id/txtDateDue"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="auto"
+                android:focusableInTouchMode="false" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inlDuration"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/Event_Duration">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Event_Description">
 
-                    <EditText
-                        android:id="@+id/txtDuration"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="number|numberDecimal" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </TableRow>
-
-            <TableRow
+            <EditText
+                android:id="@+id/txtDescription"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inlDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/Event_Description">
-
-                    <EditText
-                        android:id="@+id/txtDescription"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:gravity="start|top"
-                        android:inputType="textMultiLine" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </TableRow>
-
-        </TableLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnCreate"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4sp"
+            android:layout_marginTop="16sp"
+            android:layout_marginRight="4sp"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
             android:text="@string/Create_Event_Button" />
-
-        <Button
-            android:id="@+id/btnCancelCreation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Cancel_Event_Button" />
 
     </LinearLayout>
 

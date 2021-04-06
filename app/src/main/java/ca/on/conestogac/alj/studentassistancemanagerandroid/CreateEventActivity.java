@@ -56,12 +56,12 @@ public class CreateEventActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_close);
         }
 
         intent = new Intent(this, CreateEventActivity.class);
 
         btnCreate = findViewById(R.id.btnCreate);
-        btnCancelCreation = findViewById(R.id.btnCancelCreation);
 
         txtEventName = findViewById(R.id.txtEventName);
         txtDuration = findViewById(R.id.txtDuration);
@@ -184,12 +184,6 @@ public class CreateEventActivity extends AppCompatActivity {
 
             }
         };
-        btnCancelCreation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
     }
 
