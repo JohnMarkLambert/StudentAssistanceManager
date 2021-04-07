@@ -289,8 +289,8 @@ public class SAMApplication extends Application {
     //Category Table functions
     public void createCategory(String name, double goal) {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL("INSERT INTO tbl_category(CategoryName, CategoryGoal) Values('" +
-                name + "', '" + goal + "')");
+        db.execSQL("INSERT INTO tbl_category(CategoryName, CategoryGoal, Deleted) Values('" +
+                name + "', '" + goal + "', 0)");
     }
 
     public void updateCategory(int id, String name, double goal) {

@@ -1,8 +1,10 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -84,10 +87,28 @@ public class SetGoalActivity extends AppCompatActivity {
             }
         });
 
+        DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int result) {
+                switch (result) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        ((SAMApplication) getApplication()).deleteCategory(cId);
+//                        intent = new Intent(getApplicationContext(), AllTransactionActivity.class);
+                        finish();
+//                        startActivity(intent);
+                }
+            }
+        };
+
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_StudentAssistanceManagerAndroid));
+        dialogBuilder.setMessage("Delete this Budget Goal?").setPositiveButton("Yes", dialogListener)
+                .setNegativeButton("No", dialogListener);
+
         btnDeleteGoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((SAMApplication) getApplication()).deleteCategory(cId);
+                dialogBuilder.show();
             }
         });
     }
