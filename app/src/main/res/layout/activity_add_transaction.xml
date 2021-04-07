@@ -1,30 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TableRow
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlTransactionDate"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtTransactionDate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                android:focusable="auto"
-                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
                 android:hint="@string/Transaction_Date_Hint" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </TableRow>
-
-        <TableRow
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlTransactionAmount"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtAmount"
@@ -32,84 +43,81 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/Transaction_Amount_Hint"
                 android:inputType="number|numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </TableRow>
-
-        <TableRow
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlTransactionCategory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Payment_Label" />
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spnPayment"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtGoalHelper"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:spinnerMode="dropdown" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="78dp">
-
-            <TextView
-                android:id="@+id/textView22"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Category_Label" />
+                android:clickable="false"
+                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                android:focusable="false"
+                android:hint="@string/Menu_Goals"
+                android:inputType="none" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spnGoals"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="0dp"
-                android:paddingBottom="0dp"
-                android:spinnerMode="dropdown" />
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dialog" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/txtGoalError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:paddingTop="0dp" />
-
-        </TableRow>
-
-        <TableRow
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlTransactionPayment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPaymentHelper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                android:focusable="false"
+                android:hint="@string/Payment_Label"
+                android:inputType="none" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spnPayment"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dialog" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inlTransactionNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Notes_Hint" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </TableRow>
-
-        <TableRow
+        <Button
+            android:id="@+id/btnSaveTran"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4sp"
+            android:layout_marginTop="16sp"
+            android:layout_marginRight="4sp"
+            android:paddingTop="4sp"
+            android:paddingBottom="4sp"
+            android:text="@string/Save_Button" />
 
-            <Button
-                android:id="@+id/btnSaveTran"
-                android:layout_width="214dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/Save_Button" />
-
-            <Button
-                android:id="@+id/btnTranCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Cancel_Event_Button" />
-        </TableRow>
-    </TableLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

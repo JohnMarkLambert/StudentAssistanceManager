@@ -102,26 +102,17 @@ public class MainActivity extends AppCompatActivity {
                 //intent.putExtra("darkTheme", darkTheme);
                 startActivity(intent);
                 break;
+            case R.id.menuSettings:
+                intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                //intent.putExtra("darkTheme", darkTheme);
+                startActivity(intent);
+                break;
+
 //            case R.id.menuSettings:
 //                intent = new Intent(getApplicationContext(), SettingsActivity.class);
 //                //intent.putExtra("darkTheme", darkTheme);
 //                startActivity(intent);
 //                break;
-//            case R.id.menuCalendar:
-//                intent = new Intent(getApplicationContext(), CalendarActivity.class);
-//                //intent.putExtra("darkTheme", darkTheme);
-//                startActivity(intent);
-//                break;
-//            case R.id.menuBudget:
-//                intent = new Intent(getApplicationContext(), BudgetHomeActivity.class);
-//                //intent.putExtra("darkTheme", darkTheme);
-//                startActivity(intent);
-//                break;
-////            case R.id.menuSettings:
-////                intent = new Intent(getApplicationContext(), SettingsActivity.class);
-////                //intent.putExtra("darkTheme", darkTheme);
-////                startActivity(intent);
-////                break;
             default:
                 result = super.onOptionsItemSelected(item);
                 break;
@@ -129,9 +120,10 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-    @Override
-    protected void onStop() {
-        startService(new Intent(getApplicationContext(), NotificationService.class));
-        super.onStop();
-    }
-}
+            @Override
+            protected void onStop () {
+                startService(new Intent(getApplicationContext(), NotificationService.class));
+                super.onStop();
+            }
+        }
+
