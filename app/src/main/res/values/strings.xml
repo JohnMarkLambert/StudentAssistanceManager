@@ -79,4 +79,11 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
 
+    <!-- Transaction Details -->
+    <string name="Transaction_Details_Amount">Amount</string>
+    <string name="Transaction_Details_Goal">Goal</string>
+    <string name="Edit_Transaction">Edit Transaction</string>
+    <string name="Delete_Transaction">Delete Transaciton</string>
+
+
 </resources>
