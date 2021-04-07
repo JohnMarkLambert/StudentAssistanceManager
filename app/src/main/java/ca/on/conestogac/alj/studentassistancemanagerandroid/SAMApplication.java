@@ -386,4 +386,9 @@ public class SAMApplication extends Application {
         }
         return r;
     }
+
+    public void deleteAllRecords(){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.execSQL("DELETE FROM tbl_records");
+    }
 }

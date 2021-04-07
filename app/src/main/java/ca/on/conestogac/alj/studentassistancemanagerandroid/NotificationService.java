@@ -6,11 +6,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,9 @@ public class NotificationService extends Service {
     private DateFormat recordDate = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
     private boolean firstDateChecked = false;
     private String recordString;
+    private String assignmentPeriod;
+    private SharedPreferences sp;
+    private long assignmentPeriodMilli;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -52,9 +57,26 @@ public class NotificationService extends Service {
         List<Assignment> assignments = new ArrayList<>();
         assignments = ((SAMApplication) getApplication()).getAllAssignments();
 
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        assignmentPeriod = sp.getString("notificationType", "empty");
+
+        if (assignmentPeriod.equals("2 Days")){
+            assignmentPeriodMilli = TimeUnit.DAYS.toMillis(2);
+        }
+        else if (assignmentPeriod.equals("1 Day")){
+            assignmentPeriodMilli = TimeUnit.DAYS.toMillis(1);
+        }
+        else if (assignmentPeriod.equals("12 Hours")){
+            assignmentPeriodMilli = TimeUnit.HOURS.toMillis(12);
+        }
+        else if (assignmentPeriod.equals("6 Hours")){
+            assignmentPeriodMilli = TimeUnit.HOURS.toMillis(6);
+        }
+
         if (assignments.size() > 0) {
             for (Assignment a : assignments) {
-                if ((a.getDueDate() - System.currentTimeMillis()) <= TimeUnit.DAYS.toMillis(a.getPeriod())) {
+                if ((a.getDueDate() - System.currentTimeMillis()) <= assignmentPeriodMilli/*TimeUnit.DAYS.toMillis(a.getPeriod())*/) {
                     if(!a.isNotified()) {
                         String dueDate = df.format(a.getDueDate());
                         String [] dateTime = dueDate.split(" ");

@@ -3,7 +3,6 @@ package ca.on.conestogac.alj.studentassistancemanagerandroid;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,9 +14,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationView;
-
 
 import java.util.List;
 
@@ -31,6 +30,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Preferences need to go first
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+//        if (sp.getBoolean("themeType", false)) {
+//            //Dark Theme
+//            setTheme();
+//        } else {
+//            //Light Theme
+//            setTheme();
+//        }
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -46,16 +58,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
-
-//        if (sp.getBoolean("themeType", false)) {
-//            //Dark Theme
-//            setTheme();
-//        } else {
-//            //Light Theme
-//            setTheme();
-//        }
 
 
         //dummy Data
@@ -84,18 +86,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

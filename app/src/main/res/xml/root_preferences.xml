@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="Preference category">
+    <PreferenceCategory android:title="Application Settings">
 
         <SwitchPreference
             android:defaultValue="false"
@@ -22,5 +22,15 @@
             android:key="notificationType"
             android:title="Notification Period"
             app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Data Settings">
+        <Preference
+            android:title="Clear Calendar Data"
+            android:key="@string/btnClearCal"
+            />
+        <Preference
+            android:title="Clear Budget Data"
+            android:key="@string/btnClearBud"
+            />
     </PreferenceCategory>
 </PreferenceScreen>

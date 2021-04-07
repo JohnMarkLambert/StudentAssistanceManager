@@ -33,9 +33,16 @@
                     android:id="@+id/BHChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <Switch
+            android:id="@+id/swtBudgetHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Goals/Spending" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
