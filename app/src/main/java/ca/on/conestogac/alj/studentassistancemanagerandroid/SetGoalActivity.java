@@ -27,6 +27,7 @@ public class SetGoalActivity extends AppCompatActivity {
 
     private Button btnSetGoal;
     private Button btnCancelSet;
+    private Button btnDeleteGoal;
     private TextView txtGoalName;
     private TextView txtGoalAmount;
     private TextInputLayout inlGoalName;
@@ -48,6 +49,7 @@ public class SetGoalActivity extends AppCompatActivity {
 
         btnSetGoal = findViewById(R.id.btnSetGoal);
         btnCancelSet = findViewById(R.id.btnCancelSet);
+        btnDeleteGoal = findViewById(R.id.btnDeleteGoal);
         txtGoalName = findViewById(R.id.txtGoalName);
         txtGoalAmount = findViewById(R.id.txtGoalAmount);
         inlGoalName = findViewById(R.id.inlGoalName);
@@ -60,6 +62,10 @@ public class SetGoalActivity extends AppCompatActivity {
             populateFields();
             isEditing = true;
             btnSetGoal.setText("Update Goal");
+            btnDeleteGoal.setVisibility(View.VISIBLE);
+        }
+        else {
+            btnDeleteGoal.setVisibility(View.INVISIBLE);
         }
 
         btnSetGoal.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +81,13 @@ public class SetGoalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        btnDeleteGoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((SAMApplication) getApplication()).deleteCategory(cId);
             }
         });
     }

@@ -73,6 +73,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cancel" />
+
+            <Button
+                android:id="@+id/btnDeleteGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete" />
         </LinearLayout>
     </LinearLayout>
 
