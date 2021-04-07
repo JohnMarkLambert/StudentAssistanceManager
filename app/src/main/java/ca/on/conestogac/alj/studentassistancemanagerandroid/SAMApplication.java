@@ -104,7 +104,7 @@ public class SAMApplication extends Application {
     public void updateNotified(int id, boolean notified) {
         SQLiteDatabase db = helper.getWritableDatabase();
         int note;
-        if (notified = false) {
+        if (notified == false) {
             note = 0;
         } else {
             note = 1;
@@ -132,7 +132,6 @@ public class SAMApplication extends Application {
         a.setDueDate(c.getLong(2));
         a.setDuration(c.getLong(3));
         a.setPeriod(c.getLong(4));
-
         a.setDesc(c.getString(5));
         int note = c.getInt(6);
         if (note == 1) {
@@ -145,7 +144,7 @@ public class SAMApplication extends Application {
         return a;
     }
 
-    public List<Assignment> getAllAssignments () {
+    public List<Assignment> getAllAssignments() {
         SQLiteDatabase db = helper.getReadableDatabase();
         List<Assignment> assignments = new ArrayList<>();
         Cursor c = db.rawQuery("SELECT * FROM tbl_assignments ORDER BY dueDate",
@@ -160,7 +159,6 @@ public class SAMApplication extends Application {
                 a.setDueDate(c.getLong(2));
                 a.setDuration(c.getLong(3));
                 a.setPeriod(c.getLong(4));
-                int comp = c.getInt(5);
                 a.setDesc(c.getString(5));
                 int note = c.getInt(6);
                 if (note == 1) {
@@ -175,6 +173,32 @@ public class SAMApplication extends Application {
         }
         c.close();
         return assignments;
+    }
+
+    public Assignment getNextAssignment() {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Assignment a = new Assignment();
+        Cursor c = db.rawQuery("SELECT * FROM tbl_assignments ORDER BY dueDate",
+                null);
+        c.moveToFirst();
+        if (c.getCount() > 0) {
+            a.setId(c.getInt(0));
+            a.setName(c.getString(1));
+            a.setDueDate(c.getLong(2));
+            a.setDuration(c.getLong(3));
+            a.setPeriod(c.getLong(4));
+            a.setDesc(c.getString(5));
+            int note = c.getInt(6);
+            if (note == 1) {
+                a.setNotified(true);
+            } else {
+                a.setNotified(false);
+            }
+        } else {
+            a.setName("No Assignments Found");
+            a.setDesc("Create an assignment");
+        }
+        return a;
     }
 
     public void deleteAllAssignments() {
@@ -218,6 +242,23 @@ public class SAMApplication extends Application {
         Transaction t = new Transaction(c.getInt(0), c.getLong(1),
                 c.getDouble(2), c.getInt(3), c.getInt(4),
                 c.getString(5));
+        c.close();
+        return t;
+    }
+
+    public Transaction getLastTransaction() {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM tbl_transactions", null);
+        Transaction t = new Transaction();
+        if (c.getCount() > 0) {
+            c.moveToLast();
+            t = new Transaction(c.getInt(0), c.getLong(1),
+                    c.getDouble(2), c.getInt(3), c.getInt(4),
+                    c.getString(5));
+        } else {
+            t.setAmount(0.00);
+            t.setNotes("No Transactions");
+        }
         c.close();
         return t;
     }
@@ -315,9 +356,9 @@ public class SAMApplication extends Application {
 
     public String getPaymentType(int id) {
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM tbl_payment_types WHERE PaymentTypeId = " + id, null);
+        Cursor c = db.rawQuery("SELECT * FROM tbl_payment_type WHERE PaymentTypeId = " + id, null);
         c.moveToFirst();
-        return c.getString(2);
+        return c.getString(1);
     }
 
     public List<List<String>> getPaymentTypes() {

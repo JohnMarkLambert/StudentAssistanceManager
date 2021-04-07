@@ -168,6 +168,11 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
         });
 
+        btnTranCancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         txtTransactionDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -286,7 +291,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         }
 
 
-        payment = spnPayment.getSelectedItemPosition();
+        payment = spnPayment.getSelectedItemPosition() + 1 ;
         notes = txtNotes.getText().toString();
 
         Log.i("Data Validation", "Data is valid: " + goodData);
