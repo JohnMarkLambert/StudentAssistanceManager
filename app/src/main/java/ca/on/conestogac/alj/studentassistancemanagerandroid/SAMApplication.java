@@ -322,7 +322,7 @@ public class SAMApplication extends Application {
     public List<Category> getAllCategory() {
         SQLiteDatabase db = helper.getReadableDatabase();
         List<Category> categories = new ArrayList<>();
-        Cursor c = db.rawQuery("SELECT * FROM tbl_category WHERE Deleted != 1", null);
+        Cursor c = db.rawQuery("SELECT * FROM tbl_category WHERE Deleted = 0", null);
         c.moveToFirst();
         if (c.getCount() > 0) {
             while (c.getPosition() < c.getCount()) {
