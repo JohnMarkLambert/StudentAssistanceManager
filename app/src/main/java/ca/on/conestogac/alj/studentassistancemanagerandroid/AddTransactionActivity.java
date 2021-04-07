@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +43,9 @@ public class AddTransactionActivity extends AppCompatActivity {
     private Intent intent;
     private boolean isEditing;
     private SimpleDateFormat dfDate;
-    private TextView txtGoalError;
+    private TextView txtGoalHelper;
+    private TextView txtPaymentHelper;
+    private TextInputLayout inlTransactionDate, inlTransactionAmount, inlTransactionCategory;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +56,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_close);
         }
 
 
@@ -59,10 +65,15 @@ public class AddTransactionActivity extends AppCompatActivity {
         spnPayment = findViewById(R.id.spnPayment);
         spnGoals = findViewById(R.id.spnGoals);
         txtNotes = findViewById(R.id.txtNotes);
-        txtGoalError = findViewById(R.id.txtGoalError);
+
+        txtGoalHelper = findViewById(R.id.txtGoalHelper);
+        txtPaymentHelper = findViewById(R.id.txtPaymentHelper);
 
         btnSaveTran = findViewById(R.id.btnSaveTran);
-        btnTranCancel = findViewById(R.id.btnTranCancel);
+
+        inlTransactionDate = findViewById(R.id.inlTransactionDate);
+        inlTransactionAmount = findViewById(R.id.inlTransactionAmount);
+        inlTransactionCategory = findViewById(R.id.inlTransactionCategory);
 
         isEditing = false;
         dfDate = new SimpleDateFormat("yyyy/MM/dd");
@@ -95,6 +106,58 @@ public class AddTransactionActivity extends AppCompatActivity {
 //        }
 //        ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymentListString);
 //        spnPayment.setAdapter(paymentAdapter);
+
+        txtGoalHelper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((SAMApplication) getApplication()).getAllCategory().size() !=0) {
+                    spnGoals.performClick();
+                }
+            }
+        });
+
+        txtPaymentHelper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                spnPayment.performClick();
+
+            }
+        });
+
+        spnGoals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                category = (Category) parent.getAdapter().getItem(position);
+                if (((SAMApplication) getApplication()).getAllCategory() != null) {
+                    txtGoalHelper.setText(category.getName());
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spnPayment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                payment =  position;
+
+
+                switch (payment) {
+                    case 0: txtPaymentHelper.setText("Debit");
+                        break;
+                    case 1:
+                        txtPaymentHelper.setText("Credit");
+                        break;
+                }
+                }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         btnSaveTran.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,40 +253,40 @@ public class AddTransactionActivity extends AppCompatActivity {
         Date today = new Date();
 
         if (txtTransactionDate.getText().length() == 0) {
-            txtTransactionDate.setError("Select a transaction date");
+            inlTransactionDate.setError("Select a transaction date");
             goodData = false;
         } else if (txtTransactionDate.getText().length() != 0) {
             try {
                 epochTime = dfDate.parse(txtTransactionDate.getText().toString()).getTime();
             } catch (ParseException e) {
-                txtTransactionDate.setError("Select a transaction date");
+                inlTransactionDate.setError("Select a transaction date");
                 goodData = false;
             }
             if (epochTime > today.getTime()) {
-                txtTransactionDate.setError("Date cannot be in the future");
+                inlTransactionDate.setError("Date cannot be in the future");
                 goodData = false;
             } else {
-                txtTransactionDate.setError(null);
+                inlTransactionDate.setError(null);
             }
         }
 
         //Amount Validation
 
         if (txtAmount.getText().length() == 0) {
-            txtAmount.setError("Enter an amount");
+            inlTransactionAmount.setError("Enter an amount");
             goodData = false;
         } else {
             amount = Double.parseDouble(txtAmount.getText().toString());
-            txtAmount.setError(null);
+            inlTransactionAmount.setError(null);
         }
 
         //Category Validation
 
         if (spnGoals.getSelectedItem() == null) {
             goodData = false;
-            txtGoalError.setError("Select a category");
+            inlTransactionCategory.setError("Select a category");
         } else {
-            txtGoalError.setError(null);
+            inlTransactionCategory.setError(null);
             category = (Category) spnGoals.getSelectedItem();
         }
 
