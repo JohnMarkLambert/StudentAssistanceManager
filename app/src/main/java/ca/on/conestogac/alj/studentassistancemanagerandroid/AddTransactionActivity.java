@@ -168,11 +168,6 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
         });
 
-        btnTranCancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         txtTransactionDate.setOnClickListener(new View.OnClickListener() {
             @Override
