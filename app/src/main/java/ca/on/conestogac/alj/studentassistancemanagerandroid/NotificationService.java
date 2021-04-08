@@ -1,6 +1,5 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,18 +7,13 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.preference.PreferenceManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -48,6 +42,7 @@ public class NotificationService extends Service {
 
         checkForAssignmentNotification();
         checkForStartOfMonth();
+        removeAssignment();
 
         return START_STICKY;
     }
@@ -247,6 +242,19 @@ public class NotificationService extends Service {
             firstDateChecked = false;
         }
 
+    }
+
+    private void removeAssignment(){
+        List<Assignment> assignments = ((SAMApplication) getApplication()).getAllAssignments();
+        Long currentDate = System.currentTimeMillis();
+
+        for (Assignment a: assignments){
+            if (a.isNotified()) {
+                if (a.getDueDate() < currentDate) {
+                    ((SAMApplication) getApplication()).deleteAssignment(a.getId());
+                }
+            }
+        }
     }
 
     @Override
