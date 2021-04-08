@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Amount"
+                    android:text="@string/Transaction_Details_Amount"
                     android:textSize="24sp" />
 
                 <TextView
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Payment"
+                    android:text="@string/Payment_Label"
                     android:textSize="24sp" />
 
                 <TextView
@@ -86,7 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Goal"
+                    android:text="@string/Transaction_Details_Goal"
                     android:textSize="24sp" />
 
                 <TextView
@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Notes"
+                    android:text="@string/Notes_Hint"
                     android:textSize="24sp" />
 
                 <TextView
@@ -125,13 +125,13 @@
             android:id="@+id/btnTranEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Edit Transaction" />
+            android:text="@string/Edit_Transaction" />
 
         <Button
             android:id="@+id/btnTranDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete Transaction" />
+            android:text="@string/Delete_Transaction" />
 
     </LinearLayout>
 
