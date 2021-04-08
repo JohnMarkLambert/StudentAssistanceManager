@@ -32,10 +32,10 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
     private TextView txtAssignName;
     private TextView txtDueDate;
     private TextView txtDuration;
-    private CheckBox ckbComplete;
     private TextView txtDesc;
     private Button btnEdit;
     private Button btnCancel;
+    private Button btnCompleteAssignment;
     private Intent intent;
 
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
@@ -59,16 +59,15 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
         txtAssignName = findViewById(R.id.txtAssignName);
         txtDueDate = findViewById(R.id.txtDueDate);
         txtDuration = findViewById(R.id.txtDuration);
-        ckbComplete = findViewById(R.id.ckbComplete);
         txtDesc = findViewById(R.id.txtDesc);
         btnEdit = findViewById(R.id.btnEditADetails);
         btnCancel = findViewById(R.id.btnCancelEvent);
+        btnCompleteAssignment = findViewById(R.id.btnCompleteAssignment);
 
         txtAssignName.setText(assignment.getName());
         date = new Date((long)assignment.getDueDate());
         txtDueDate.setText(df.format(date));
         txtDuration.setText(assignment.getDuration() + " Hours");
-        ckbComplete.setChecked(assignment.isComplete());
         txtDesc.setText(assignment.getDesc());
         calDetails.setDate(assignment.getDueDate());
 
@@ -103,6 +102,32 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialogBuilder.show();
+            }
+        });
+
+
+        //Marking Assignment as Complete
+        DialogInterface.OnClickListener dialogListenerComplete = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int result) {
+                switch (result) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        ((SAMApplication) getApplication()).updateNotified(aId, true);
+//                        intent = new Intent(getApplicationContext(), AllAssignmentActivity.class);
+                        finish();
+//                        startActivity(intent);
+                }
+            }
+        };
+
+        AlertDialog.Builder dialogBuilderComplete = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_StudentAssistanceManagerAndroid));
+        dialogBuilderComplete.setMessage("Mark Assignment as complete?").setPositiveButton("Yes", dialogListenerComplete)
+                .setNegativeButton("No", dialogListenerComplete);
+
+        btnCompleteAssignment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogBuilderComplete.show();
             }
         });
 

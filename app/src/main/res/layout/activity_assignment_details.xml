@@ -98,20 +98,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <CheckBox
-                        android:id="@+id/ckbComplete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:enabled="false"
-                        android:text="CheckBox" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
                     <TextView
                         android:id="@+id/textView24"
                         android:layout_width="105dp"
@@ -135,6 +121,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="TextView"
                                 android:textSize="18sp" />
+
                         </LinearLayout>
                     </ScrollView>
 
@@ -145,21 +132,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnEditADetails"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/Button_Edit" />
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnEditADetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/Button_Edit" />
+
+                    <Button
+                        android:id="@+id/btnCancelEvent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/Button_Cancel" />
+                </LinearLayout>
 
                 <Button
-                    android:id="@+id/btnCancelEvent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:id="@+id/btnCompleteAssignment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/Button_Cancel" />
+                    android:text="Mark Assignment as Complete" />
+
             </LinearLayout>
 
         </LinearLayout>
