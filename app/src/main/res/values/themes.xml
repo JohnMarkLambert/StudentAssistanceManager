@@ -41,4 +41,9 @@
     <!--        <item name="android:buttonStyle">@style/LightButtonColor</item>-->
     <!--    </style>-->
 
+    <style name="SplashScreenTheme">
+        <item name="android:windowBackground">@drawable/ic_splashscreen</item>
+        <item name="android:colorBackground">@color/prussian_blue</item>
+    </style>
+
 </resources>
