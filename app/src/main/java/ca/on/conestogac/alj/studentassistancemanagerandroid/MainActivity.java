@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        setTheme(R.style.Theme_StudentAssistanceManagerAndroid);
+
         //Preferences need to go first
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
         sp = PreferenceManager.getDefaultSharedPreferences(this);
