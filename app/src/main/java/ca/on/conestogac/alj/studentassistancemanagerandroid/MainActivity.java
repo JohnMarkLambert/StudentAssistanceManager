@@ -14,7 +14,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,28 +24,12 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     private SharedPreferences sp;
+    private boolean darkTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
-        setTheme(R.style.Theme_StudentAssistanceManagerAndroid);
-
-        //Preferences need to go first
-        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
-
-
-
-//        if (sp.getBoolean("themeType", false)) {
-//            //Dark Theme
-//            //setTheme();
-//        } else {
-//            //Light Theme
-//            setTheme(R.style.SAMThemeLight);
-//        }
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);

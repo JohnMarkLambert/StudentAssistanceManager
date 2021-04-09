@@ -4,10 +4,10 @@
 
     <PreferenceCategory android:title="Application Settings">
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="themeType"
-            android:title="Theme" />
+<!--        <SwitchPreference-->
+<!--            android:defaultValue="false"-->
+<!--            android:key="themeType"-->
+<!--            android:title="Theme" />-->
         <ListPreference
             android:defaultValue="$"
             android:entries="@array/currency_values"
