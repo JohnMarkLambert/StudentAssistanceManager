@@ -12,7 +12,7 @@
 
     </style>
 
-    <style name="Theme.StudentAssistanceManagerAndroid.NoActionBar">
+    <style name="Theme.StudentAssistanceManagerAndroid.NoActionBar" parent="@style/Theme.StudentAssistanceManagerAndroid">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
