@@ -50,6 +50,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_StudentAssistanceManagerAndroid);
         setContentView(R.layout.activity_add_transaction);
 
 
