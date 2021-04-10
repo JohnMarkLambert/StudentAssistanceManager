@@ -35,8 +35,8 @@
 
 
     <string name="Assignment_Complete">Complete: </string>
-    <string name="Button_Edit">Edit Assignment</string>
-    <string name="Button_Cancel">Cancel Assignment</string>
+    <string name="Button_Edit">Edit</string>
+    <string name="Button_Cancel">Cancel</string>
 
     <string name="Title_All_Events">All Events</string>
 
