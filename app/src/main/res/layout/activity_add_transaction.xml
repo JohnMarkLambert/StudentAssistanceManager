@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
@@ -107,6 +108,7 @@
                 android:hint="@string/Notes_Hint" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <Button
             android:id="@+id/btnSaveTran"
             android:layout_width="match_parent"
@@ -119,5 +121,15 @@
             android:text="@string/Save_Button" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSaveTran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4sp"
+        android:paddingBottom="4sp"
+        android:text="@string/Save_Button"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
+        tools:layout_editor_absoluteX="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

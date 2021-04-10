@@ -31,7 +31,7 @@
                 android:textSize="18sp" />
 
             <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/tranDateSpinner"
+                android:id="@+id/assignDateSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

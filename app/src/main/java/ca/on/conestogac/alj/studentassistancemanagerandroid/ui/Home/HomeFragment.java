@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
     private Assignment assignment;
     private Transaction transaction;
     private String currency;
+    private boolean darkTheme;
 
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
     private SharedPreferences sp;
@@ -48,6 +49,7 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         sp = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
         currency = sp.getString("currencyType", "$");
+
 
 
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
@@ -89,6 +91,7 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         // TODO: Use the ViewModel
+
     }
 
 }

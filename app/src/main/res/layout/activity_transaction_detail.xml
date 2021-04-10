@@ -6,6 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/btnTranEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Edit_Transaction"
+        app:layout_constraintBottom_toTopOf="@+id/btnTranDelete" />
+
+    <Button
+        android:id="@+id/btnTranDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Delete_Transaction"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -133,6 +147,7 @@
 
         </TableLayout>
 
+
         <Button
             android:id="@+id/btnTranEdit"
             android:layout_width="match_parent"
@@ -149,6 +164,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:text="@string/Delete_Transaction" />
+
 
     </LinearLayout>
 

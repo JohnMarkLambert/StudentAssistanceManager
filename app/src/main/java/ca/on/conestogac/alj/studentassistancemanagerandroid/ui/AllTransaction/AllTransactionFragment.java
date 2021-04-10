@@ -1,17 +1,8 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.AllTransaction;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.cardview.widget.CardView;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +12,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,7 +56,7 @@ public class AllTransactionFragment extends Fragment {
         }
 
         btnNewTransaction = view.findViewById(R.id.btnATNewTrans);
-        dateSpinner = (Spinner) view.findViewById(R.id.tranDateSpinner);
+        dateSpinner = (Spinner) view.findViewById(R.id.assignDateSpinner);
         ll = (LinearLayout) view.findViewById(R.id.llShowTransactions);
         populateSpinner();
 
