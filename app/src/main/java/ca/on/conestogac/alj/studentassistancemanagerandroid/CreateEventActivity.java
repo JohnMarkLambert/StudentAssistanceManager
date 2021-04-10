@@ -226,8 +226,8 @@ public class CreateEventActivity extends AppCompatActivity {
         if (name.length() == 0) {
             inlEventName.setError("Event must have name");
             goodData = false;
-        } else if (name.length() > 15) {
-            inlEventName.setError("Event name must be under 15 characters");
+        } else if (name.length() > 40) {
+            inlEventName.setError("Event name must be under 40 characters");
             goodData = false;
         } else {
             inlEventName.setError(null);

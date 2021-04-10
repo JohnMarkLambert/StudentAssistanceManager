@@ -4,6 +4,7 @@ import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,13 +103,23 @@ public class ReportsFragment extends Fragment {
                 txtGoal.setText("$" + String.format("%.2f", goal));
                 totalTitle.setText("Total: ");
                 txtTotal.setText("$" + String.format("%.2f", total));
-                diffTitle.setText("Difference ");
+                diffTitle.setText("Difference: ");
                 txtDiff.setText("$" + String.format("%.2f", diff));
                 if (diff > 0) {
                     txtDiff.setTextColor(getResources().getColor(R.color.red, null));
                 } else if (diff <= 0) {
                     txtDiff.setTextColor(getResources().getColor(R.color.green, null));
                 }
+
+                txtDate.setTypeface(null, Typeface.BOLD);
+                txtDate.setTextSize(getResources().getDimension(R.dimen.card_title));
+                goalTitle.setTextSize(getResources().getDimension(R.dimen.card_text));
+                txtGoal.setTextSize(getResources().getDimension(R.dimen.card_text));
+                totalTitle.setTextSize(getResources().getDimension(R.dimen.card_text));
+                txtTotal.setTextSize(getResources().getDimension(R.dimen.card_text));
+                diffTitle.setTextSize(getResources().getDimension(R.dimen.card_text));
+                txtDiff.setTextSize(getResources().getDimension(R.dimen.card_text));
+
                 newLL.addView(txtDate);
                 ll1.addView(goalTitle);
                 ll1.addView(txtGoal);
@@ -119,6 +131,11 @@ public class ReportsFragment extends Fragment {
                 newLL.addView(ll2);
                 newLL.addView(ll3);
                 newCard.addView(newLL);
+
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(0,0,0, (int) getResources().getDimension(R.dimen.padding));
+                newCard.setLayoutParams(lp);
+                newCard.setBackground(getResources().getDrawable(R.drawable.card_bg));
 
                 ll.addView(newCard);
 

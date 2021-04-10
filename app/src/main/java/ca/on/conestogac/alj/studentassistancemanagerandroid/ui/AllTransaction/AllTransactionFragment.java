@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.AllTransaction;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -125,18 +126,27 @@ public class AllTransactionFragment extends Fragment {
                     String addAmount = Double.toString(t.getAmount());
                     tDate.setText(addDate);
                     tAmount.setText("$" + addAmount);
+
+                    tDate.setTypeface(null, Typeface.BOLD);
+                    tDate.setTextSize(getResources().getDimension(R.dimen.card_title));
+                    tAmount.setTextSize(getResources().getDimension(R.dimen.card_text));
+
                     //tPayment.setText(((SAMApplication) getApplication()).getPaymentType(t.getPaymentType()));
                     tLayout.setOrientation(LinearLayout.VERTICAL);
                     tLayout.addView(tDate);
                     tLayout.addView(tAmount);
                     //tLayout.addView(tPayment);
 
-
+                    newCard.setBackground(getResources().getDrawable(R.drawable.card_bg));
                     newCard.addView(tLayout);
                     newCard.setCardElevation(10);
                     newCard.setPadding(10, 10, 10, 10);
                     newCard.setRadius(15);
                     newCard.setContentPadding(10, 10, 10, 10);
+
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    lp.setMargins(0,0,0, (int) getResources().getDimension(R.dimen.padding));
+                    newCard.setLayoutParams(lp);
 
                     ll.addView(newCard);
 
