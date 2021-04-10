@@ -3,6 +3,7 @@ package ca.on.conestogac.alj.studentassistancemanagerandroid;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -141,7 +142,9 @@ public class RecordDetailsActivity extends AppCompatActivity {
             newLL.addView(txtGoalAmount);
             newLL.addView(txtTotalAmount);
             newLL.addView(txtDiff);
-
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(0,0,0, (int) getResources().getDimension(R.dimen.padding));
+            newLL.setLayoutParams(lp);
             newCard.addView(newLL);
 
             ll.addView(newCard);

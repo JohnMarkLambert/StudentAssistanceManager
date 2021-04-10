@@ -1,10 +1,10 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.AllAssignment;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -72,6 +72,10 @@ public class AllAssignmentFragment extends Fragment {
             LinearLayout aLayout = new LinearLayout(getActivity().getApplication());
             aLayout.setOrientation(LinearLayout.VERTICAL);
 
+            aName.setTypeface(null, Typeface.BOLD);
+            aName.setTextSize(getResources().getDimension(R.dimen.card_title));
+            aDue.setTextSize(getResources().getDimension(R.dimen.card_text));
+
             aName.setText(assignment.getName());
             Date date = new Date(assignment.getDueDate());
             aDue.setText(df.format(date));
@@ -83,6 +87,11 @@ public class AllAssignmentFragment extends Fragment {
             newCard.setPadding(10,10,10,10);
             newCard.setRadius(15);
             newCard.setContentPadding(10, 10, 10, 10);
+            newCard.setBackground(getResources().getDrawable(R.drawable.card_bg));
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(0,0,0, (int) getResources().getDimension(R.dimen.padding));
+            newCard.setLayoutParams(lp);
 
             ll.addView(newCard);
 

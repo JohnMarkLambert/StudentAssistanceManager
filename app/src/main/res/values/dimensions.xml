@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding">8dp</dimen>
+    <dimen name="card_title">6.5dp</dimen>
+    <dimen name="card_text">6dp</dimen>
+</resources>

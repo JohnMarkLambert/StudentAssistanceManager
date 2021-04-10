@@ -111,11 +111,11 @@
             android:id="@+id/btnSaveTran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4sp"
-            android:layout_marginTop="16sp"
-            android:layout_marginRight="4sp"
-            android:paddingTop="4sp"
-            android:paddingBottom="4sp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="4dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:text="@string/Save_Button" />
 
     </LinearLayout>

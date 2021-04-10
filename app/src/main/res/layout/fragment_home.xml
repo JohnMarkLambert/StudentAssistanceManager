@@ -11,7 +11,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -134,14 +140,16 @@
                         android:layout_width="51dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Date" />
+                        android:text="Date:"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtMMTDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
-                        android:textAlignment="textEnd" />
+                        android:textAlignment="textEnd"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -154,14 +162,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Amount" />
+                        android:text="Amount:"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtMMAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
-                        android:textAlignment="textEnd" />
+                        android:textAlignment="textEnd"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -174,14 +184,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Payment" />
+                        android:text="Payment:"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtMMPayment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
-                        android:textAlignment="textEnd" />
+                        android:textAlignment="textEnd"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -194,14 +206,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Notes" />
+                        android:text="Notes:"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtMMNotes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
-                        android:textAlignment="textEnd" />
+                        android:textAlignment="textEnd"
+                        android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
 

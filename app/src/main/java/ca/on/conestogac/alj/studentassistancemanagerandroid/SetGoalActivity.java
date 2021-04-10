@@ -51,7 +51,6 @@ public class SetGoalActivity extends AppCompatActivity {
         }
 
         btnSetGoal = findViewById(R.id.btnSetGoal);
-        btnCancelSet = findViewById(R.id.btnCancelSet);
         btnDeleteGoal = findViewById(R.id.btnDeleteGoal);
         txtGoalName = findViewById(R.id.txtGoalName);
         txtGoalAmount = findViewById(R.id.txtGoalAmount);
@@ -80,12 +79,6 @@ public class SetGoalActivity extends AppCompatActivity {
             }
         });
 
-        btnCancelSet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
             @Override
