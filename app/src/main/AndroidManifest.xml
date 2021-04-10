@@ -33,23 +33,29 @@
         </activity>
         <activity
             android:name=".AssignmentDetailsActivity"
-            android:label="Assignment Details" />
+            android:label="Assignment Details"
+            android:theme="@style/Theme.StudentAssistanceManagerAndroid"/>
         <activity
             android:name=".CreateEventActivity"
             android:label="@string/Create_Event_Button"
             android:theme="@style/Theme.StudentAssistanceManagerAndroid"/>
         <activity
             android:name=".AddTransactionActivity"
-            android:label="Add/Edit Transaction" />
+            android:label="Add/Edit Transaction"
+            android:theme="@style/Theme.StudentAssistanceManagerAndroid"/>
+
         <activity
             android:name=".RecordDetailsActivity"
-            android:label="Monthly Report" />
+            android:label="Monthly Report"
+            android:theme="@style/Theme.StudentAssistanceManagerAndroid"/>
         <activity
             android:name=".TransactionDetailActivity"
-            android:label="Transaction Details" />
+            android:label="Transaction Details"
+            android:theme="@style/Theme.StudentAssistanceManagerAndroid"/>
         <activity
             android:name=".SetGoalActivity"
-            android:label="Add Budget Goal" />
+            android:label="Add Budget Goal"
+            android:theme="@style/Theme.StudentAssistanceManagerAndroid"/>
     </application>
 
 </manifest>
