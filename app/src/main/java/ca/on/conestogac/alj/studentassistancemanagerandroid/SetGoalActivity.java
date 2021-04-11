@@ -4,9 +4,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lecho.lib.hellocharts.model.Line;
 
 public class SetGoalActivity extends AppCompatActivity {
 
@@ -42,6 +46,7 @@ public class SetGoalActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_close);
         }
 
         btnSetGoal = findViewById(R.id.btnSetGoal);
@@ -61,7 +66,8 @@ public class SetGoalActivity extends AppCompatActivity {
             btnDeleteGoal.setVisibility(View.VISIBLE);
         }
         else {
-            btnDeleteGoal.setVisibility(View.INVISIBLE);
+            btnDeleteGoal.setVisibility(View.GONE);
+            btnSetGoal.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
         }
 
         btnSetGoal.setOnClickListener(new View.OnClickListener() {
