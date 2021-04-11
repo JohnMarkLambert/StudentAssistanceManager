@@ -56,13 +56,19 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
         String date = df.format(transaction.getDate());
         txtTranDDate.setText(date);
-        txtTranDAmount.setText(String.valueOf(transaction.getAmount()));
+        txtTranDAmount.setText(String.valueOf(String.format("%.2f", transaction.getAmount())));
 
         category = ((SAMApplication) getApplication()).getCategory(transaction.getCategory());
         txtTranDGoal.setText(category.getName());
 
-        //Just have these until payment table issues are resolved, and category is implemented into transaction creation
-        txtTranDPayment.setText("FILLER");
+        String paymentType = String.valueOf(transaction.getCategory());
+        if (paymentType.equals("1")){
+            txtTranDPayment.setText("Debit");
+        }
+        else{
+            txtTranDPayment.setText("Credit");
+        }
+
 
         if (transaction.getNotes().length() != 0){
             txtTranDNotes.setText(transaction.getNotes());

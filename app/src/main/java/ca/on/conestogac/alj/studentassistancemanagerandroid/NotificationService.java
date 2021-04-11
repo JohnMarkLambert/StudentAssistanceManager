@@ -156,13 +156,6 @@ public class NotificationService extends Service {
                     transactionDate = df.format(t.getDate());
                     splitTransactionDate = transactionDate.split("/");
 
-//                    Toast.makeText(this,
-//                            splitCurrentDate[1] + " " +
-//                            splitTransactionDate[1] + " " +
-//                            splitCurrentDate[2].substring(0, 1) + " " +
-//                            splitTransactionDate[2].substring(0, 1),
-//                            Toast.LENGTH_LONG).show();
-
                     //make sure that the transaction has the same month and year as the previous month
                     if (splitCurrentDate[1].equals(splitTransactionDate[1]) && splitCurrentDate[2].substring(0, 2).equals(splitTransactionDate[2].substring(0, 2))) {
                         //add up transactions for each category/goal
