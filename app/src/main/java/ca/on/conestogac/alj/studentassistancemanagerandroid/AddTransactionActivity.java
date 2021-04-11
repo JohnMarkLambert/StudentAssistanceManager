@@ -77,7 +77,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         inlTransactionCategory = findViewById(R.id.inlTransactionCategory);
 
         isEditing = false;
-        dfDate = new SimpleDateFormat("yyyy/MM/dd");
+        dfDate = new SimpleDateFormat("dd/MM/yyyy");
 
         //Temp
         String[] paymentArray = {"Debit", "Credit"};
@@ -178,9 +178,9 @@ public class AddTransactionActivity extends AppCompatActivity {
                 int year, month, day;
                 if (txtTransactionDate.getText().length() != 0) {
                     String[] dateArray = String.valueOf(txtTransactionDate.getText()).split("/");
-                    year = Integer.parseInt(dateArray[0]);
+                    day = Integer.parseInt(dateArray[0]);
                     month = Integer.parseInt(dateArray[1]) - 1;
-                    day = Integer.parseInt(dateArray[2]);
+                    year = Integer.parseInt(dateArray[2]);
                 } else {
                     year = calendar.get(Calendar.YEAR);
                     month = calendar.get(Calendar.MONTH);
@@ -201,7 +201,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                transactionDate = year + "/" + month + "/" + day;
+                transactionDate = day + "/" + month + "/" + year;
                 Log.i("DATE1", transactionDate);
                 txtTransactionDate.setText(transactionDate);
             }

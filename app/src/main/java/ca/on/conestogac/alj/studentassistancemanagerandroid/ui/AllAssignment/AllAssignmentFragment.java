@@ -43,7 +43,7 @@ public class AllAssignmentFragment extends Fragment {
     private List<Assignment> a;
     private Spinner spinner;
     private LinearLayout ll;
-
+    private View view;
     private DateFormat df = new SimpleDateFormat("dd/MM/yy hh:mm aa", Locale.getDefault());
 
     public static AllAssignmentFragment newInstance() {
@@ -53,7 +53,7 @@ public class AllAssignmentFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.all_assignment_fragment, container, false);
+       view = inflater.inflate(R.layout.all_assignment_fragment, container, false);
 
         ll = view.findViewById(R.id.AALayout);
 
@@ -146,12 +146,20 @@ public class AllAssignmentFragment extends Fragment {
                 aLayout.addView(aName);
                 aLayout.addView(aDue);
 
+                aName.setTypeface(null,Typeface.BOLD);
+                aName.setTextSize(getResources().getDimension(R.dimen.card_title));
+                aDue.setTextSize(getResources().getDimension(R.dimen.card_text));
+
+                newCard.setBackground(getResources().getDrawable(R.drawable.card_bg));
                 newCard.addView(aLayout);
                 newCard.setCardElevation(10);
                 newCard.setPadding(10, 10, 10, 10);
                 newCard.setRadius(15);
                 newCard.setContentPadding(10, 10, 10, 10);
 
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(0,0,0, (int) getResources().getDimension(R.dimen.padding));
+                newCard.setLayoutParams(lp);
 
                 ll.addView(newCard);
 
@@ -167,4 +175,15 @@ public class AllAssignmentFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            a = ((SAMApplication) getActivity().getApplication()).getAllAssignments();
+        } catch (Exception ex) {
+
+        }
+        populateSpinner();
+        populateAssignments("All");
+    }
 }

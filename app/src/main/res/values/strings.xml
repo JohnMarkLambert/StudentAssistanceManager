@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Student Assistance Manager</string>
     <!-- Main Menu Labels -->
-    <string name="MM_Event_Title">Next Event:</string>
-    <string name="MM_Event_Name">Event Name: </string>
+    <string name="MM_Event_Title">Next Assignment:</string>
+    <string name="MM_Event_Name">Assignment Name: </string>
     <string name="MM_Event_DueDate">Due Date: </string>
     <string name="MM_Event_Duration">Duration: </string>
     <string name="MM_Event_Desc">Description: </string>
@@ -21,12 +21,12 @@
 
     <!-- Calendar Labels -->
     <string name="Title_Calendar">Calendar</string>
-    <string name="Create_Event_Button">Create Event</string>
-    <string name="Show_All_Events">Show All Events</string>
+    <string name="Create_Event_Button">Create Assignment</string>
+    <string name="Show_All_Events">Show All Assignment</string>
     <string name="Cancel_Event_Button">Cancel</string>
-    <string name="Edit_Event">Edit Event</string>
+    <string name="Edit_Event">Edit Assignment</string>
 
-    <string name="Event_Name">Event Name: </string>
+    <string name="Event_Name">Assignment Name: </string>
     <string name="Event_Due_Date">Due Date: </string>
     <string name="Event_Duration">Duration: </string>
     <string name="Event_Description">Description</string>
@@ -38,7 +38,7 @@
     <string name="Button_Edit">Edit</string>
     <string name="Button_Cancel">Cancel</string>
 
-    <string name="Title_All_Events">All Events</string>
+    <string name="Title_All_Events">All Assignments</string>
 
     <!-- Budget Labels -->
     <string name="BH_Last_Transaction">Last Transaction</string>

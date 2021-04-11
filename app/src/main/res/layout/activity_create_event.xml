@@ -102,10 +102,14 @@
         android:id="@+id/btnCreate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:paddingTop="4sp"
         android:paddingBottom="4sp"
         android:text="@string/Create_Event_Button"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-        tools:layout_editor_absoluteX="12dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

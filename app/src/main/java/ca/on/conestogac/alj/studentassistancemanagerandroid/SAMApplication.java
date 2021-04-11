@@ -86,7 +86,7 @@ public class SAMApplication extends Application {
     }
 
     public void updateAssignment(int id, String name, long dueDate, double duration,
-                                 int period, int complete, String desc)
+                                 int period, String desc)
     {
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -95,7 +95,6 @@ public class SAMApplication extends Application {
         cv.put("DueDate", dueDate);
         cv.put("Duration", duration);
         cv.put("Period", period);
-        cv.put("Complete", complete);
         cv.put("Description", desc);
 
         db.update("tbl_assignments", cv, "AssignmentId = ?", new String[]{String.valueOf(id)});

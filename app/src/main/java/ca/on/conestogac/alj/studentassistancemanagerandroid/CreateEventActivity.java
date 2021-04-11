@@ -77,7 +77,7 @@ public class CreateEventActivity extends AppCompatActivity {
         isEditing = false;
 
         dfTime = new SimpleDateFormat("hh:mm aa");
-        df = new SimpleDateFormat("yyyy/MM/dd hh:mm aa");
+        df = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
 
         aId = getIntent().getExtras().getInt("aId");
         if (aId != 0) {
@@ -106,9 +106,9 @@ public class CreateEventActivity extends AppCompatActivity {
                 int year, month, day;
                 if (txtDateDue.getText().length() != 0) {
                     String[] dateArray = String.valueOf(txtDateDue.getText()).split("/");
-                    year = Integer.parseInt(dateArray[0]);
+                    day = Integer.parseInt(dateArray[0]);
                     month = Integer.parseInt(dateArray[1]) -1;
-                    day = Integer.parseInt(dateArray[2]);
+                    year = Integer.parseInt(dateArray[2]);
                 } else {
                     year = calendar.get(Calendar.YEAR);
                     month = calendar.get(Calendar.MONTH);
@@ -128,7 +128,7 @@ public class CreateEventActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                dueDate = year + "/" + month + "/" + day;
+                dueDate = day + "/" + month + "/" + year;
                 Log.i("DATE1", dueDate);
                 txtDateDue.setText(dueDate);
             }
@@ -199,7 +199,7 @@ public class CreateEventActivity extends AppCompatActivity {
                         "\nDescription: " + description);
 
         if (isEditing) {
-//            ((SAMApplication) getApplication()).updateAssignment(aId, name, epochTime, duration, 2,  description);
+            ((SAMApplication) getApplication()).updateAssignment(aId, name, epochTime, duration, 2, description);
             Toast.makeText(this, "Event updated", Toast.LENGTH_SHORT).show();
         } else {
             ((SAMApplication) getApplication()).addAssignment(name, epochTime, duration, 2,  description);
@@ -291,7 +291,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
         txtEventName.setText(assignment.getName());
 
-        SimpleDateFormat dfDate = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dfDate = new SimpleDateFormat("dd/MM/yyyy");
 
         txtDateDue.setText(dfDate.format(assignment.getDueDate()));
         dueDate = String.valueOf(txtDateDue.getText());
