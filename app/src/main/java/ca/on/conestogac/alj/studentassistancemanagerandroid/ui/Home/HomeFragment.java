@@ -99,8 +99,8 @@ public class HomeFragment extends Fragment {
         transaction = ((SAMApplication) getActivity().getApplication()).getLastTransaction();
         Long date = transaction.getDate();
         if (date != 0 ) {
-            txtMMTDate.setText(df.format(transaction.getDate()));
-            txtMMPayment.setText(df2.format(((SAMApplication) getActivity().getApplication()).getPaymentType(transaction.getPaymentType())));
+            txtMMTDate.setText(df2.format(transaction.getDate()));
+            txtMMPayment.setText(((SAMApplication) getActivity().getApplication()).getPaymentType(transaction.getPaymentType()));
         }
         txtMMAmount.setText(currency + String.format("%.2f", transaction.getAmount()));
         txtMMNotes.setText(transaction.getNotes());

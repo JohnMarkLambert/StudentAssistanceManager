@@ -1,6 +1,7 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.AllTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,6 +42,9 @@ public class AllTransactionFragment extends Fragment {
     private LinearLayout ll;
     private View view;
 
+    private SharedPreferences sp;
+    private String currency;
+
     public static AllTransactionFragment newInstance() {
         return new AllTransactionFragment();
     }
@@ -48,6 +53,10 @@ public class AllTransactionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.all_transaction_fragment, container, false);
+
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.root_preferences, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        currency = sp.getString("currencyType", "$");
 
         try {
             transactions = ((SAMApplication) getActivity().getApplication()).getAllTransactions();
@@ -123,9 +132,9 @@ public class AllTransactionFragment extends Fragment {
                     LinearLayout tLayout = new LinearLayout(getActivity().getApplicationContext());
 
                     String addDate = new SimpleDateFormat("dd/MM/yy").format(new Date(t.getDate()));
-                    String addAmount = Double.toString(t.getAmount());
+                    String addAmount = String.format("%.2f", t.getAmount());
                     tDate.setText(addDate);
-                    tAmount.setText("$" + addAmount);
+                    tAmount.setText(currency + addAmount);
 
                     tDate.setTypeface(null, Typeface.BOLD);
                     tDate.setTextSize(getResources().getDimension(R.dimen.card_title));
