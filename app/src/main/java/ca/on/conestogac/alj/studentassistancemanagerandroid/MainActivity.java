@@ -3,10 +3,7 @@ package ca.on.conestogac.alj.studentassistancemanagerandroid;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -40,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_calendar,R.id.nav_assignments, R.id.nav_budget,R.id.nav_transactions, R.id.nav_reports, R.id.nav_goals, R.id.nav_settings)
+                R.id.nav_home, R.id.nav_calendar, R.id.nav_assignments, R.id.nav_budget, R.id.nav_transactions, R.id.nav_reports, R.id.nav_goals, R.id.nav_settings)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -67,17 +64,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         List<List<String>> categoryList = ((SAMApplication) getApplication()).getPaymentTypes();
-        if (categoryList ==  null | categoryList.isEmpty()) {
+        if (categoryList == null | categoryList.isEmpty()) {
             ((SAMApplication) getApplication()).addPaymentType("Debit");
             ((SAMApplication) getApplication()).addPaymentType("Credit");
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -85,39 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        boolean result = true;
-        Intent intent;
-
-        switch (item.getItemId()) {
-            case R.id.menuHome:
-                intent = new Intent(getApplicationContext(), MainActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-            case R.id.menuSettings:
-                intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                //intent.putExtra("darkTheme", darkTheme);
-                startActivity(intent);
-                break;
-
-//            case R.id.menuSettings:
-//                intent = new Intent(getApplicationContext(), SettingsActivity.class);
-//                //intent.putExtra("darkTheme", darkTheme);
-//                startActivity(intent);
-//                break;
-            default:
-                result = super.onOptionsItemSelected(item);
-                break;
-        }
-        return result;
+    protected void onStop() {
+        startService(new Intent(getApplicationContext(), NotificationService.class));
+        super.onStop();
     }
-
-            @Override
-            protected void onStop () {
-                startService(new Intent(getApplicationContext(), NotificationService.class));
-                super.onStop();
-            }
-        }
+}
 

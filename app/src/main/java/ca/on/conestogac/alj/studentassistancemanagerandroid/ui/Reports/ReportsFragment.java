@@ -1,23 +1,22 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.Reports;
 
-import androidx.cardview.widget.CardView;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.lang.reflect.Type;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +31,8 @@ public class ReportsFragment extends Fragment {
     private List<Record> records;
     private LinearLayout ll;
 
+    private SharedPreferences sp;
+    private String currency;
 
     public static ReportsFragment newInstance() {
         return new ReportsFragment();
@@ -41,6 +42,10 @@ public class ReportsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reports, container, false);
+
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.root_preferences, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        currency = sp.getString("currencyType", "$");
 
         try {
             records = ((SAMApplication) getActivity().getApplication()).getAllRecords();
@@ -75,7 +80,7 @@ public class ReportsFragment extends Fragment {
                 double total = 0.0;
                 double diff = 0.0;
                 for (Record record: records) {
-                    if (record.getDate() == date) {
+                    if (record.getDate().equals(date)) {
                         goal += record.getGoalAmount();
                         total += record.getAmountSpent();
                         diff += record.getDifference();
@@ -100,11 +105,11 @@ public class ReportsFragment extends Fragment {
 
                 txtDate.setText(date);
                 goalTitle.setText("Goal: ");
-                txtGoal.setText("$" + String.format("%.2f", goal));
+                txtGoal.setText(currency + String.format("%.2f", goal));
                 totalTitle.setText("Total: ");
-                txtTotal.setText("$" + String.format("%.2f", total));
+                txtTotal.setText(currency + String.format("%.2f", total));
                 diffTitle.setText("Difference: ");
-                txtDiff.setText("$" + String.format("%.2f", diff));
+                txtDiff.setText(currency + String.format("%.2f", diff));
                 if (diff > 0) {
                     txtDiff.setTextColor(getResources().getColor(R.color.red, null));
                 } else if (diff <= 0) {
