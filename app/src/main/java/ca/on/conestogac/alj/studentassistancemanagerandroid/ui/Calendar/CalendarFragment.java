@@ -86,6 +86,11 @@ public class CalendarFragment extends Fragment {
             txtCDuration.setText(displayAssignment.getDuration() + " Hours");
             txtCDescription.setText(displayAssignment.getDesc());
             calendar.setDate(displayAssignment.getDueDate());
+        } else {
+            txtCEventName.setText("No Assignments");
+            txtCDueDate.setText("");
+            txtCDuration.setText("");
+            txtCDescription.setText("");
         }
 
         btnCreateEvent.setOnClickListener(new View.OnClickListener() {

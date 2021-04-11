@@ -1,6 +1,5 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.Home;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,13 +41,15 @@ public class HomeFragment extends Fragment {
     private String currency;
     private boolean darkTheme;
 
-    private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
+    private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm aa", Locale.getDefault());
+    private DateFormat df2 = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
     private SharedPreferences sp;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        sp = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.root_preferences, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         currency = sp.getString("currencyType", "$");
 
 
@@ -63,6 +65,26 @@ public class HomeFragment extends Fragment {
         txtMMPayment = view.findViewById(R.id.txtMMPayment);
         txtMMNotes = view.findViewById(R.id.txtMMNotes);
 
+        populate();
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        // TODO: Use the ViewModel
+
+    }
+
+    @Override
+    public void onResume() {
+        populate();
+        super.onResume();
+    }
+
+    private void populate(){
         assignment = ((SAMApplication) getActivity().getApplication()).getNextAssignment();
         txtMMEventName.setText(assignment.getName());
         if (assignment.getName() != "No Assignments Found") {
@@ -77,21 +99,10 @@ public class HomeFragment extends Fragment {
         transaction = ((SAMApplication) getActivity().getApplication()).getLastTransaction();
         Long date = transaction.getDate();
         if (date != 0 ) {
-            txtMMTDate.setText(df.format(transaction.getDate()));
+            txtMMTDate.setText(df2.format(transaction.getDate()));
             txtMMPayment.setText(((SAMApplication) getActivity().getApplication()).getPaymentType(transaction.getPaymentType()));
         }
-        txtMMAmount.setText( currency + String.valueOf(transaction.getAmount()));
+        txtMMAmount.setText(currency + String.format("%.2f", transaction.getAmount()));
         txtMMNotes.setText(transaction.getNotes());
-
-        return view;
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        // TODO: Use the ViewModel
-
-    }
-
 }

@@ -1,6 +1,5 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.Budget;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -15,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -56,7 +56,8 @@ public class BudgetFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_budget, container, false);
 
-        sp = this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.root_preferences, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         currency = sp.getString("currencyType", "$");
 
 //        if (sp.getBoolean("themeType", false)) {
@@ -68,7 +69,7 @@ public class BudgetFragment extends Fragment {
 //        }
 
         btnAddTransaction = view.findViewById(R.id.btnAddTransaction);
-        pcvReport = (PieChartView) view.findViewById(R.id.BHChart);
+        pcvReport = view.findViewById(R.id.BHChart);
 
         txtBHDate = view.findViewById(R.id.txtMMTDate);
         txtBHAmount = view.findViewById(R.id.txtMMAmount);
@@ -81,7 +82,7 @@ public class BudgetFragment extends Fragment {
             txtBHDate.setText(df.format(transaction.getDate()));
             txtBHPayment.setText(((SAMApplication) getActivity().getApplication()).getPaymentType(transaction.getPaymentType()));
         }
-        txtBHAmount.setText(currency + String.valueOf(transaction.getAmount()));
+        txtBHAmount.setText(currency + String.format("%.2f", transaction.getAmount()));
         txtBHNotes.setText(transaction.getNotes());
 
         btnAddTransaction.setOnClickListener(new View.OnClickListener() {

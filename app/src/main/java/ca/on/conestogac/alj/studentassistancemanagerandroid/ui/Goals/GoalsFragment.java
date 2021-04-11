@@ -1,22 +1,22 @@
 package ca.on.conestogac.alj.studentassistancemanagerandroid.ui.Goals;
 
-import androidx.cardview.widget.CardView;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,9 @@ public class GoalsFragment extends Fragment {
     private Button btnNewGoal;
     private LinearLayout ll;
 
+    private SharedPreferences sp;
+    private String currency;
+
     public static GoalsFragment newInstance() {
         return new GoalsFragment();
     }
@@ -40,6 +43,10 @@ public class GoalsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.goals_fragment, container, false);
+
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.root_preferences, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        currency = sp.getString("currencyType", "$");
 
         //Add new goal button
         btnNewGoal = view.findViewById(R.id.btnNewGoal);
@@ -55,7 +62,7 @@ public class GoalsFragment extends Fragment {
             }
         });
 
-        ll = (LinearLayout) view.findViewById(R.id.llShowGoals);
+        ll = view.findViewById(R.id.llShowGoals);
 
         return view;
     }
@@ -84,9 +91,9 @@ public class GoalsFragment extends Fragment {
             LinearLayout gLayout = new LinearLayout(getActivity().getApplicationContext());
 
             String addName = c.getName();
-            String addAmount = Double.toString(c.getGoal());
+            String addAmount = String.format("%.2f", c.getGoal());
             cName.setText(addName);
-            cAmount.setText("$" + addAmount);
+            cAmount.setText(currency + addAmount);
             gLayout.setOrientation(LinearLayout.VERTICAL);
             gLayout.addView(cName);
             gLayout.addView(cAmount);
