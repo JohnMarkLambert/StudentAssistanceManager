@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,8 +32,8 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
     private TextView txtDueDate;
     private TextView txtDuration;
     private TextView txtDesc;
-    private Button btnEdit;
-    private Button btnCancel;
+    private Button btnEditADetails;
+    private Button btnCancelAssignment;
     private Button btnCompleteAssignment;
     private Intent intent;
 
@@ -50,8 +49,10 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        try {
+            aId = getIntent().getExtras().getInt("aId");
+        } catch (Exception e) {}
 
-        aId = getIntent().getExtras().getInt("aId");
 
         assignment = ((SAMApplication) getApplication()).getAssignment(aId);
 
@@ -60,8 +61,8 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
         txtDueDate = findViewById(R.id.txtDueDate);
         txtDuration = findViewById(R.id.txtDuration);
         txtDesc = findViewById(R.id.txtDesc);
-        btnEdit = findViewById(R.id.btnEditADetails);
-        btnCancel = findViewById(R.id.btnCancelEvent);
+        btnEditADetails = findViewById(R.id.btnEditADetails);
+        btnCancelAssignment = findViewById(R.id.btnCancelAssignment);
         btnCompleteAssignment = findViewById(R.id.btnCompleteAssignment);
 
         txtAssignName.setText(assignment.getName());
@@ -71,7 +72,7 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
         txtDesc.setText(assignment.getDesc());
         calDetails.setDate(assignment.getDueDate());
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
+        btnEditADetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CreateEventActivity.class);
@@ -98,7 +99,7 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
         dialogBuilder.setMessage("Cancel this event?").setPositiveButton("Yes", dialogListener)
                 .setNegativeButton("No", dialogListener);
 
-        btnCancel.setOnClickListener(new View.OnClickListener(){
+        btnCancelAssignment.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 dialogBuilder.show();

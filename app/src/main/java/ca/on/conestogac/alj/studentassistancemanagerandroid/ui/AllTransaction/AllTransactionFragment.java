@@ -38,7 +38,7 @@ public class AllTransactionFragment extends Fragment {
     private Spinner dateSpinner;
     private String sortBy;
     private LinearLayout ll;
-
+    private View view;
 
     public static AllTransactionFragment newInstance() {
         return new AllTransactionFragment();
@@ -47,7 +47,7 @@ public class AllTransactionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.all_transaction_fragment, container, false);
+        view =  inflater.inflate(R.layout.all_transaction_fragment, container, false);
 
         try {
             transactions = ((SAMApplication) getActivity().getApplication()).getAllTransactions();
@@ -162,5 +162,21 @@ public class AllTransactionFragment extends Fragment {
             }
         }
 
+
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            transactions = ((SAMApplication) getActivity().getApplication()).getAllTransactions();
+        } catch(Exception ex){
+
+        }
+
+        btnNewTransaction = view.findViewById(R.id.btnATNewTrans);
+        dateSpinner = (Spinner) view.findViewById(R.id.assignDateSpinner);
+        ll = (LinearLayout) view.findViewById(R.id.llShowTransactions);
+        populateSpinner();
     }
+}

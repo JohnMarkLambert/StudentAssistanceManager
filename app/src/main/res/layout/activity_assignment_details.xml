@@ -27,14 +27,20 @@
                 android:id="@+id/btnEditADetails"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginRight="8dp"
                 android:layout_weight="1"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:text="@string/Button_Edit" />
 
             <Button
-                android:id="@+id/btnCancelEvent"
+                android:id="@+id/btnCancelAssignment"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
                 android:layout_weight="1"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:text="@string/Button_Cancel" />
         </LinearLayout>
 
@@ -42,7 +48,10 @@
             android:id="@+id/btnCompleteAssignment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:text="Mark as Complete" />
 
     </LinearLayout>
