@@ -2,6 +2,7 @@ package ca.on.conestogac.alj.studentassistancemanagerandroid;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -46,7 +48,8 @@ public class AddTransactionActivity extends AppCompatActivity {
     private TextView txtGoalHelper;
     private TextView txtPaymentHelper;
     private TextInputLayout inlTransactionDate, inlTransactionAmount, inlTransactionCategory;
-
+    private SharedPreferences sharedPref;
+    private String currencyType;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +63,15 @@ public class AddTransactionActivity extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_close);
         }
 
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        currencyType = sharedPref.getString("currencyType", "$");
 
         txtTransactionDate = findViewById(R.id.txtTransactionDate);
         txtAmount = findViewById(R.id.txtAmount);
         spnPayment = findViewById(R.id.spnPayment);
         spnGoals = findViewById(R.id.spnGoals);
         txtNotes = findViewById(R.id.txtNotes);
+
 
         txtGoalHelper = findViewById(R.id.txtGoalHelper);
         txtPaymentHelper = findViewById(R.id.txtPaymentHelper);
@@ -75,6 +81,8 @@ public class AddTransactionActivity extends AppCompatActivity {
         inlTransactionDate = findViewById(R.id.inlTransactionDate);
         inlTransactionAmount = findViewById(R.id.inlTransactionAmount);
         inlTransactionCategory = findViewById(R.id.inlTransactionCategory);
+
+        inlTransactionAmount.setHint("Amount (" + currencyType + ")*");
 
         isEditing = false;
         dfDate = new SimpleDateFormat("dd/MM/yyyy");
