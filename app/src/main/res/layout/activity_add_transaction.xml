@@ -42,7 +42,6 @@
                 android:id="@+id/txtAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/Transaction_Amount_Hint"
                 android:inputType="number|numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
