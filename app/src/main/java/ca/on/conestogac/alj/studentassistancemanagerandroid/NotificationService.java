@@ -25,6 +25,7 @@ public class NotificationService extends Service {
     public static final int ID = 1;
     private DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm", Locale.getDefault());
     private DateFormat recordDate = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
+    private DateFormat assignmentDate = new SimpleDateFormat("dd/MM/yy hh:mm aa", Locale.getDefault());
     private boolean firstDateChecked = false;
     private String recordString;
     private String assignmentPeriod;
@@ -73,7 +74,7 @@ public class NotificationService extends Service {
             for (Assignment a : assignments) {
                 if ((a.getDueDate() - System.currentTimeMillis()) <= assignmentPeriodMilli/*TimeUnit.DAYS.toMillis(a.getPeriod())*/) {
                     if(!a.isNotified()) {
-                        String dueDate = df.format(a.getDueDate());
+                        String dueDate = assignmentDate.format(a.getDueDate());
                         String [] dateTime = dueDate.split(" ");
 
                         final NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
