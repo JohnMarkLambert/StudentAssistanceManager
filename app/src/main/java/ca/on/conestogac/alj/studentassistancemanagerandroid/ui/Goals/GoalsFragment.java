@@ -93,7 +93,7 @@ public class GoalsFragment extends Fragment {
             String addName = c.getName();
             String addAmount = String.format("%.2f", c.getGoal());
             cName.setText(addName);
-            cAmount.setText(currency + addAmount);
+            cAmount.setText(currency + " " + addAmount);
             gLayout.setOrientation(LinearLayout.VERTICAL);
             gLayout.addView(cName);
             gLayout.addView(cAmount);

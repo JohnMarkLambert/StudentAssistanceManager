@@ -82,7 +82,7 @@ public class BudgetFragment extends Fragment {
             txtBHDate.setText(df.format(transaction.getDate()));
             txtBHPayment.setText(((SAMApplication) getActivity().getApplication()).getPaymentType(transaction.getPaymentType()));
         }
-        txtBHAmount.setText(currency + String.format("%.2f", transaction.getAmount()));
+        txtBHAmount.setText(currency + " " + String.format("%.2f", transaction.getAmount()));
         txtBHNotes.setText(transaction.getNotes());
 
         btnAddTransaction.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class BudgetFragment extends Fragment {
 
             txtBHDate.setText(dfDate.format(latestTransaction.getDate()));
 
-            txtBHAmount.setText(currency + String.valueOf(latestTransaction.getAmount()));
+            txtBHAmount.setText(currency + " " + String.format("%.2f", latestTransaction.getAmount()));
             txtBHPayment.setText(((SAMApplication) getActivity().getApplication()).getPaymentType(latestTransaction.getPaymentType()));
             txtBHNotes.setText(latestTransaction.getNotes());
 
@@ -143,7 +143,7 @@ public class BudgetFragment extends Fragment {
             Random random = new Random();
             int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
             pieData.add(new SliceValue((float) value, color).setLabel(goal.getName()
-                    + ": " + currency + value));
+                    + ": " + currency + " " + value));
 
         }
         PieChartData pieChartData = new PieChartData(pieData);

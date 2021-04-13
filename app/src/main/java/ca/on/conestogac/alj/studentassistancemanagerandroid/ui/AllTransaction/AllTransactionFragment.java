@@ -134,7 +134,7 @@ public class AllTransactionFragment extends Fragment {
                     String addDate = new SimpleDateFormat("dd/MM/yy").format(new Date(t.getDate()));
                     String addAmount = String.format("%.2f", t.getAmount());
                     tDate.setText(addDate);
-                    tAmount.setText(currency + addAmount);
+                    tAmount.setText(currency + " " + addAmount);
 
                     tDate.setTypeface(null, Typeface.BOLD);
                     tDate.setTextSize(getResources().getDimension(R.dimen.card_title));

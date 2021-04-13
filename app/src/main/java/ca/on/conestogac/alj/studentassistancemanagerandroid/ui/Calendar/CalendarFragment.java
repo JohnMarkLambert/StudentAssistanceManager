@@ -83,7 +83,7 @@ public class CalendarFragment extends Fragment {
             txtCEventName.setText(displayAssignment.getName());
             dueDate = new Date((long) displayAssignment.getDueDate());
             txtCDueDate.setText(df.format(dueDate));
-            txtCDuration.setText(displayAssignment.getDuration() + " Hours");
+            txtCDuration.setText(displayAssignment.getDuration() + " Hour(s)");
             txtCDescription.setText(displayAssignment.getDesc());
             calendar.setDate(displayAssignment.getDueDate());
         } else {

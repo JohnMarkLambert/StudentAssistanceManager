@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
         txtMMEventName.setText(assignment.getName());
         if (assignment.getName() != "No Assignments Found") {
             txtMMDueDate.setText(df.format(assignment.getDueDate()));
-            txtMMDuration.setText(assignment.getDuration() + " Hours");
+            txtMMDuration.setText(assignment.getDuration() + " Hour(s)");
         } else {
             txtMMDueDate.setText("");
             txtMMDuration.setText("");
@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
             txtMMTDate.setText(df2.format(transaction.getDate()));
             txtMMPayment.setText(((SAMApplication) getActivity().getApplication()).getPaymentType(transaction.getPaymentType()));
         }
-        txtMMAmount.setText(currency + String.format("%.2f", transaction.getAmount()));
+        txtMMAmount.setText(currency + " " + String.format("%.2f", transaction.getAmount()));
         txtMMNotes.setText(transaction.getNotes());
     }
 }
