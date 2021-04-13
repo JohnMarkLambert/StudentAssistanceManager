@@ -105,11 +105,11 @@ public class ReportsFragment extends Fragment {
 
                 txtDate.setText(date);
                 goalTitle.setText("Goal: ");
-                txtGoal.setText(currency + String.format("%.2f", goal));
+                txtGoal.setText(currency + " " + String.format("%.2f", goal));
                 totalTitle.setText("Total: ");
-                txtTotal.setText(currency + String.format("%.2f", total));
+                txtTotal.setText(currency + " " + String.format("%.2f", total));
                 diffTitle.setText("Difference: ");
-                txtDiff.setText(currency + String.format("%.2f", diff));
+                txtDiff.setText(currency + " " + String.format("%.2f", diff));
                 if (diff > 0) {
                     txtDiff.setTextColor(getResources().getColor(R.color.red, null));
                 } else if (diff <= 0) {

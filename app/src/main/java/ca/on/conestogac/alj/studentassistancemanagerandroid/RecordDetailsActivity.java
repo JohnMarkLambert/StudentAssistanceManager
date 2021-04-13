@@ -3,7 +3,6 @@ package ca.on.conestogac.alj.studentassistancemanagerandroid;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -129,9 +128,9 @@ public class RecordDetailsActivity extends AppCompatActivity {
             } else {
                 num++;
             }
-            txtGoalAmount.setText("Goal Target: " + currency + String.format("%.2f", record.getGoalAmount()));
-            txtTotalAmount.setText("Total Spent: " + currency + String.format("%.2f", record.getAmountSpent()));
-            txtDiff.setText("Difference: " + currency + String.format("%.2f", record.getDifference()));
+            txtGoalAmount.setText("Goal Target: " + currency + " " + String.format("%.2f", record.getGoalAmount()));
+            txtTotalAmount.setText("Total Spent: " + currency + " " + String.format("%.2f", record.getAmountSpent()));
+            txtDiff.setText("Difference: " + currency + " " + String.format("%.2f", record.getDifference()));
             if (record.getDifference() > 0) {
                 txtDiff.setTextColor(getResources().getColor(R.color.red, null));
             } else if (record.getDifference() <= 0) {
@@ -163,7 +162,7 @@ public class RecordDetailsActivity extends AppCompatActivity {
             }
 
             pieData.add(new SliceValue((float)value, colors.get(num)).setLabel(record.getGoalName()
-            + ": " + currency + value));
+            + ": " + currency + " " + value));
             num++;
             if (num >= colors.size()){
                 num = 0;

@@ -68,7 +68,7 @@ public class AssignmentDetailsActivity extends AppCompatActivity {
         txtAssignName.setText(assignment.getName());
         date = new Date((long)assignment.getDueDate());
         txtDueDate.setText(df.format(date));
-        txtDuration.setText(assignment.getDuration() + " Hours");
+        txtDuration.setText(assignment.getDuration() + " Hour(s)");
         txtDesc.setText(assignment.getDesc());
         calDetails.setDate(assignment.getDueDate());
 
