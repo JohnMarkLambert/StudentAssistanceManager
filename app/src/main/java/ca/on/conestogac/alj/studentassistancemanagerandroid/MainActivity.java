@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean darkTheme;
 
     private DateFormat df = new SimpleDateFormat("dd/MM/yy hh:mm aa", Locale.getDefault());
+    private DateFormat dft = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,22 +118,22 @@ public class MainActivity extends AppCompatActivity {
             String T13 = "02/04/21"; //f
             String T14 = "08/04/21"; //t
             try {
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T1).getTime(), 250, 1,4, "Zehrs Waterloo");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T2).getTime(), 45, 1,4, "Canadian Tire");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T3).getTime(), 100, 1,4, "Costco");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T4).getTime(), 30, 1,4, "Train");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T5).getTime(), 105, 1,4, "");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T6).getTime(), 1600, 1,4, "");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T1).getTime(), 250, 1,4, "Zehrs Waterloo");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T2).getTime(), 45, 1,4, "Canadian Tire");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T3).getTime(), 100, 1,4, "Costco");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T4).getTime(), 30, 1,4, "Train");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T5).getTime(), 105, 1,4, "");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T6).getTime(), 1600, 1,4, "");
 
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T7).getTime(), 200, 1,4, "Walmart");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T8).getTime(), 50, 1,4, "Train");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T9).getTime(), 200, 1,4, "Zehrs");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T10).getTime(), 75, 1,4, "Petro Canada");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T11).getTime(), 95, 1,4, "");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T12).getTime(), 1600, 1,4, "");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T7).getTime(), 200, 1,4, "Walmart");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T8).getTime(), 50, 1,4, "Train");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T9).getTime(), 200, 1,4, "Zehrs");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T10).getTime(), 75, 1,4, "Petro Canada");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T11).getTime(), 95, 1,4, "");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T12).getTime(), 1600, 1,4, "");
 
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T13).getTime(), 15, 1,4, "Mc Ds");
-                ((SAMApplication) getApplication()).addTransaction(df.parse(T14).getTime(), 20, 1,4, "Bus");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T13).getTime(), 15, 1,4, "Mc Ds");
+                ((SAMApplication) getApplication()).addTransaction(dft.parse(T14).getTime(), 20, 1,4, "Bus");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
